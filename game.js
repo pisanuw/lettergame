@@ -1,6 +1,9 @@
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const MAX_SKIPS = 3;
 
+// Image search is proxied through /.netlify/functions/image-search
+// so credentials stay server-side (set GOOGLE_API_KEY and GOOGLE_CX in Netlify env vars)
+
 let state = {
   phase: 'setup',
   category: null,
@@ -310,16 +313,49 @@ function appendWordToHistory(word, player, letter) {
   el.wordHistory.scrollTop = el.wordHistory.scrollHeight;
 }
 
-async function fetchWikiImage(word) {
+// 1. Try Wikipedia REST API directly (fastest, no quota)
+async function tryWikiDirect(word) {
   try {
-    const query = encodeURIComponent(word.replace(/ /g, '_'));
-    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${query}`);
+    const q = encodeURIComponent(word.replace(/ /g, '_'));
+    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${q}`);
     if (!res.ok) return null;
     const data = await res.json();
     return data.thumbnail?.source ?? null;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
+}
+
+// 2. Search Wikipedia for the closest article, then fetch its image
+async function tryWikiSearch(word) {
+  try {
+    const q = encodeURIComponent(word);
+    const res = await fetch(
+      `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${q}&srlimit=1&format=json&origin=*`
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    const title = data.query?.search?.[0]?.title;
+    if (!title) return null;
+    return tryWikiDirect(title);
+  } catch { return null; }
+}
+
+// 3. Google Custom Search fallback
+async function tryGoogleImage(word) {
+  try {
+    const q = encodeURIComponent(word);
+    const res = await fetch(
+      `/.netlify/functions/image-search?q=${q}`
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.items?.[0]?.link ?? null;
+  } catch { return null; }
+}
+
+async function fetchWikiImage(word) {
+  return (await tryWikiDirect(word))
+      ?? (await tryWikiSearch(word))
+      ?? (await tryGoogleImage(word));
 }
 
 function showHint() {
