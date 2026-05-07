@@ -42,18 +42,16 @@ function init() {
     finalWords:      $('final-words'),
     playAgainBtn:    $('play-again-btn'),
     endHomeBtn:      $('end-home-btn'),
-    // suggestion modal
-    suggestOpenBtn:  $('suggest-open-btn'),
-    suggestModal:    $('suggest-modal'),
-    suggestCloseBtn: $('suggest-close-btn'),
-    sugCategory:     $('sug-category'),
+    // suggestion (end screen)
+    sugSection:      $('suggest-section'),
+    sugCategoryName: $('sug-category-name'),
     sugWord:         $('sug-word'),
     sugEmail:        $('sug-email'),
     sugError:        $('sug-error'),
     sugSubmitBtn:    $('sug-submit-btn'),
+    sugSkipBtn:      $('sug-skip-btn'),
     sugFormWrap:     $('suggest-form-wrap'),
     sugSuccess:      $('suggest-success'),
-    sugDoneBtn:      $('sug-done-btn'),
   };
 
   // Populate category dropdowns
@@ -78,17 +76,12 @@ function init() {
   el.playAgainBtn.addEventListener('click', resetToSetup);
   el.endHomeBtn.addEventListener('click', resetToSetup);
 
-  // Suggestion modal events
-  el.suggestOpenBtn.addEventListener('click', openSuggestModal);
-  el.suggestCloseBtn.addEventListener('click', closeSuggestModal);
-  el.sugDoneBtn.addEventListener('click', closeSuggestModal);
+  // Suggestion events (end screen)
   el.sugSubmitBtn.addEventListener('click', handleSuggestion);
-  el.suggestModal.addEventListener('click', e => {
-    if (e.target === el.suggestModal) closeSuggestModal();
+  el.sugSkipBtn.addEventListener('click', () => {
+    el.sugSection.classList.add('hidden');
   });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeSuggestModal();
-  });
+  el.sugWord.addEventListener('keydown', e => { if (e.key === 'Enter') handleSuggestion(); });
 }
 
 function showScreen(name) {
@@ -362,36 +355,28 @@ function endGame() {
       <span class="f-who">${player === 'user' ? 'You' : 'Computer'}</span>
     </div>`;
   }).join('');
-  showScreen('end');
-}
 
-// --- Word Suggestion ---
-
-function openSuggestModal() {
+  // Reset suggestion section
+  el.sugCategoryName.textContent = CATEGORIES[state.category];
   el.sugWord.value = '';
   el.sugEmail.value = '';
   el.sugError.classList.add('hidden');
   el.sugFormWrap.classList.remove('hidden');
   el.sugSuccess.classList.add('hidden');
-  el.suggestModal.classList.remove('hidden');
-  el.sugWord.focus();
+  el.sugSection.classList.remove('hidden');
+
+  showScreen('end');
 }
 
-function closeSuggestModal() {
-  el.suggestModal.classList.add('hidden');
-}
+// --- Word Suggestion ---
 
 async function handleSuggestion() {
   const word     = el.sugWord.value.trim();
-  const category = el.sugCategory.value;
+  const category = state.category;
   const email    = el.sugEmail.value.trim();
 
   if (!word) {
     showSugError('Please enter a word.');
-    return;
-  }
-  if (!category) {
-    showSugError('Please choose a category.');
     return;
   }
 
@@ -405,7 +390,7 @@ async function handleSuggestion() {
       body: new URLSearchParams({
         'form-name': 'word-suggestion',
         word,
-        category,
+        category: CATEGORIES[category] || category,
         email,
       }).toString(),
     });
@@ -420,7 +405,7 @@ async function handleSuggestion() {
     showSugError('Network error. Please try again.');
   } finally {
     el.sugSubmitBtn.disabled = false;
-    el.sugSubmitBtn.textContent = 'Submit';
+    el.sugSubmitBtn.textContent = 'Suggest';
   }
 }
 

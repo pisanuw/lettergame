@@ -22,7 +22,6 @@
         <option value="">Pick one for me</option>
       </select>
       <button id="start-btn" class="btn btn-primary">Start Game</button>
-      <button id="suggest-open-btn" class="btn btn-ghost">Suggest a Word</button>
     </div>
   </div>
 
@@ -78,42 +77,31 @@
       <h2>A to Z complete!</h2>
       <p class="end-category-label" id="end-category"></p>
       <div class="final-list" id="final-words"></div>
-      <div class="end-actions">
-        <button class="btn btn-primary" id="play-again-btn">Play Again</button>
-        <button class="btn btn-secondary" id="end-home-btn">&#8962; Home</button>
-      </div>
-    </div>
-  </div>
 
-  <!-- Word Suggestion Modal -->
-  <div id="suggest-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
-    <div class="modal-box">
-      <h3>Suggest a Word</h3>
-      <p class="modal-sub">Missing a good word? Let us know and we will review it.</p>
+      <!-- Inline word suggestion -->
+      <div id="suggest-section" class="suggest-section">
+        <p class="suggest-prompt">Got a word we missed in <strong id="sug-category-name"></strong>?</p>
 
-      <div id="suggest-form-wrap">
-        <label class="field-label" for="sug-category">Category</label>
-        <select id="sug-category" name="category">
-          <!-- filled by JS -->
-        </select>
+        <div id="suggest-form-wrap">
+          <div class="sug-input-row">
+            <input id="sug-word" type="text" placeholder="Type a missing word&hellip;" autocomplete="off" spellcheck="false">
+            <input id="sug-email" type="email" placeholder="Your email (optional)">
+          </div>
+          <div id="sug-error" class="error-msg hidden"></div>
+          <div class="sug-actions">
+            <button id="sug-submit-btn" class="btn btn-primary" style="width:auto;">Suggest</button>
+            <button id="sug-skip-btn" class="btn btn-secondary" style="width:auto;">Skip</button>
+          </div>
+        </div>
 
-        <label class="field-label" for="sug-word">Word to add</label>
-        <input id="sug-word" name="word" type="text" placeholder="e.g. Dragonfruit" autocomplete="off">
-
-        <label class="field-label" for="sug-email">Your email <span class="optional">(optional)</span></label>
-        <input id="sug-email" name="email" type="email" placeholder="you@example.com">
-
-        <div id="sug-error" class="error-msg hidden"></div>
-
-        <div class="modal-actions">
-          <button id="sug-submit-btn" class="btn btn-primary" style="width:auto;">Submit</button>
-          <button id="suggest-close-btn" class="btn btn-secondary" style="width:auto;">Cancel</button>
+        <div id="suggest-success" class="hidden">
+          <p class="success-msg">Thanks! Sent for review.</p>
         </div>
       </div>
 
-      <div id="suggest-success" class="hidden">
-        <p class="success-msg">Thanks! Your suggestion has been sent for review.</p>
-        <button id="sug-done-btn" class="btn btn-secondary" style="width:auto;margin-top:16px;">Close</button>
+      <div class="end-actions">
+        <button class="btn btn-primary" id="play-again-btn">Play Again</button>
+        <button class="btn btn-secondary" id="end-home-btn">&#8962; Home</button>
       </div>
     </div>
   </div>

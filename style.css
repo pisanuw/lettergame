@@ -455,73 +455,52 @@ select:focus { outline: none; border-color: var(--primary); }
 
 .end-actions .btn { flex: 1; }
 
-/* --- Suggestion Modal --- */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  z-index: 100;
+/* --- Inline Word Suggestion (end screen) --- */
+.suggest-section {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-.modal-box {
-  background: white;
-  border-radius: var(--radius);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-  padding: 36px 32px;
-  width: 100%;
-  max-width: 440px;
-}
-
-.modal-box h3 {
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-
-.modal-sub {
-  color: var(--muted);
+.suggest-prompt {
   font-size: 0.9rem;
-  margin-bottom: 24px;
+  color: var(--muted);
+  margin-bottom: 12px;
 }
 
-.modal-box select,
-.modal-box input[type="text"],
-.modal-box input[type="email"] {
+.sug-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.sug-input-row input {
   width: 100%;
-  padding: 10px 14px;
+  padding: 9px 13px;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--text);
-  margin-bottom: 16px;
 }
 
-.modal-box select:focus,
-.modal-box input:focus {
+.sug-input-row input:focus {
   outline: none;
   border-color: var(--primary);
 }
 
-.modal-actions {
+.sug-actions {
   display: flex;
   gap: 8px;
-  margin-top: 8px;
-}
-
-.optional {
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0;
 }
 
 .success-msg {
   color: #065f46;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  padding: 4px 0;
 }
 
 @media (max-width: 480px) {
