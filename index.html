@@ -15,12 +15,14 @@
       <p class="subtitle">
         Take turns with the computer naming things in a category,
         one letter at a time — A all the way to Z.
+        You get <strong>3 skips</strong> per game.
       </p>
       <label class="field-label" for="category-select">Choose a category (or leave blank for a random one)</label>
       <select id="category-select">
         <option value="">Pick one for me</option>
       </select>
       <button id="start-btn" class="btn btn-primary">Start Game</button>
+      <button id="suggest-open-btn" class="btn btn-ghost">Suggest a Word</button>
     </div>
   </div>
 
@@ -29,7 +31,8 @@
     <div class="game-wrap">
 
       <div class="game-header">
-        <div>
+        <button id="home-btn" class="home-btn" title="Back to Home">&#8962; Home</button>
+        <div class="header-center">
           <div class="category-label">Category</div>
           <div class="category-name" id="category-display"></div>
         </div>
@@ -61,6 +64,7 @@
 
       <div class="action-row">
         <button class="btn btn-secondary" id="hint-btn">Hint</button>
+        <button class="btn btn-skip" id="skip-btn">Skip <span id="skip-count">(3 left)</span></button>
         <button class="btn btn-secondary" id="quit-btn">Quit</button>
       </div>
 
@@ -74,9 +78,52 @@
       <h2>A to Z complete!</h2>
       <p class="end-category-label" id="end-category"></p>
       <div class="final-list" id="final-words"></div>
-      <button class="btn btn-primary" id="play-again-btn">Play Again</button>
+      <div class="end-actions">
+        <button class="btn btn-primary" id="play-again-btn">Play Again</button>
+        <button class="btn btn-secondary" id="end-home-btn">&#8962; Home</button>
+      </div>
     </div>
   </div>
+
+  <!-- Word Suggestion Modal -->
+  <div id="suggest-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <h3>Suggest a Word</h3>
+      <p class="modal-sub">Missing a good word? Let us know and we will review it.</p>
+
+      <div id="suggest-form-wrap">
+        <label class="field-label" for="sug-category">Category</label>
+        <select id="sug-category" name="category">
+          <!-- filled by JS -->
+        </select>
+
+        <label class="field-label" for="sug-word">Word to add</label>
+        <input id="sug-word" name="word" type="text" placeholder="e.g. Dragonfruit" autocomplete="off">
+
+        <label class="field-label" for="sug-email">Your email <span class="optional">(optional)</span></label>
+        <input id="sug-email" name="email" type="email" placeholder="you@example.com">
+
+        <div id="sug-error" class="error-msg hidden"></div>
+
+        <div class="modal-actions">
+          <button id="sug-submit-btn" class="btn btn-primary" style="width:auto;">Submit</button>
+          <button id="suggest-close-btn" class="btn btn-secondary" style="width:auto;">Cancel</button>
+        </div>
+      </div>
+
+      <div id="suggest-success" class="hidden">
+        <p class="success-msg">Thanks! Your suggestion has been sent for review.</p>
+        <button id="sug-done-btn" class="btn btn-secondary" style="width:auto;margin-top:16px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Netlify form (required for Netlify Forms detection at deploy time) -->
+  <form name="word-suggestion" data-netlify="true" hidden>
+    <input name="category">
+    <input name="word">
+    <input name="email">
+  </form>
 
   <script src="words.js"></script>
   <script src="game.js"></script>
