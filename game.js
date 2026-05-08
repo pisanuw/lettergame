@@ -1,5 +1,5 @@
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const MAX_SKIPS = 3;
+const MAX_HINTS = 3;
 
 // Image search is proxied through /.netlify/functions/image-search
 // so credentials stay server-side (set GOOGLE_API_KEY and GOOGLE_CX in Netlify env vars)
@@ -11,7 +11,8 @@ let state = {
   currentTurn: null,
   history: [],
   usedComputerWords: {},
-  skipsLeft: MAX_SKIPS,
+  hintsLeft: MAX_HINTS,
+  lastHintWord: null,
   skippedLetters: new Set(),
 };
 
@@ -39,9 +40,9 @@ function init() {
     submitBtn:       $('submit-btn'),
     errorMsg:        $('error-msg'),
     hintBtn:         $('hint-btn'),
+    hintLabel:       $('hint-label'),
+    hintCount:       $('hint-count'),
     hintText:        $('hint-text'),
-    skipBtn:         $('skip-btn'),
-    skipCount:       $('skip-count'),
     quitBtn:         $('quit-btn'),
     homeBtn:         $('home-btn'),
     endCategory:     $('end-category'),
@@ -83,8 +84,10 @@ function init() {
   el.startBtn.addEventListener('click', startGame);
   el.submitBtn.addEventListener('click', handleSubmit);
   el.wordInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
-  el.hintBtn.addEventListener('click', showHint);
-  el.skipBtn.addEventListener('click', handleSkip);
+  el.hintBtn.addEventListener('click', () => {
+    if (state.hintsLeft > 0) showHint();
+    else handleSkip();
+  });
   el.quitBtn.addEventListener('click', resetToSetup);
   el.homeBtn.addEventListener('click', resetToSetup);
   el.playAgainBtn.addEventListener('click', resetToSetup);
@@ -120,7 +123,8 @@ function resetToSetup() {
     currentTurn: null,
     history: [],
     usedComputerWords: {},
-    skipsLeft: MAX_SKIPS,
+    hintsLeft: MAX_HINTS,
+    lastHintWord: null,
     skippedLetters: new Set(),
   };
   el.wordHistory.innerHTML = '';
@@ -133,7 +137,8 @@ function startGame() {
   state.currentLetterIndex = 0;
   state.history = [];
   state.usedComputerWords = {};
-  state.skipsLeft = MAX_SKIPS;
+  state.hintsLeft = MAX_HINTS;
+  state.lastHintWord = null;
   state.skippedLetters = new Set();
   state.phase = 'playing';
   // Clear prefetch cache from previous game
@@ -178,15 +183,12 @@ function updateUI() {
   el.hintText.classList.add('hidden');
   el.errorMsg.classList.add('hidden');
 
-  // Skip button
-  el.skipCount.textContent = `(${state.skipsLeft} left)`;
-  el.skipBtn.disabled = state.skipsLeft <= 0;
-
   if (state.currentTurn === 'user') {
     el.turnIndicator.textContent =
       `Your turn — name a ${CATEGORIES[state.category]} starting with "${currentLetter()}"`;
     el.inputArea.classList.remove('hidden');
-    el.skipBtn.classList.remove('hidden');
+    el.hintBtn.classList.remove('hidden');
+    updateHintButton();
     el.wordInput.value = '';
     el.wordInput.focus();
     // While user is thinking, silently pick and prefetch the computer's next word
@@ -194,7 +196,7 @@ function updateUI() {
   } else {
     el.turnIndicator.textContent = 'Computer is thinking\u2026';
     el.inputArea.classList.add('hidden');
-    el.skipBtn.classList.add('hidden');
+    el.hintBtn.classList.add('hidden');
   }
 }
 
@@ -275,17 +277,27 @@ function handleSubmit() {
   recordWord(match, 'user');
 }
 
-function handleSkip() {
-  if (state.skipsLeft <= 0 || state.currentTurn !== 'user') return;
+async function handleSkip() {
+  if (state.currentTurn !== 'user') return;
 
   const letter = currentLetter();
-  state.skipsLeft--;
+  // Use the hint word if one was shown this turn, otherwise pick a random word
+  const word = state.lastHintWord || pickComputerWord(letter);
+  const imageUrl = word ? await fetchWikiImage(word, state.category) : null;
+
   state.skippedLetters.add(letter);
-  state.history.push({ word: '(skipped)', player: 'skipped', letter });
+  const displayWord = word || '(none)';
+  state.history.push({ word: displayWord, player: 'skipped', letter });
 
   const row = document.createElement('div');
   row.className = 'history-row skipped-row';
-  row.textContent = `${letter} — skipped (${state.skipsLeft} skip${state.skipsLeft !== 1 ? 's' : ''} remaining)`;
+  row.innerHTML = `
+    <div class="h-meta">
+      <span class="h-letter">${letter}</span>
+      <span class="h-word">${displayWord} (skipped)</span>
+    </div>
+    ${imageUrl ? `<img class="word-img loaded" src="${imageUrl}" alt="${displayWord}">` : ''}
+  `;
   el.wordHistory.appendChild(row);
   el.wordHistory.scrollTop = el.wordHistory.scrollHeight;
 
@@ -293,6 +305,7 @@ function handleSkip() {
   el.errorMsg.classList.add('hidden');
 
   state.currentLetterIndex++;
+  state.lastHintWord = null;
 
   if (state.currentLetterIndex >= 26) {
     state.phase = 'ended';
@@ -317,6 +330,7 @@ function recordWord(word, player, prefetchedImageUrl = undefined) {
   appendWordToHistory(word, player, letter, prefetchedImageUrl);
 
   state.currentLetterIndex++;
+  state.lastHintWord = null;
 
   if (state.currentLetterIndex >= 26) {
     state.phase = 'ended';
@@ -434,13 +448,34 @@ async function fetchWikiImage(word, category) {
 function showHint() {
   const letter = currentLetter();
   const words = (WORDS[state.category] || {})[letter] || [];
+
   if (words.length === 0) {
-    el.hintText.textContent = 'No hints available.';
-  } else {
-    const sample = words.slice(0, 3).join(', ');
-    el.hintText.textContent = `Hint: try \u2014 ${sample}`;
+    el.hintText.textContent = 'No hints available for this letter.';
+    el.hintText.classList.remove('hidden');
+    return;
   }
+
+  const word = words[Math.floor(Math.random() * words.length)];
+  state.lastHintWord = word;
+  state.hintsLeft--;
+
+  el.hintText.textContent = `Hint: ${word}`;
   el.hintText.classList.remove('hidden');
+
+  updateHintButton();
+}
+
+function updateHintButton() {
+  if (state.hintsLeft > 0) {
+    el.hintBtn.className = 'btn btn-secondary';
+    el.hintLabel.textContent = 'Hint';
+    el.hintCount.textContent = `(${state.hintsLeft} left)`;
+    el.hintCount.classList.remove('hidden');
+  } else {
+    el.hintBtn.className = 'btn btn-hint-skip';
+    el.hintLabel.textContent = 'Skip';
+    el.hintCount.classList.add('hidden');
+  }
 }
 
 function showError(msg, suggestWord = null) {
@@ -459,6 +494,40 @@ function showError(msg, suggestWord = null) {
     el.errorMsg.textContent = msg;
   }
   el.errorMsg.classList.remove('hidden');
+}
+
+function acceptSuggestion(word) {
+  closeIngameModal();
+
+  const letter = currentLetter();
+  const displayWord = `${word} (suggested)`;
+  state.history.push({ word: displayWord, player: 'user', letter });
+
+  const row = document.createElement('div');
+  row.className = 'history-row user';
+  row.innerHTML = `
+    <span class="h-letter">${letter}</span>
+    <span class="h-word">${displayWord}</span>
+    <span class="h-who">You</span>
+  `;
+  el.wordHistory.appendChild(row);
+  el.wordHistory.scrollTop = el.wordHistory.scrollHeight;
+
+  el.errorMsg.classList.add('hidden');
+  el.hintText.classList.add('hidden');
+
+  state.currentLetterIndex++;
+  state.lastHintWord = null;
+
+  if (state.currentLetterIndex >= 26) {
+    state.phase = 'ended';
+    setTimeout(endGame, 400);
+    return;
+  }
+
+  state.currentTurn = 'computer';
+  updateUI();
+  scheduleComputerTurn();
 }
 
 // --- In-game suggestion modal ---
@@ -504,6 +573,8 @@ async function handleIngameSuggestion() {
     if (res.ok || res.status === 303) {
       el.ingameSugForm.classList.add('hidden');
       el.ingameSugSuccess.classList.remove('hidden');
+      // Advance the game after a brief moment so user sees the success message
+      setTimeout(() => acceptSuggestion(ingameSuggestWord), 1200);
     } else {
       el.ingameSugError.textContent = 'Submission failed. Please try again.';
       el.ingameSugError.classList.remove('hidden');

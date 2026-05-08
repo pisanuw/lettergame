@@ -128,19 +128,16 @@ select:focus { outline: none; border-color: var(--primary); }
 
 .btn-ghost:hover { color: var(--primary); }
 
-.btn-skip {
+.btn-hint-skip {
   background: var(--skip-bg);
   color: var(--skip-text);
-  font-size: 0.85rem;
-  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border: 2px dashed #f59e0b;
 }
 
-.btn-skip:hover { background: #fde68a; }
-
-.btn-skip:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
+.btn-hint-skip:hover { background: #fde68a; }
 
 /* --- Home button in game header --- */
 .home-btn {
@@ -289,9 +286,11 @@ select:focus { outline: none; border-color: var(--primary); }
 .history-row.skipped-row {
   background: #fef9ec;
   color: #92400e;
-  align-self: center;
-  font-size: 0.82rem;
-  padding: 6px 14px;
+  align-self: flex-start;
+  max-width: 72%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   border: 1px dashed #fde68a;
 }
 
