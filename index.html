@@ -106,6 +106,27 @@
     </div>
   </div>
 
+  <!-- In-game word suggestion modal -->
+  <div id="ingame-suggest-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <h3>Suggest a Word</h3>
+      <p class="modal-sub">We'll review <strong id="ingame-sug-word-display"></strong> and may add it to <strong id="ingame-sug-cat-display"></strong>.</p>
+      <div id="ingame-sug-form">
+        <label class="field-label" for="ingame-sug-email">Your email <span class="optional">(optional)</span></label>
+        <input id="ingame-sug-email" type="email" placeholder="you@example.com">
+        <div id="ingame-sug-error" class="error-msg hidden"></div>
+        <div class="modal-actions">
+          <button id="ingame-sug-submit" class="btn btn-primary" style="width:auto;">Send Suggestion</button>
+          <button id="ingame-sug-cancel" class="btn btn-secondary" style="width:auto;">Cancel</button>
+        </div>
+      </div>
+      <div id="ingame-sug-success" class="hidden">
+        <p class="success-msg">Thanks! Sent for review. Keep playing!</p>
+        <button id="ingame-sug-close" class="btn btn-secondary" style="width:auto;margin-top:16px;">Close</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Hidden Netlify form (required for Netlify Forms detection at deploy time) -->
   <form name="word-suggestion" data-netlify="true" hidden>
     <input name="category">

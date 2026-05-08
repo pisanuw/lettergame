@@ -58,6 +58,17 @@ function init() {
     sugSkipBtn:      $('sug-skip-btn'),
     sugFormWrap:     $('suggest-form-wrap'),
     sugSuccess:      $('suggest-success'),
+    // in-game suggestion modal
+    ingameModal:     $('ingame-suggest-modal'),
+    ingameSugWord:   $('ingame-sug-word-display'),
+    ingameSugCat:    $('ingame-sug-cat-display'),
+    ingameSugEmail:  $('ingame-sug-email'),
+    ingameSugForm:   $('ingame-sug-form'),
+    ingameSugError:  $('ingame-sug-error'),
+    ingameSugSubmit: $('ingame-sug-submit'),
+    ingameSugCancel: $('ingame-sug-cancel'),
+    ingameSugSuccess:$('ingame-sug-success'),
+    ingameSugClose:  $('ingame-sug-close'),
   };
 
   // Populate category dropdown
@@ -85,6 +96,14 @@ function init() {
     el.sugSection.classList.add('hidden');
   });
   el.sugWord.addEventListener('keydown', e => { if (e.key === 'Enter') handleSuggestion(); });
+
+  // In-game suggestion modal events
+  el.ingameSugCancel.addEventListener('click', closeIngameModal);
+  el.ingameSugClose.addEventListener('click', closeIngameModal);
+  el.ingameSugSubmit.addEventListener('click', handleIngameSuggestion);
+  el.ingameSugEmail.addEventListener('keydown', e => { if (e.key === 'Enter') handleIngameSuggestion(); });
+  el.ingameModal.addEventListener('click', e => { if (e.target === el.ingameModal) closeIngameModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeIngameModal(); });
 }
 
 function showScreen(name) {
@@ -193,17 +212,16 @@ function prefetchNextComputerWord() {
   const nextIndex = state.currentLetterIndex + 1;
   if (nextIndex >= 26) return;
   const letter = LETTERS[nextIndex];
-  if (prefetchCache[letter] !== undefined) return; // already done
+  if (prefetchCache[letter] !== undefined) return; // already in-flight or done
 
   const word = pickComputerWord(letter);
   if (!word) { prefetchCache[letter] = null; return; }
 
-  // Mark as in-progress so concurrent calls don't double-fetch
-  prefetchCache[letter] = { word, imageUrl: null };
-
-  fetchWikiImage(word, state.category).then(url => {
-    prefetchCache[letter] = { word, imageUrl: url };
-  });
+  // Store the Promise so doComputerTurn can await it whether it's done or not
+  prefetchCache[letter] = {
+    word,
+    imagePromise: fetchWikiImage(word, state.category),
+  };
 }
 
 function scheduleComputerTurn() {
@@ -211,21 +229,26 @@ function scheduleComputerTurn() {
   setTimeout(doComputerTurn, delay);
 }
 
-function doComputerTurn() {
+async function doComputerTurn() {
   if (state.phase !== 'playing') return;
 
   const letter = currentLetter();
   const cached = prefetchCache[letter];
 
+  let word, imageUrl;
+
   if (cached && cached.word) {
-    // Use pre-picked word; image may already be ready
-    recordWord(cached.word, 'computer', cached.imageUrl);
+    // Await the Promise — likely already resolved during user's turn
+    word     = cached.word;
+    imageUrl = await cached.imagePromise;
   } else {
-    // Fallback: pick now (no image pre-fetch)
-    const word = pickComputerWord(letter);
+    // Computer went first or cache missed — pick and fetch now
+    word = pickComputerWord(letter);
     if (!word) { recordWord('(none found)', 'computer', null); return; }
-    recordWord(word, 'computer', null);
+    imageUrl = await fetchWikiImage(word, state.category);
   }
+
+  recordWord(word, 'computer', imageUrl);
 }
 
 function handleSubmit() {
@@ -243,7 +266,7 @@ function handleSubmit() {
   const match = words.find(w => w.toLowerCase() === raw.toLowerCase());
 
   if (!match) {
-    showError(`"${raw}" isn\u2019t in my ${CATEGORIES[state.category]} list. Try another.`);
+    showError(`"${raw}" isn\u2019t in my ${CATEGORIES[state.category]} list. Try another.`, raw);
     return;
   }
 
@@ -307,7 +330,7 @@ function recordWord(word, player, prefetchedImageUrl = undefined) {
   if (state.currentTurn === 'computer') scheduleComputerTurn();
 }
 
-function appendWordToHistory(word, player, letter, prefetchedImageUrl = undefined) {
+function appendWordToHistory(word, player, letter, imageUrl) {
   const row = document.createElement('div');
   row.className = `history-row ${player}`;
 
@@ -321,23 +344,11 @@ function appendWordToHistory(word, player, letter, prefetchedImageUrl = undefine
       <img class="word-img" alt="${word}">
     `;
     const img = row.querySelector('.word-img');
-
-    const applyImage = url => {
-      if (url) {
-        img.src = url;
-        img.classList.add('loaded');
-        el.wordHistory.scrollTop = el.wordHistory.scrollHeight;
-      } else {
-        img.remove();
-      }
-    };
-
-    if (prefetchedImageUrl !== undefined) {
-      // Already fetched (or confirmed null) during user's turn
-      applyImage(prefetchedImageUrl);
+    if (imageUrl) {
+      img.src = imageUrl;
+      img.classList.add('loaded');
     } else {
-      // Fallback: fetch now
-      fetchWikiImage(word, state.category).then(applyImage);
+      img.remove();
     }
   } else {
     row.innerHTML = `
@@ -432,9 +443,78 @@ function showHint() {
   el.hintText.classList.remove('hidden');
 }
 
-function showError(msg) {
-  el.errorMsg.textContent = msg;
+function showError(msg, suggestWord = null) {
+  if (suggestWord) {
+    const link = document.createElement('a');
+    link.href = '#';
+    link.className = 'suggest-link';
+    link.textContent = 'Suggest this word';
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      openInGameSuggestModal(suggestWord);
+    });
+    el.errorMsg.textContent = msg + ' ';
+    el.errorMsg.appendChild(link);
+  } else {
+    el.errorMsg.textContent = msg;
+  }
   el.errorMsg.classList.remove('hidden');
+}
+
+// --- In-game suggestion modal ---
+
+let ingameSuggestWord = '';
+
+function openInGameSuggestModal(word) {
+  ingameSuggestWord = word;
+  el.ingameSugWord.textContent = `"${word}"`;
+  el.ingameSugCat.textContent = CATEGORIES[state.category];
+  el.ingameSugEmail.value = '';
+  el.ingameSugError.classList.add('hidden');
+  el.ingameSugForm.classList.remove('hidden');
+  el.ingameSugSuccess.classList.add('hidden');
+  el.ingameModal.classList.remove('hidden');
+  el.ingameSugEmail.focus();
+}
+
+function closeIngameModal() {
+  el.ingameModal.classList.add('hidden');
+  // Return focus to word input if game is still in progress
+  if (state.phase === 'playing' && state.currentTurn === 'user') {
+    el.wordInput.focus();
+  }
+}
+
+async function handleIngameSuggestion() {
+  const email = el.ingameSugEmail.value.trim();
+  el.ingameSugSubmit.disabled = true;
+  el.ingameSugSubmit.textContent = 'Sending\u2026';
+
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'word-suggestion',
+        word: ingameSuggestWord,
+        category: CATEGORIES[state.category] || state.category,
+        email,
+      }).toString(),
+    });
+    if (res.ok || res.status === 303) {
+      el.ingameSugForm.classList.add('hidden');
+      el.ingameSugSuccess.classList.remove('hidden');
+    } else {
+      el.ingameSugError.textContent = 'Submission failed. Please try again.';
+      el.ingameSugError.classList.remove('hidden');
+    }
+  } catch {
+    el.ingameSugError.textContent = 'Network error. Please try again.';
+    el.ingameSugError.classList.remove('hidden');
+  } finally {
+    el.ingameSugSubmit.disabled = false;
+    el.ingameSugSubmit.textContent = 'Send Suggestion';
+  }
 }
 
 function endGame() {

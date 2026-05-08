@@ -496,6 +496,77 @@ select:focus { outline: none; border-color: var(--primary); }
   gap: 8px;
 }
 
+/* Inline suggest link inside error message */
+.suggest-link {
+  color: var(--primary);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.suggest-link:hover { color: var(--primary-dark); }
+
+/* In-game suggestion modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 100;
+}
+
+.modal-box {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.modal-box h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.modal-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.modal-box input[type="email"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.modal-box input[type="email"]:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.optional {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 .success-msg {
   color: #065f46;
   font-weight: 600;
