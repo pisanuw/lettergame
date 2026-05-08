@@ -286,12 +286,16 @@ select:focus { outline: none; border-color: var(--primary); }
 .history-row.skipped-row {
   background: #fef9ec;
   color: #92400e;
-  align-self: flex-start;
+  align-self: flex-end;
   max-width: 72%;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 8px;
   border: 1px dashed #fde68a;
+}
+
+.history-row.skipped-row .h-meta {
+  flex-direction: row-reverse;
 }
 
 .h-meta {
@@ -435,7 +439,7 @@ select:focus { outline: none; border-color: var(--primary); }
 
 .final-row.user     { background: #eff4ff; }
 .final-row.computer { background: #f9fafb; }
-.final-row.skipped  { background: #fef9ec; color: #92400e; }
+.final-row.skipped  { background: #fef9ec; color: #92400e; border: 1px dashed #fde68a; }
 
 .f-letter {
   font-size: 0.7rem;

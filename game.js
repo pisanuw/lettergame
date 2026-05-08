@@ -376,6 +376,21 @@ function appendWordToHistory(word, player, letter, imageUrl) {
   el.wordHistory.scrollTop = el.wordHistory.scrollHeight;
 }
 
+// Override search terms for words that don't match well on Wikipedia as-is
+const SEARCH_OVERRIDES = {
+  'UX Designer':          'User Experience Designer',
+  'EMT':                  'Emergency Medical Technician',
+  'ET':                   'E.T. the Extra-Terrestrial film',
+  'X-Men':                'X-Men Marvel Comics',
+  'X-Files':              'The X-Files TV show',
+  'XCOM':                 'XCOM video game',
+  'XO Sauce':             'XO sauce Hong Kong',
+  'X-ray Tetra':          'X-ray tetra fish',
+  'X-Games':              'X Games extreme sports',
+  'X-23':                 'X-23 Marvel Comics',
+  "Xi'an":                "Xi'an city China",
+};
+
 // Singular form of the category name used as search context (e.g. "Flowers" -> "flower")
 const CATEGORY_HINT = {
   fruits:      'fruit',
@@ -440,9 +455,10 @@ async function tryGoogleImage(word, category) {
 }
 
 async function fetchWikiImage(word, category) {
-  return (await tryWikiDirect(word))
-      ?? (await tryWikiSearch(word, category))
-      ?? (await tryGoogleImage(word, category));
+  const searchWord = SEARCH_OVERRIDES[word] ?? word;
+  return (await tryWikiDirect(searchWord))
+      ?? (await tryWikiSearch(searchWord, category))
+      ?? (await tryGoogleImage(searchWord, category));
 }
 
 function showHint() {
@@ -594,8 +610,8 @@ function endGame() {
     if (player === 'skipped') {
       return `<div class="final-row skipped">
         <span class="f-letter">${letter}</span>
-        <span class="f-word">(skipped)</span>
-        <span class="f-who"></span>
+        <span class="f-word">${word} (skipped)</span>
+        <span class="f-who">You</span>
       </div>`;
     }
     return `<div class="final-row ${player}">
