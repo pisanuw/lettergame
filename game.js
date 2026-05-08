@@ -289,7 +289,7 @@ function appendWordToHistory(word, player, letter) {
       <img class="word-img" alt="${word}">
     `;
     const img = row.querySelector('.word-img');
-    fetchWikiImage(word).then(url => {
+    fetchWikiImage(word, state.category).then(url => {
       if (url) {
         img.src = url;
         img.classList.add('loaded');
@@ -310,6 +310,30 @@ function appendWordToHistory(word, player, letter) {
   el.wordHistory.scrollTop = el.wordHistory.scrollHeight;
 }
 
+// Singular form of the category name used as search context (e.g. "Flowers" -> "flower")
+const CATEGORY_HINT = {
+  fruits:      'fruit',
+  animals:     'animal',
+  cities:      'city',
+  foods:       'food dish',
+  vegetables:  'vegetable',
+  sports:      'sport',
+  instruments: 'musical instrument',
+  occupations: 'occupation',
+  birds:       'bird',
+  flowers:     'flower',
+  trees:       'tree',
+  gemstones:   'gemstone',
+  dinosaurs:   'dinosaur',
+  movies:      'movie',
+  games:       'video game',
+  tvshows:     'TV show',
+  superheroes: 'superhero',
+  mythology:   'mythological deity',
+  history:     'historical figure',
+  dances:      'dance',
+};
+
 // 1. Try Wikipedia REST API directly (fastest, no quota)
 async function tryWikiDirect(word) {
   try {
@@ -321,10 +345,11 @@ async function tryWikiDirect(word) {
   } catch { return null; }
 }
 
-// 2. Search Wikipedia for the closest article, then fetch its image
-async function tryWikiSearch(word) {
+// 2. Search Wikipedia with category context, then fetch the top article's image
+async function tryWikiSearch(word, category) {
   try {
-    const q = encodeURIComponent(word);
+    const hint = CATEGORY_HINT[category] ?? '';
+    const q = encodeURIComponent(hint ? `${word} ${hint}` : word);
     const res = await fetch(
       `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${q}&srlimit=1&format=json&origin=*`
     );
@@ -336,10 +361,11 @@ async function tryWikiSearch(word) {
   } catch { return null; }
 }
 
-// 3. Google Custom Search fallback
-async function tryGoogleImage(word) {
+// 3. Google Custom Search fallback with category context
+async function tryGoogleImage(word, category) {
   try {
-    const q = encodeURIComponent(word);
+    const hint = CATEGORY_HINT[category] ?? '';
+    const q = encodeURIComponent(hint ? `${word} ${hint}` : word);
     const res = await fetch(`/.netlify/functions/image-search?q=${q}`);
     if (!res.ok) return null;
     const data = await res.json();
@@ -347,10 +373,10 @@ async function tryGoogleImage(word) {
   } catch { return null; }
 }
 
-async function fetchWikiImage(word) {
+async function fetchWikiImage(word, category) {
   return (await tryWikiDirect(word))
-      ?? (await tryWikiSearch(word))
-      ?? (await tryGoogleImage(word));
+      ?? (await tryWikiSearch(word, category))
+      ?? (await tryGoogleImage(word, category));
 }
 
 function showHint() {
