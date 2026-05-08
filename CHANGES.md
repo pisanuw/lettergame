@@ -8,3 +8,17 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-07 [code] Doubled word choices (2105 total). Home button in game/end header. Skip button (3/game, yellow in alphabet). Word suggestion via Netlify Forms.
 2026-05-07 [decision] Word suggestions use Netlify Forms (AJAX POST to /). Admin configures email notification in Netlify dashboard — no API key in client code.
 2026-05-07 [doc] README updated with live URL, repo URL, feature summary.
+2026-05-07 [code] Wikipedia image fetch added for computer words (bubble layout, fade-in on load).
+2026-05-07 [code] Fixed all words in history category not starting with their letter key (Napoleon Bonaparte etc).
+2026-05-08 [code] Google Custom Search fallback added via Netlify serverless function (/.netlify/functions/image-search).
+2026-05-08 [decision] API key kept server-side only; client calls proxy function. Keys in Netlify env vars + local .env (git-ignored).
+2026-05-08 [code] Category context appended to all image queries to disambiguate (e.g. "Bleeding Heart flower").
+2026-05-08 [code] Image prefetch during user turn: computer word and image fetched while user types, Promise stored in prefetchCache.
+2026-05-08 [code] Rejected word error message now includes inline "Suggest this word" link opening in-game modal.
+2026-05-08 [code] Suggestion modal submits word+category to Netlify Forms; on success advances game treating word as valid (suggested).
+2026-05-08 [decision] Skips removed as separate mechanic. Hint button (3 uses) shows one random word. When hints exhausted, button becomes dashed amber Skip.
+2026-05-08 [code] Skip shows a word with image in history (right-aligned, dashed amber border). Skipped words shown in end-game recap with actual word.
+2026-05-08 [code] SEARCH_OVERRIDES map added for abbreviations/ambiguous terms (UX Designer, EMT, X-Men, etc).
+2026-05-08 [code] Fixed image bug when computer goes first (doComputerTurn now async, awaits image Promise before recordWord).
+2026-05-08 [note] Live site: https://letter-category.netlify.app/ — repo: https://github.com/pisanuw/lettergame
+2026-05-08 [doc] ~/.claude/CLAUDE.md rewritten: AI-log logging made mandatory first step, tables for project records and slash commands, removed redundancy.
