@@ -1,10 +1,8 @@
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const MAX_SKIPS = 3;
 
-// Image search credentials
-// Restrict this API key in Google Cloud Console to letter-category.netlify.app
-const GOOGLE_API_KEY = 'AIzaSyCZQZRA5Z2JIjQxsVVR_Qf8-BA-zw7JRgU';
-const GOOGLE_CX      = '617e6807ea18b4c8b';
+// Image search is proxied through /.netlify/functions/image-search
+// so credentials stay server-side (set GOOGLE_API_KEY and GOOGLE_CX in Netlify env vars)
 
 let state = {
   phase: 'setup',
@@ -345,9 +343,7 @@ async function tryWikiSearch(word) {
 async function tryGoogleImage(word) {
   try {
     const q = encodeURIComponent(word);
-    const res = await fetch(
-      `https://www.googleapis.com/customsearch/v1?q=${q}&searchType=image&key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&num=1`
-    );
+    const res = await fetch(`/.netlify/functions/image-search?q=${q}`);
     if (!res.ok) return null;
     const data = await res.json();
     return data.items?.[0]?.link ?? null;
