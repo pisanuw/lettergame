@@ -15,6 +15,9 @@ let state = {
   skippedLetters: new Set(),
 };
 
+// Prefetch cache: keyed by letter, value is { word, imageUrl } or null
+const prefetchCache = {};
+
 let el = {};
 
 function $(id) { return document.getElementById(id); }
@@ -114,6 +117,8 @@ function startGame() {
   state.skipsLeft = MAX_SKIPS;
   state.skippedLetters = new Set();
   state.phase = 'playing';
+  // Clear prefetch cache from previous game
+  Object.keys(prefetchCache).forEach(k => delete prefetchCache[k]);
 
   const selected = el.categorySelect.value;
   const keys = Object.keys(CATEGORIES);
@@ -165,11 +170,40 @@ function updateUI() {
     el.skipBtn.classList.remove('hidden');
     el.wordInput.value = '';
     el.wordInput.focus();
+    // While user is thinking, silently pick and prefetch the computer's next word
+    prefetchNextComputerWord();
   } else {
     el.turnIndicator.textContent = 'Computer is thinking\u2026';
     el.inputArea.classList.add('hidden');
     el.skipBtn.classList.add('hidden');
   }
+}
+
+function pickComputerWord(letter) {
+  const words = (WORDS[state.category] || {})[letter] || [];
+  if (words.length === 0) return null;
+  const used = state.usedComputerWords[letter] || new Set();
+  const available = words.filter(w => !used.has(w.toLowerCase()));
+  const pool = available.length > 0 ? available : words;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function prefetchNextComputerWord() {
+  // Computer plays every other turn, one letter ahead of user's current letter
+  const nextIndex = state.currentLetterIndex + 1;
+  if (nextIndex >= 26) return;
+  const letter = LETTERS[nextIndex];
+  if (prefetchCache[letter] !== undefined) return; // already done
+
+  const word = pickComputerWord(letter);
+  if (!word) { prefetchCache[letter] = null; return; }
+
+  // Mark as in-progress so concurrent calls don't double-fetch
+  prefetchCache[letter] = { word, imageUrl: null };
+
+  fetchWikiImage(word, state.category).then(url => {
+    prefetchCache[letter] = { word, imageUrl: url };
+  });
 }
 
 function scheduleComputerTurn() {
@@ -181,19 +215,17 @@ function doComputerTurn() {
   if (state.phase !== 'playing') return;
 
   const letter = currentLetter();
-  const words = (WORDS[state.category] || {})[letter] || [];
+  const cached = prefetchCache[letter];
 
-  if (words.length === 0) {
-    recordWord('(none found)', 'computer');
-    return;
+  if (cached && cached.word) {
+    // Use pre-picked word; image may already be ready
+    recordWord(cached.word, 'computer', cached.imageUrl);
+  } else {
+    // Fallback: pick now (no image pre-fetch)
+    const word = pickComputerWord(letter);
+    if (!word) { recordWord('(none found)', 'computer', null); return; }
+    recordWord(word, 'computer', null);
   }
-
-  const used = state.usedComputerWords[letter] || new Set();
-  const available = words.filter(w => !used.has(w.toLowerCase()));
-  const pool = available.length > 0 ? available : words;
-  const word = pool[Math.floor(Math.random() * pool.length)];
-
-  recordWord(word, 'computer');
 }
 
 function handleSubmit() {
@@ -250,7 +282,7 @@ function handleSkip() {
   scheduleComputerTurn();
 }
 
-function recordWord(word, player) {
+function recordWord(word, player, prefetchedImageUrl = undefined) {
   const letter = currentLetter();
 
   if (player === 'computer') {
@@ -259,7 +291,7 @@ function recordWord(word, player) {
   }
 
   state.history.push({ word, player, letter });
-  appendWordToHistory(word, player, letter);
+  appendWordToHistory(word, player, letter, prefetchedImageUrl);
 
   state.currentLetterIndex++;
 
@@ -275,7 +307,7 @@ function recordWord(word, player) {
   if (state.currentTurn === 'computer') scheduleComputerTurn();
 }
 
-function appendWordToHistory(word, player, letter) {
+function appendWordToHistory(word, player, letter, prefetchedImageUrl = undefined) {
   const row = document.createElement('div');
   row.className = `history-row ${player}`;
 
@@ -289,7 +321,8 @@ function appendWordToHistory(word, player, letter) {
       <img class="word-img" alt="${word}">
     `;
     const img = row.querySelector('.word-img');
-    fetchWikiImage(word, state.category).then(url => {
+
+    const applyImage = url => {
       if (url) {
         img.src = url;
         img.classList.add('loaded');
@@ -297,7 +330,15 @@ function appendWordToHistory(word, player, letter) {
       } else {
         img.remove();
       }
-    });
+    };
+
+    if (prefetchedImageUrl !== undefined) {
+      // Already fetched (or confirmed null) during user's turn
+      applyImage(prefetchedImageUrl);
+    } else {
+      // Fallback: fetch now
+      fetchWikiImage(word, state.category).then(applyImage);
+    }
   } else {
     row.innerHTML = `
       <span class="h-letter">${letter}</span>
