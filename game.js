@@ -57,15 +57,12 @@ function init() {
     sugSuccess:      $('suggest-success'),
   };
 
-  // Populate category dropdowns
+  // Populate category dropdown
   Object.entries(CATEGORIES).forEach(([key, name]) => {
     const opt = document.createElement('option');
     opt.value = key;
     opt.textContent = name;
     el.categorySelect.appendChild(opt);
-
-    const sugOpt = opt.cloneNode(true);
-    el.sugCategory.appendChild(sugOpt);
   });
 
   // Game events
