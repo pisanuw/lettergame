@@ -21,4 +21,25 @@
 2026-05-08T18:45 User: Hints generated, anything else needed before deployment?
 
 2026-05-08T18:50 User: On admin page the word box is too small
+
+2026-05-08T18:55 User: /close
+
+2026-05-08T19:05 User: I got "Rejected: Verification failed: Google API error: Requests from referer are blocked." Help me diagnose the problem
+
+2026-05-08T19:10 User: Now I get a different error: Rejected: Verification failed: Google API error: This project does not have the access to Custom Search JSON API.
+2026-05-08T19:15 User: 2. What is the correct project? I have been using a project called meetme for storing multiple APIs
+2026-05-08T19:20 User: GOOGLE_API_KEY matches and it is already enabled. When I go to the admin page, I use "add to queue" for "Barbados Cherry" under trees. It goes into the queue, and says "Verified" next to it. Does this mean it has already been verified? When I click on Commit to Github, I get the error "Rejected: Verification failed: Google API error: This project does not have the access to Custom Search JSON API."
+2026-05-08T21:40 User: Running it locally, I cannot login to admin page
+2026-05-08T21:45 User: Getting the error Rejected: Verification failed: Google API error: This project does not have the access to Custom Search JSON API. running locally. Check if you are able to use the Google_api_key to confirm that this is a type of tree
+2026-05-08T21:50 User: Netlify key and .env key for GOOGLE_API_KEY matches. In the "Programmable Search Engine" page 'Sites to search" has only a single URL www.google.com/* Does this need to change?
+2026-05-08T21:55 User: "Custom Search API" is in the list. It shows 18 requests and 100% fails
+2026-05-08T22:00 User: Custom Search API is already in the list under API restrictions
+2026-05-08T22:05 User: OK, lets create a different google cloud project and create a new API key
+2026-05-08T22:15 User: Same error message. the google api key in .env has been updated, running it locally I get Rejected: Verification failed: Google API error: This project does not have the access to Custom Search JSON API.
+2026-05-08T22:20 User: "Custom Search API" is listed in the Google Cloud lettergame project. The credential matching .env does have "Custom Search API" as the selected apis under credentials
+2026-05-08T22:25 User: Billing was already enabled
+2026-05-08T22:30 User: The programmable search engine has a public url that is https://cse.google.com/cse?cx=617e6807ea18b4c8b#gsc.tab=0. Can you not use that when searching?
+2026-05-08T22:35 User: OK, switch to wikipedia
 2026-05-08T18:24 User: Modify ~/.claude/CLAUDE.md file so there is a newline before each entry in AI-log.md file
+
+2026-05-08T21:38 User: how run python web server locally

@@ -98,35 +98,80 @@ exports.handler = async (event) => {
   }
 };
 
-// ---- Google verification ----
+// ---- Wikipedia verification ----
+// Fetch the Wikipedia summary for the word and check that category keywords
+// appear in the summary. Falls back to Wikipedia search if no direct page.
+
+// Keywords that confirm a word belongs to a category.
+// Using specific terms avoids false positives (e.g. "treelike" for Trees).
+const CATEGORY_KEYWORDS = {
+  fruits:      ['fruit', 'berry', 'drupe', 'citrus'],
+  animals:     ['animal', 'mammal', 'reptile', 'amphibian', 'species of', 'genus'],
+  cities:      ['city', 'capital', 'town', 'municipality', 'metropolis'],
+  foods:       ['food', 'dish', 'cuisine', 'recipe', 'meal', 'snack', 'dessert'],
+  vegetables:  ['vegetable', 'root vegetable', 'leafy', 'edible plant'],
+  sports:      ['sport', 'athletic', 'competition', 'game played'],
+  instruments: ['instrument', 'musical instrument', 'played by', 'strings', 'percussion', 'woodwind', 'brass'],
+  occupations: ['occupation', 'profession', 'career', 'job', 'practitioner', 'worker'],
+  birds:       ['bird', 'avian', 'species of bird', 'passerine', 'raptor', 'waterfowl'],
+  flowers:     ['flower', 'flowering plant', 'bloom', 'blossom', 'floral'],
+  trees:       ['\\btree\\b', 'woody plant', 'shrub', 'conifer', 'deciduous', 'evergreen'],
+  gemstones:   ['gemstone', 'gem', 'mineral', 'crystal', 'precious stone', 'semiprecious'],
+  dinosaurs:   ['dinosaur', 'prehistoric', 'theropod', 'sauropod', 'cretaceous', 'jurassic'],
+  movies:      ['film', 'movie', 'cinema', 'directed by', 'box office'],
+  games:       ['video game', 'game developed', 'game published', 'role-playing', 'action game'],
+  tvshows:     ['television series', 'tv series', 'sitcom', 'drama series', 'aired on', 'episodes'],
+  superheroes: ['superhero', 'comic book', 'marvel', 'dc comics', 'fictional character'],
+  mythology:   ['deity', 'god', 'goddess', 'mythology', 'mythological', 'divine'],
+  history:     ['politician', 'statesman', 'general', 'emperor', 'queen', 'king', 'leader', 'president', 'philosopher', 'scientist', 'explorer'],
+  dances:      ['dance', 'dancing', 'choreography', 'music genre'],
+};
 
 async function verifyWordWithGoogle(word, category) {
-  const key = process.env.GOOGLE_API_KEY;
-  const cx  = process.env.GOOGLE_CX;
-  if (!key || !cx) return { valid: false, reason: 'Google API not configured on server' };
-
   const categoryLabel = categoryDisplayName(category);
-  const q = encodeURIComponent(`${word} ${categoryLabel}`);
-  const url = `https://www.googleapis.com/customsearch/v1?q=${q}&key=${key}&cx=${cx}&num=3`;
+  const keywords = CATEGORY_KEYWORDS[category] || [categoryLabel.toLowerCase()];
+
+  function textMatches(text) {
+    const t = text.toLowerCase();
+    return keywords.some(kw => {
+      // Keywords starting with \b use regex word boundaries; others use plain includes
+      if (kw.startsWith('\\b')) {
+        return new RegExp(kw).test(t);
+      }
+      return t.includes(kw);
+    });
+  }
 
   try {
-    const res  = await fetch(url);
-    const data = await res.json();
+    // 1. Try direct page summary
+    const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(word)}`;
+    const res = await fetch(summaryUrl, { headers: { 'User-Agent': 'lettergame-admin/1.0' } });
 
-    if (data.error) return { valid: false, reason: `Google API error: ${data.error.message}` };
+    if (res.ok) {
+      const data = await res.json();
+      if (data.type === 'standard') {
+        const text = (data.description || '') + ' ' + (data.extract || '');
+        if (textMatches(text)) return { valid: true };
+        return {
+          valid: false,
+          reason: `Wikipedia article for "${word}" doesn't confirm it as a ${categoryLabel.toLowerCase().replace(/s$/, '')}`,
+        };
+      }
+    }
 
-    const items = data.items || [];
-    if (items.length === 0) return { valid: false, reason: 'No Google results found for this word and category' };
+    // 2. Fall back to Wikipedia search
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(word + ' ' + categoryLabel)}&srlimit=3&format=json&origin=*`;
+    const sRes  = await fetch(searchUrl, { headers: { 'User-Agent': 'lettergame-admin/1.0' } });
+    const sData = await sRes.json();
+    const results = sData.query?.search || [];
 
-    // Check that the word appears in the top results' title or snippet
-    const wordLower = word.toLowerCase();
-    const matched = items.some(item => {
-      const text = ((item.title || '') + ' ' + (item.snippet || '')).toLowerCase();
-      return text.includes(wordLower);
-    });
+    if (results.length === 0) {
+      return { valid: false, reason: `No Wikipedia results found for "${word}" in category "${categoryLabel}"` };
+    }
 
+    const matched = results.some(r => textMatches((r.title || '') + ' ' + (r.snippet || '')));
     if (!matched) {
-      return { valid: false, reason: `Top results don't mention "${word}" in context of "${categoryLabel}"` };
+      return { valid: false, reason: `Wikipedia search doesn't confirm "${word}" as a ${categoryLabel.toLowerCase().replace(/s$/, '')}` };
     }
 
     return { valid: true };
