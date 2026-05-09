@@ -314,7 +314,7 @@ const WORDS = {
 
   trees: {
     A: ['Ash', 'Apple Tree', 'Acacia', 'Alder', 'Aspen', 'Avocado Tree'],
-    B: ['Birch', 'Beech', 'Baobab', 'Bonsai', 'Balsa', 'Black Walnut'],
+    B: ['Birch', 'Beech', 'Baobab', 'Bonsai', 'Balsa', 'Black Walnut', 'Barbados Cherry'],
     C: ['Cedar', 'Cherry Tree', 'Cypress', 'Chestnut', 'Catalpa', 'Coffee Tree'],
     D: ['Douglas Fir', 'Date Palm', 'Dawn Redwood'],
     E: ['Elm', 'Eucalyptus', 'Elder', 'English Oak'],
