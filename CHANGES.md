@@ -22,3 +22,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-08 [code] Fixed image bug when computer goes first (doComputerTurn now async, awaits image Promise before recordWord).
 2026-05-08 [note] Live site: https://letter-category.netlify.app/ — repo: https://github.com/pisanuw/lettergame
 2026-05-08 [doc] ~/.claude/CLAUDE.md rewritten: AI-log logging made mandatory first step, tables for project records and slash commands, removed redundancy.
+2026-05-08 [plan] Hints redesigned: show clue text (not the answer) when Hint pressed. generate-hints.js one-time script uses Claude Haiku to produce one clue per word, saved to hints.js.
+2026-05-08 [code] admin.html added: password-gated word admin. Two modes via ADMIN_PASSWORD_BASIC / ADMIN_PASSWORD_VERIFIED. Mode 2 Google-verifies each word before GitHub commit. netlify/functions/admin-add-word.js handles auth, verify, and GitHub REST API commit.

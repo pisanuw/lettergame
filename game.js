@@ -471,11 +471,13 @@ function showHint() {
     return;
   }
 
+  // Pick a random word and show its hint clue (not the word itself)
   const word = words[Math.floor(Math.random() * words.length)];
   state.lastHintWord = word;
   state.hintsLeft--;
 
-  el.hintText.textContent = `Hint: ${word}`;
+  const clue = (HINTS[state.category]?.[letter]?.[word]) || `Starts with "${letter}".`;
+  el.hintText.textContent = `Hint: ${clue}`;
   el.hintText.classList.remove('hidden');
 
   updateHintButton();
