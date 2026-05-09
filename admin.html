@@ -136,14 +136,8 @@
     <label for="word-input">
       Word <span id="letter-preview" style="color:var(--primary);font-size:0.95rem;font-weight:800;"></span>
     </label>
-    <div style="display:flex;gap:8px;align-items:flex-start;">
-      <div style="flex:1;">
-        <input type="text" id="word-input" placeholder="e.g. Starfruit" autocomplete="off">
-      </div>
-      <button class="btn btn-primary btn-sm" id="add-to-queue-btn" style="margin-top:0;white-space:nowrap;">
-        Add to Queue
-      </button>
-    </div>
+    <input type="text" id="word-input" placeholder="e.g. Starfruit" autocomplete="off">
+    <button class="btn btn-primary" id="add-to-queue-btn">Add to Queue</button>
     <div class="msg" id="word-msg"></div>
 
     <div id="queue-section" class="hidden">
