@@ -127,3 +127,15 @@ Ready for game code wiring to support Turkish language selection.
 
 2026-05-09T00:00 User: 'git pull' says local file is different to remote.
 How do I see differences easilty to integrate 2 files
+
+2026-05-09T00:00 User: Create a new slash '/' command for Claude. The command details will be written in ~/.claude/commands/git-help-merge.md
+
+The content of the file will be the workflow for merging conflicting git files.
+
+Read the other commands in ~/.claude/commands/ to understand the format. Be precise in the instructions and use comments to explain what is going on
+
+2026-05-09T14:12 User: Add it
+
+$ts User: For "Filmler" category in Turkish. Use only movies that were made in Turkey or that have clear Turkish titles. The turkish title is the one that has to start with the correct letter. Update the category to say "Turk Filmleri" to indicate that this is turkish only movies. Update the hints as well
+
+2026-05-09T00:00 User: For "Filmler" category in Turkish. Use only movies that were made in Turkey or that have clear Turkish titles. The turkish title is the one that has to start with the correct letter. Update the category to say "Turk Filmleri" to indicate that this is turkish only movies. Update the hints as well

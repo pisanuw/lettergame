@@ -36,3 +36,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-09 [code] Turkish hints replaced: hints-tr.js now contains meaningful Turkish clues instead of generic "Bu bir [kategori]" placeholders. Each hint describes characteristics, origin, use, or appearance (e.g., Armut→autumn harvest fruit, Timsah→crocodile with strong jaw).
 2026-05-09 [code] Added 4 English-only categories: Countries (25 letters, no X), Famous Baseball Players, Famous Football Players, Famous Basketball Players. All with full A-Z word lists and hints.
 2026-05-09 [code] Game hint/skip button now handles letters with no words (auto-shows Skip instead of Hint). Supports sparse categories like Countries missing X.
+2026-05-09 [doc] Added ~/.claude/commands/git-help-merge.md slash command with step-by-step conflict diff and merge workflow.
+2026-05-09 [code] Updated Turkish movies to Turk Filmleri with Turkish-title-only entries and synchronized hints in words-tr.js and hints-tr.js.
