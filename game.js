@@ -4,8 +4,16 @@ const MAX_HINTS = 3;
 // Image search is proxied through /.netlify/functions/image-search
 // so credentials stay server-side (set GOOGLE_API_KEY and GOOGLE_CX in Netlify env vars)
 
+// Active language data (set on language change / game start)
+let activeCategories = {};
+let activeWords = {};
+let activeHints = {};
+let activeWikiLang = 'en';
+let t = {}; // current UI strings
+
 let state = {
   phase: 'setup',
+  lang: 'en',
   category: null,
   currentLetterIndex: 0,
   currentTurn: null,
@@ -23,11 +31,53 @@ let el = {};
 
 function $(id) { return document.getElementById(id); }
 
+function setLanguage(lang) {
+  state.lang = lang;
+  const data = LANG[lang] || LANG.en;
+  activeCategories = data.categories;
+  activeWords      = data.words;
+  activeHints      = data.hints;
+  activeWikiLang   = data.wikiLang;
+  t = UI[lang] || UI.en;
+
+  // Update HTML lang attribute
+  document.getElementById('html-root').lang = lang;
+
+  // Rebuild category dropdown
+  const select = el.categorySelect;
+  // Remove all options except the first "Pick for me"
+  while (select.options.length > 1) select.remove(1);
+  $('pick-for-me-opt').textContent = t.pickForMe;
+  Object.entries(activeCategories).forEach(([key, name]) => {
+    const opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = name;
+    select.appendChild(opt);
+  });
+
+  // Update static UI text
+  $('game-title').textContent = t.title;
+  $('game-subtitle').textContent = t.subtitle;
+  $('game-hints-note').innerHTML = t.hintsNote;
+  $('lang-label').textContent = t.chooseLanguage;
+  $('cat-label').textContent = t.chooseCategory;
+  $('start-btn').textContent = t.startGame;
+  $('home-label').textContent = t.home;
+  $('submit-label').textContent = t.submit;
+  $('quit-label').textContent = t.quit;
+  $('complete-heading').textContent = t.complete;
+  $('play-again-label').textContent = t.playAgain;
+  $('end-home-label').textContent = t.home;
+  $('modal-title').textContent = t.suggestTitle;
+  el.wordInput.placeholder = t.typeWord;
+}
+
 function init() {
   el = {
     setupScreen:     $('setup-screen'),
     gameScreen:      $('game-screen'),
     endScreen:       $('end-screen'),
+    langSelect:      $('lang-select'),
     categorySelect:  $('category-select'),
     startBtn:        $('start-btn'),
     categoryDisplay: $('category-display'),
@@ -72,20 +122,19 @@ function init() {
     ingameSugClose:  $('ingame-sug-close'),
   };
 
-  // Populate category dropdown
-  Object.entries(CATEGORIES).forEach(([key, name]) => {
-    const opt = document.createElement('option');
-    opt.value = key;
-    opt.textContent = name;
-    el.categorySelect.appendChild(opt);
-  });
+  // Set initial language
+  setLanguage(el.langSelect.value || 'en');
+
+  // Language change handler
+  el.langSelect.addEventListener('change', () => setLanguage(el.langSelect.value));
 
   // Game events
   el.startBtn.addEventListener('click', startGame);
   el.submitBtn.addEventListener('click', handleSubmit);
   el.wordInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
   el.hintBtn.addEventListener('click', () => {
-    if (state.hintsLeft > 0) showHint();
+    const words = (activeWords[state.category] || {})[currentLetter()] || [];
+    if (state.hintsLeft > 0 && words.length > 0) showHint();
     else handleSkip();
   });
   el.quitBtn.addEventListener('click', resetToSetup);
@@ -118,6 +167,7 @@ function showScreen(name) {
 function resetToSetup() {
   state = {
     phase: 'setup',
+    lang: state.lang,
     category: null,
     currentLetterIndex: 0,
     currentTurn: null,
@@ -145,10 +195,10 @@ function startGame() {
   Object.keys(prefetchCache).forEach(k => delete prefetchCache[k]);
 
   const selected = el.categorySelect.value;
-  const keys = Object.keys(CATEGORIES);
+  const keys = Object.keys(activeCategories);
   state.category = selected || keys[Math.floor(Math.random() * keys.length)];
 
-  el.categoryDisplay.textContent = CATEGORIES[state.category];
+  el.categoryDisplay.textContent = activeCategories[state.category];
   el.wordHistory.innerHTML = '';
   el.hintText.classList.add('hidden');
   el.errorMsg.classList.add('hidden');
@@ -184,8 +234,7 @@ function updateUI() {
   el.errorMsg.classList.add('hidden');
 
   if (state.currentTurn === 'user') {
-    el.turnIndicator.textContent =
-      `Your turn — name a ${CATEGORIES[state.category]} starting with "${currentLetter()}"`;
+    el.turnIndicator.textContent = t.yourTurn(activeCategories[state.category], currentLetter());
     el.inputArea.classList.remove('hidden');
     el.hintBtn.classList.remove('hidden');
     updateHintButton();
@@ -194,14 +243,14 @@ function updateUI() {
     // While user is thinking, silently pick and prefetch the computer's next word
     prefetchNextComputerWord();
   } else {
-    el.turnIndicator.textContent = 'Computer is thinking\u2026';
+    el.turnIndicator.textContent = t.computerThinking;
     el.inputArea.classList.add('hidden');
     el.hintBtn.classList.add('hidden');
   }
 }
 
 function pickComputerWord(letter) {
-  const words = (WORDS[state.category] || {})[letter] || [];
+  const words = (activeWords[state.category] || {})[letter] || [];
   if (words.length === 0) return null;
   const used = state.usedComputerWords[letter] || new Set();
   const available = words.filter(w => !used.has(w.toLowerCase()));
@@ -240,13 +289,13 @@ async function doComputerTurn() {
   let word, imageUrl;
 
   if (cached && cached.word) {
-    // Await the Promise — likely already resolved during user's turn
+    // Await the Promise -- likely already resolved during user's turn
     word     = cached.word;
     imageUrl = await cached.imagePromise;
   } else {
-    // Computer went first or cache missed — pick and fetch now
+    // Computer went first or cache missed -- pick and fetch now
     word = pickComputerWord(letter);
-    if (!word) { recordWord('(none found)', 'computer', null); return; }
+    if (!word) { recordWord(t.noneFound, 'computer', null); return; }
     imageUrl = await fetchWikiImage(word, state.category);
   }
 
@@ -260,15 +309,15 @@ function handleSubmit() {
   const letter = currentLetter();
 
   if (!raw.toUpperCase().startsWith(letter)) {
-    showError(`"${raw}" doesn\u2019t start with "${letter}". Try again.`);
+    showError(t.wrongLetter(raw, letter));
     return;
   }
 
-  const words = (WORDS[state.category] || {})[letter] || [];
+  const words = (activeWords[state.category] || {})[letter] || [];
   const match = words.find(w => w.toLowerCase() === raw.toLowerCase());
 
   if (!match) {
-    showError(`"${raw}" isn\u2019t in my ${CATEGORIES[state.category]} list. Try another.`, raw);
+    showError(t.notInList(raw, activeCategories[state.category]), raw);
     return;
   }
 
@@ -294,7 +343,7 @@ async function handleSkip() {
   row.innerHTML = `
     <div class="h-meta">
       <span class="h-letter">${letter}</span>
-      <span class="h-word">${displayWord} (skipped)</span>
+      <span class="h-word">${displayWord} (${t.skipped})</span>
     </div>
     ${imageUrl ? `<img class="word-img loaded" src="${imageUrl}" alt="${displayWord}">` : ''}
   `;
@@ -353,7 +402,7 @@ function appendWordToHistory(word, player, letter, imageUrl) {
       <div class="h-meta">
         <span class="h-letter">${letter}</span>
         <span class="h-word">${word}</span>
-        <span class="h-who">Computer</span>
+        <span class="h-who">${t.computer}</span>
       </div>
       <img class="word-img" alt="${word}">
     `;
@@ -368,7 +417,7 @@ function appendWordToHistory(word, player, letter, imageUrl) {
     row.innerHTML = `
       <span class="h-letter">${letter}</span>
       <span class="h-word">${word}</span>
-      <span class="h-who">You</span>
+      <span class="h-who">${t.you}</span>
     `;
   }
 
@@ -393,33 +442,66 @@ const SEARCH_OVERRIDES = {
 
 // Singular form of the category name used as search context (e.g. "Flowers" -> "flower")
 const CATEGORY_HINT = {
-  fruits:      'fruit',
-  animals:     'animal',
-  cities:      'city',
-  foods:       'food dish',
-  vegetables:  'vegetable',
-  sports:      'sport',
-  instruments: 'musical instrument',
-  occupations: 'occupation',
-  birds:       'bird',
-  flowers:     'flower',
-  trees:       'tree',
-  gemstones:   'gemstone',
-  dinosaurs:   'dinosaur',
-  movies:      'movie',
-  games:       'video game',
-  tvshows:     'TV show',
-  superheroes: 'superhero',
-  mythology:   'mythological deity',
-  history:     'historical figure',
-  dances:      'dance',
+  en: {
+    fruits:      'fruit',
+    animals:     'animal',
+    cities:      'city',
+    foods:       'food dish',
+    vegetables:  'vegetable',
+    sports:      'sport',
+    instruments: 'musical instrument',
+    occupations: 'occupation',
+    birds:       'bird',
+    flowers:     'flower',
+    trees:       'tree',
+    gemstones:   'gemstone',
+    dinosaurs:   'dinosaur',
+    movies:      'movie',
+    games:       'video game',
+    tvshows:     'TV show',
+    superheroes: 'superhero',
+    mythology:   'mythological deity',
+    history:     'historical figure',
+    dances:      'dance',
+    countries:   'country',
+    baseball:    'famous baseball player',
+    football:    'famous football player',
+    basketball:  'famous basketball player',
+  },
+  tr: {
+    fruits:      'meyve',
+    animals:     'hayvan',
+    cities:      'sehir',
+    foods:       'yemek',
+    vegetables:  'sebze',
+    sports:      'spor',
+    instruments: 'muzik aleti',
+    occupations: 'meslek',
+    birds:       'kus',
+    flowers:     'cicek',
+    trees:       'agac',
+    gemstones:   'degerli tas',
+    dinosaurs:   'dinozor',
+    movies:      'film',
+    games:       'video oyunu',
+    tvshows:     'dizi',
+    superheroes: 'super kahraman',
+    mythology:   'mitoloji',
+    history:     'tarihi kisi',
+    dances:      'dans',
+  },
 };
+
+function getCategoryHint(category) {
+  const langHints = CATEGORY_HINT[state.lang] || CATEGORY_HINT.en;
+  return langHints[category] || '';
+}
 
 // 1. Try Wikipedia REST API directly (fastest, no quota)
 async function tryWikiDirect(word) {
   try {
     const q = encodeURIComponent(word.replace(/ /g, '_'));
-    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${q}`);
+    const res = await fetch(`https://${activeWikiLang}.wikipedia.org/api/rest_v1/page/summary/${q}`);
     if (!res.ok) return null;
     const data = await res.json();
     return data.thumbnail?.source ?? null;
@@ -429,10 +511,10 @@ async function tryWikiDirect(word) {
 // 2. Search Wikipedia with category context, then fetch the top article's image
 async function tryWikiSearch(word, category) {
   try {
-    const hint = CATEGORY_HINT[category] ?? '';
+    const hint = getCategoryHint(category);
     const q = encodeURIComponent(hint ? `${word} ${hint}` : word);
     const res = await fetch(
-      `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${q}&srlimit=1&format=json&origin=*`
+      `https://${activeWikiLang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${q}&srlimit=1&format=json&origin=*`
     );
     if (!res.ok) return null;
     const data = await res.json();
@@ -445,7 +527,7 @@ async function tryWikiSearch(word, category) {
 // 3. Google Custom Search fallback with category context
 async function tryGoogleImage(word, category) {
   try {
-    const hint = CATEGORY_HINT[category] ?? '';
+    const hint = getCategoryHint(category);
     const q = encodeURIComponent(hint ? `${word} ${hint}` : word);
     const res = await fetch(`/.netlify/functions/image-search?q=${q}`);
     if (!res.ok) return null;
@@ -463,10 +545,10 @@ async function fetchWikiImage(word, category) {
 
 function showHint() {
   const letter = currentLetter();
-  const words = (WORDS[state.category] || {})[letter] || [];
+  const words = (activeWords[state.category] || {})[letter] || [];
 
   if (words.length === 0) {
-    el.hintText.textContent = 'No hints available for this letter.';
+    el.hintText.textContent = t.noHints;
     el.hintText.classList.remove('hidden');
     return;
   }
@@ -476,22 +558,23 @@ function showHint() {
   state.lastHintWord = word;
   state.hintsLeft--;
 
-  const clue = (HINTS[state.category]?.[letter]?.[word]) || `Starts with "${letter}".`;
-  el.hintText.textContent = `Hint: ${clue}`;
+  const clue = (activeHints[state.category]?.[letter]?.[word]) || t.hintFallback(letter);
+  el.hintText.textContent = `${t.hint}: ${clue}`;
   el.hintText.classList.remove('hidden');
 
   updateHintButton();
 }
 
 function updateHintButton() {
-  if (state.hintsLeft > 0) {
+  const words = (activeWords[state.category] || {})[currentLetter()] || [];
+  if (state.hintsLeft > 0 && words.length > 0) {
     el.hintBtn.className = 'btn btn-secondary';
-    el.hintLabel.textContent = 'Hint';
-    el.hintCount.textContent = `(${state.hintsLeft} left)`;
+    el.hintLabel.textContent = t.hint;
+    el.hintCount.textContent = `(${state.hintsLeft} ${t.left})`;
     el.hintCount.classList.remove('hidden');
   } else {
     el.hintBtn.className = 'btn btn-hint-skip';
-    el.hintLabel.textContent = 'Skip';
+    el.hintLabel.textContent = t.skip;
     el.hintCount.classList.add('hidden');
   }
 }
@@ -501,7 +584,7 @@ function showError(msg, suggestWord = null) {
     const link = document.createElement('a');
     link.href = '#';
     link.className = 'suggest-link';
-    link.textContent = 'Suggest this word';
+    link.textContent = t.suggestLink;
     link.addEventListener('click', e => {
       e.preventDefault();
       openInGameSuggestModal(suggestWord);
@@ -518,7 +601,7 @@ function acceptSuggestion(word) {
   closeIngameModal();
 
   const letter = currentLetter();
-  const displayWord = `${word} (suggested)`;
+  const displayWord = `${word} (${t.suggested})`;
   state.history.push({ word: displayWord, player: 'user', letter });
 
   const row = document.createElement('div');
@@ -526,7 +609,7 @@ function acceptSuggestion(word) {
   row.innerHTML = `
     <span class="h-letter">${letter}</span>
     <span class="h-word">${displayWord}</span>
-    <span class="h-who">You</span>
+    <span class="h-who">${t.you}</span>
   `;
   el.wordHistory.appendChild(row);
   el.wordHistory.scrollTop = el.wordHistory.scrollHeight;
@@ -555,7 +638,7 @@ let ingameSuggestWord = '';
 function openInGameSuggestModal(word) {
   ingameSuggestWord = word;
   el.ingameSugWord.textContent = `"${word}"`;
-  el.ingameSugCat.textContent = CATEGORIES[state.category];
+  el.ingameSugCat.textContent = activeCategories[state.category];
   el.ingameSugEmail.value = '';
   el.ingameSugError.classList.add('hidden');
   el.ingameSugForm.classList.remove('hidden');
@@ -575,7 +658,7 @@ function closeIngameModal() {
 async function handleIngameSuggestion() {
   const email = el.ingameSugEmail.value.trim();
   el.ingameSugSubmit.disabled = true;
-  el.ingameSugSubmit.textContent = 'Sending\u2026';
+  el.ingameSugSubmit.textContent = t.sending;
 
   try {
     const res = await fetch('/', {
@@ -584,7 +667,7 @@ async function handleIngameSuggestion() {
       body: new URLSearchParams({
         'form-name': 'word-suggestion',
         word: ingameSuggestWord,
-        category: CATEGORIES[state.category] || state.category,
+        category: activeCategories[state.category] || state.category,
         email,
       }).toString(),
     });
@@ -594,37 +677,37 @@ async function handleIngameSuggestion() {
       // Advance the game after a brief moment so user sees the success message
       setTimeout(() => acceptSuggestion(ingameSuggestWord), 1200);
     } else {
-      el.ingameSugError.textContent = 'Submission failed. Please try again.';
+      el.ingameSugError.textContent = t.submissionFailed;
       el.ingameSugError.classList.remove('hidden');
     }
   } catch {
-    el.ingameSugError.textContent = 'Network error. Please try again.';
+    el.ingameSugError.textContent = t.networkError;
     el.ingameSugError.classList.remove('hidden');
   } finally {
     el.ingameSugSubmit.disabled = false;
-    el.ingameSugSubmit.textContent = 'Send Suggestion';
+    el.ingameSugSubmit.textContent = t.sendSuggestion;
   }
 }
 
 function endGame() {
-  el.endCategory.textContent = `Category: ${CATEGORIES[state.category]}`;
+  el.endCategory.textContent = `${t.category}: ${activeCategories[state.category]}`;
   el.finalWords.innerHTML = state.history.map(({ word, player, letter }) => {
     if (player === 'skipped') {
       return `<div class="final-row skipped">
         <span class="f-letter">${letter}</span>
-        <span class="f-word">${word} (skipped)</span>
-        <span class="f-who">You</span>
+        <span class="f-word">${word} (${t.skipped})</span>
+        <span class="f-who">${t.you}</span>
       </div>`;
     }
     return `<div class="final-row ${player}">
       <span class="f-letter">${letter}</span>
       <span class="f-word">${word}</span>
-      <span class="f-who">${player === 'user' ? 'You' : 'Computer'}</span>
+      <span class="f-who">${player === 'user' ? t.you : t.computer}</span>
     </div>`;
   }).join('');
 
   // Reset suggestion section
-  el.sugCategoryName.textContent = CATEGORIES[state.category];
+  el.sugCategoryName.innerHTML = t.suggestPrompt(activeCategories[state.category]);
   el.sugWord.value = '';
   el.sugEmail.value = '';
   el.sugError.classList.add('hidden');
@@ -643,12 +726,12 @@ async function handleSuggestion() {
   const email    = el.sugEmail.value.trim();
 
   if (!word) {
-    showSugError('Please enter a word.');
+    showSugError(t.enterWord);
     return;
   }
 
   el.sugSubmitBtn.disabled = true;
-  el.sugSubmitBtn.textContent = 'Sending\u2026';
+  el.sugSubmitBtn.textContent = t.sending;
 
   try {
     const res = await fetch('/', {
@@ -657,7 +740,7 @@ async function handleSuggestion() {
       body: new URLSearchParams({
         'form-name': 'word-suggestion',
         word,
-        category: CATEGORIES[category] || category,
+        category: activeCategories[category] || category,
         email,
       }).toString(),
     });
@@ -666,13 +749,13 @@ async function handleSuggestion() {
       el.sugFormWrap.classList.add('hidden');
       el.sugSuccess.classList.remove('hidden');
     } else {
-      showSugError('Submission failed. Please try again.');
+      showSugError(t.submissionFailed);
     }
   } catch {
-    showSugError('Network error. Please try again.');
+    showSugError(t.networkError);
   } finally {
     el.sugSubmitBtn.disabled = false;
-    el.sugSubmitBtn.textContent = 'Suggest';
+    el.sugSubmitBtn.textContent = t.suggest;
   }
 }
 

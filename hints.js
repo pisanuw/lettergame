@@ -3184,4 +3184,550 @@ const HINTS = {
       'Zydeco': 'Accordion-driven dance music with roots in Louisiana Creole culture, often played at festivals.',
     },
   },
+
+  countries: {
+    A: {
+      'Argentina': 'This South American country is famous for tango, beef, and soccer legend Maradona.',
+      'Australia': 'This continent-country is home to kangaroos, koalas, and the Great Barrier Reef.',
+      'Austria': 'This Central European country was home to Mozart, with its capital Vienna.',
+      'Afghanistan': 'This landlocked Central Asian nation is known for rugged Hindu Kush mountains.',
+      'Albania': 'This small Balkan nation on the Adriatic Sea has its capital in Tirana.',
+      'Algeria': 'The largest country in Africa by area, located in North Africa.',
+      'Angola': 'This Southern African nation gained independence from Portugal in 1975.',
+    },
+    B: {
+      'Brazil': 'This South American giant is famous for Carnival, soccer, and the Amazon rainforest.',
+      'Belgium': 'This Western European country is known for chocolate, waffles, and hosting EU headquarters.',
+      'Bolivia': 'This landlocked South American country has two capitals and sits on a high plateau.',
+      'Bangladesh': 'This South Asian country is one of the most densely populated, with its capital in Dhaka.',
+      'Bahamas': 'This Caribbean island nation near Florida is known for crystal clear waters and beaches.',
+      'Bhutan': 'This small Himalayan kingdom measures success by Gross National Happiness.',
+      'Belize': 'This Central American country on the Caribbean coast is the only one with English as official language.',
+      'Botswana': 'This Southern African country is home to the Okavango Delta and Kalahari Desert.',
+      'Bulgaria': 'This Balkan country on the Black Sea is known for rose oil production and yogurt.',
+    },
+    C: {
+      'Canada': 'The second-largest country in the world, known for maple syrup and hockey.',
+      'China': 'This East Asian country has the largest population and is home to the Great Wall.',
+      'Colombia': 'This South American country is famous for coffee, emeralds, and the city of Cartagena.',
+      'Chile': 'This long, narrow South American country stretches along the Pacific coast.',
+      'Cuba': 'This Caribbean island nation is known for cigars, classic cars, and its capital Havana.',
+      'Croatia': 'This Adriatic country is shaped like a boomerang and known for its Dalmatian coast.',
+      'Costa Rica': 'This Central American country is famous for biodiversity, volcanoes, and eco-tourism.',
+      'Cameroon': 'This Central African country is called "Africa in miniature" for its geographic diversity.',
+      'Cambodia': 'This Southeast Asian country is home to the ancient temple complex of Angkor Wat.',
+      'Cyprus': 'This Mediterranean island nation is divided between Greek and Turkish communities.',
+    },
+    D: {
+      'Denmark': 'This Scandinavian kingdom is known for Vikings, LEGO, and the Little Mermaid statue.',
+      'Dominican Republic': 'This Caribbean nation shares the island of Hispaniola with Haiti.',
+      'Djibouti': 'This tiny East African country sits at the strategic entrance to the Red Sea.',
+    },
+    E: {
+      'Egypt': 'This North African country is home to the Pyramids of Giza and the Nile River.',
+      'Ecuador': 'This South American country straddles the equator and includes the Galapagos Islands.',
+      'Estonia': 'This Baltic nation is one of the most digitally advanced countries in the world.',
+      'Ethiopia': 'This East African country is considered the birthplace of coffee and one of the oldest civilizations.',
+      'El Salvador': 'The smallest country in Central America, known for its Pacific coast volcanoes.',
+      'Eritrea': 'This East African country on the Red Sea coast gained independence from Ethiopia in 1993.',
+    },
+    F: {
+      'France': 'This Western European country is home to the Eiffel Tower and fine cuisine.',
+      'Finland': 'This Nordic country is known for saunas, the Northern Lights, and Santa Claus Village.',
+      'Fiji': 'This South Pacific island nation consists of over 300 islands and is known for tropical resorts.',
+    },
+    G: {
+      'Germany': 'This Central European economic powerhouse is known for beer, cars, and Oktoberfest.',
+      'Greece': 'This Mediterranean country is considered the birthplace of democracy and the Olympics.',
+      'Ghana': 'This West African country on the Gulf of Guinea was formerly known as the Gold Coast.',
+      'Guatemala': 'This Central American country has Mayan ruins at Tikal and active volcanoes.',
+      'Gambia': 'The smallest country on mainland Africa, nearly surrounded by Senegal.',
+      'Guinea': 'This West African country on the Atlantic coast has its capital in Conakry.',
+      'Guyana': 'The only English-speaking country in South America, bordering the Caribbean.',
+      'Georgia': 'This country at the crossroads of Europe and Asia is known for wine and the Caucasus Mountains.',
+    },
+    H: {
+      'Honduras': 'This Central American country has Mayan ruins at Copan and Caribbean coastline.',
+      'Hungary': 'This Central European country is known for thermal baths and its capital Budapest on the Danube.',
+      'Haiti': 'This Caribbean nation was the first Black republic, gaining independence in 1804.',
+    },
+    I: {
+      'India': 'This South Asian country is the world\'s most populous democracy, home to the Taj Mahal.',
+      'Indonesia': 'This Southeast Asian archipelago is the world\'s largest island country with over 17,000 islands.',
+      'Ireland': 'This island nation in the North Atlantic is known for green landscapes and literary tradition.',
+      'Iran': 'This Middle Eastern country was historically known as Persia and has its capital in Tehran.',
+      'Iraq': 'This Middle Eastern country between the Tigris and Euphrates was the cradle of civilization.',
+      'Italy': 'This Southern European country shaped like a boot is known for pasta, pizza, and the Colosseum.',
+      'Iceland': 'This Nordic island nation is known for geysers, glaciers, and the Northern Lights.',
+      'Israel': 'This Middle Eastern country on the Mediterranean contains Jerusalem, sacred to three religions.',
+    },
+    J: {
+      'Japan': 'This East Asian island nation is known for sushi, samurai history, and cherry blossoms.',
+      'Jamaica': 'This Caribbean island is the birthplace of reggae music and Bob Marley.',
+      'Jordan': 'This Middle Eastern kingdom is home to the ancient rock city of Petra.',
+    },
+    K: {
+      'Kenya': 'This East African country is famous for safaris, the Maasai Mara, and marathon runners.',
+      'Kazakhstan': 'The largest landlocked country in the world, spanning Central Asia.',
+      'Kuwait': 'This small oil-rich Persian Gulf country sits between Iraq and Saudi Arabia.',
+      'Kyrgyzstan': 'This Central Asian country is mountainous and known for nomadic traditions and yurt culture.',
+      'Kiribati': 'This Pacific island nation straddles the International Date Line and is threatened by rising seas.',
+    },
+    L: {
+      'Libya': 'This North African country has the largest proven oil reserves on the African continent.',
+      'Lebanon': 'This small Middle Eastern country is known for cedar trees, which appear on its flag.',
+      'Laos': 'This landlocked Southeast Asian country on the Mekong River is known for Buddhist monasteries.',
+      'Lithuania': 'This Baltic nation was the last European country to adopt Christianity.',
+      'Latvia': 'This Baltic country between Lithuania and Estonia has its capital in Riga.',
+      'Liberia': 'This West African nation was founded by freed American slaves in the 19th century.',
+      'Luxembourg': 'One of the smallest and wealthiest countries in Europe, a founding EU member.',
+      'Lesotho': 'This small mountainous kingdom is entirely surrounded by South Africa.',
+    },
+    M: {
+      'Mexico': 'This North American country is known for tacos, ancient Aztec and Mayan civilizations, and Day of the Dead.',
+      'Morocco': 'This North African kingdom is known for its markets, the Sahara Desert, and the city of Marrakech.',
+      'Malaysia': 'This Southeast Asian country is known for the Petronas Twin Towers and diverse cuisine.',
+      'Mongolia': 'This vast Central Asian country was home to Genghis Khan and the Mongol Empire.',
+      'Madagascar': 'This island nation off southeast Africa is home to lemurs and unique biodiversity.',
+      'Malta': 'This small Mediterranean island nation south of Sicily has ancient megalithic temples.',
+      'Mozambique': 'This Southeast African country on the Indian Ocean was a Portuguese colony until 1975.',
+      'Myanmar': 'This Southeast Asian country, formerly called Burma, is known for golden pagodas.',
+    },
+    N: {
+      'Nigeria': 'The most populous country in Africa, known for Nollywood and oil production.',
+      'Nepal': 'This Himalayan country is home to Mount Everest and the birthplace of Buddha.',
+      'Netherlands': 'This Western European country is known for tulips, windmills, and canals.',
+      'Norway': 'This Scandinavian country is known for fjords, the Northern Lights, and Viking heritage.',
+      'New Zealand': 'This South Pacific island nation was the filming location for The Lord of the Rings.',
+      'Nicaragua': 'The largest country in Central America, with volcanoes and two large lakes.',
+      'Namibia': 'This Southern African country is home to the ancient Namib Desert and Skeleton Coast.',
+      'Niger': 'This landlocked West African country is named after the Niger River.',
+    },
+    O: {
+      'Oman': 'This Arabian Peninsula country is known for frankincense and its capital Muscat.',
+    },
+    P: {
+      'Peru': 'This South American country is home to Machu Picchu and the ancient Inca Empire.',
+      'Poland': 'This Central European country is known for its medieval old towns and pierogi.',
+      'Portugal': 'This Western European country on the Atlantic coast was a great maritime empire.',
+      'Pakistan': 'This South Asian country has K2, the second tallest mountain in the world.',
+      'Panama': 'This Central American country connects North and South America and has a famous canal.',
+      'Philippines': 'This Southeast Asian archipelago of over 7,000 islands has its capital in Manila.',
+      'Paraguay': 'This landlocked South American country is one of two in the continent with no coastline.',
+      'Papua New Guinea': 'This Oceanian country on the eastern half of New Guinea has over 800 languages.',
+    },
+    Q: {
+      'Qatar': 'This wealthy Persian Gulf peninsula country hosted the 2022 FIFA World Cup.',
+    },
+    R: {
+      'Romania': 'This Eastern European country is home to Transylvania and the legend of Dracula.',
+      'Russia': 'The largest country in the world by area, spanning Europe and Asia.',
+      'Rwanda': 'This small East African nation is known as the "Land of a Thousand Hills."',
+    },
+    S: {
+      'Spain': 'This Southern European country is known for flamenco, bullfighting, and La Sagrada Familia.',
+      'Sweden': 'This Scandinavian country is known for IKEA, ABBA, and the Nobel Prize.',
+      'Switzerland': 'This landlocked Alpine country is known for chocolate, watches, and neutrality.',
+      'South Africa': 'This country at the southern tip of Africa has three capital cities and was home to Nelson Mandela.',
+      'Singapore': 'This tiny city-state in Southeast Asia is one of the world\'s busiest ports.',
+      'Sri Lanka': 'This island nation off the southern tip of India was formerly known as Ceylon.',
+      'Serbia': 'This Balkan country in southeastern Europe has its capital in Belgrade.',
+      'Somalia': 'This East African country on the Horn of Africa has the longest coastline on the continent.',
+      'Sudan': 'This Northeast African country was once the largest in Africa before South Sudan split off.',
+      'Samoa': 'This South Pacific island nation is known for traditional Polynesian culture.',
+    },
+    T: {
+      'Thailand': 'This Southeast Asian country, formerly Siam, is known for ornate temples and Thai cuisine.',
+      'Turkey': 'This transcontinental country bridges Europe and Asia, with Istanbul as its largest city.',
+      'Tunisia': 'This North African country on the Mediterranean was home to ancient Carthage.',
+      'Tanzania': 'This East African country is home to Mount Kilimanjaro and the Serengeti.',
+      'Togo': 'This narrow West African country stretches from the Gulf of Guinea inland.',
+      'Tonga': 'This Polynesian kingdom in the South Pacific is the only monarchy among Pacific Island nations.',
+      'Tajikistan': 'This Central Asian country is mostly mountainous, dominated by the Pamir Mountains.',
+      'Turkmenistan': 'This Central Asian country has the Karakum Desert and the Darvaza gas crater.',
+    },
+    U: {
+      'Uruguay': 'This small South American country between Argentina and Brazil hosted the first FIFA World Cup.',
+      'Uganda': 'This landlocked East African country is known for mountain gorillas and Lake Victoria.',
+      'Ukraine': 'This Eastern European country is the second-largest in Europe by area.',
+      'Uzbekistan': 'This Central Asian country has the ancient Silk Road cities of Samarkand and Bukhara.',
+      'United Arab Emirates': 'This federation of seven emirates on the Persian Gulf includes Dubai and Abu Dhabi.',
+      'United Kingdom': 'This island nation comprises England, Scotland, Wales, and Northern Ireland.',
+      'United States': 'This North American country of 50 states is the world\'s largest economy.',
+    },
+    V: {
+      'Venezuela': 'This South American country has Angel Falls, the world\'s highest uninterrupted waterfall.',
+      'Vietnam': 'This Southeast Asian country is known for Ha Long Bay and its rich culinary traditions.',
+      'Vanuatu': 'This South Pacific island nation near Australia is known for volcanoes and coral reefs.',
+    },
+    W: {
+      'Wales': 'This constituent country of the United Kingdom has its own language and national sports teams.',
+    },
+    Y: {
+      'Yemen': 'This Middle Eastern country at the southern tip of the Arabian Peninsula has its capital in Sanaa.',
+    },
+    Z: {
+      'Zimbabwe': 'This Southern African country is home to Victoria Falls and the ancient Great Zimbabwe ruins.',
+      'Zambia': 'This Southern African country shares Victoria Falls with its neighbor Zimbabwe.',
+    },
+  },
+
+  baseball: {
+    A: {
+      'Aaron Judge': 'This Yankees slugger set the American League single-season home run record with 62 in 2022.',
+      'Albert Pujols': 'This Dominican-born first baseman hit over 700 career home runs for the Cardinals and Angels.',
+      'Alex Rodriguez': 'This Yankees shortstop and third baseman hit 696 career homers but was suspended for PED use.',
+    },
+    B: {
+      'Babe Ruth': 'This legendary Yankee was called the "Sultan of Swat" and revolutionized baseball with power hitting.',
+      'Barry Bonds': 'This outfielder holds the all-time home run record with 762 career homers.',
+      'Bob Gibson': 'This Cardinals pitcher posted a stunning 1.12 ERA in 1968 and was a fierce competitor.',
+      'Brooks Robinson': 'This Orioles third baseman was nicknamed "The Human Vacuum Cleaner" for his fielding.',
+    },
+    C: {
+      'Cal Ripken Jr': 'This Orioles shortstop played 2,632 consecutive games, earning the nickname "Iron Man."',
+      'Cy Young': 'This pitcher won 511 career games, and the annual pitching award is named after him.',
+      'Clayton Kershaw': 'This Dodgers left-hander is considered one of the greatest pitchers of his generation.',
+      'Craig Biggio': 'This Astros second baseman and catcher collected over 3,000 hits in his career.',
+    },
+    D: {
+      'Derek Jeter': 'This Yankees shortstop and captain won five World Series and collected over 3,000 hits.',
+      'David Ortiz': 'This Red Sox designated hitter, known as "Big Papi," was clutch in the 2004 ALCS comeback.',
+      'Don Drysdale': 'This Dodgers pitcher threw 58 consecutive scoreless innings in 1968.',
+    },
+    E: {
+      'Ernie Banks': 'This Cubs shortstop was known for saying "Let\'s play two!" and hit 512 home runs.',
+      'Eddie Murray': 'This switch-hitting first baseman collected over 3,000 hits and 500 home runs.',
+      'Eddie Collins': 'This early 1900s second baseman was one of the best hitters of the dead-ball era.',
+    },
+    F: {
+      'Frank Robinson': 'This outfielder won MVP in both leagues and became the first Black manager in MLB history.',
+      'Fergie Jenkins': 'This Canadian-born pitcher won the Cy Young Award and posted six straight 20-win seasons.',
+      'Fred McGriff': 'This "Crime Dog" first baseman hit 493 career home runs across five teams.',
+    },
+    G: {
+      'Greg Maddux': 'This Braves and Cubs pitcher won four consecutive Cy Young Awards with pinpoint control.',
+      'George Brett': 'This Royals third baseman famously hit .390 in 1980 and won three batting titles.',
+    },
+    H: {
+      'Hank Aaron': 'This Hall of Famer broke Babe Ruth\'s all-time home run record with 755 career homers.',
+      'Honus Wagner': 'This early 1900s Pirates shortstop is considered one of the greatest players ever, with a famously rare baseball card.',
+      'Harmon Killebrew': 'This Twins slugger hit 573 home runs and was known for his tremendous power.',
+    },
+    I: {
+      'Ichiro Suzuki': 'This Japanese outfielder collected over 3,000 MLB hits and set the single-season record with 262.',
+      'Ivan Rodriguez': 'This catcher, known as "Pudge," won 13 Gold Glove Awards behind the plate.',
+    },
+    J: {
+      'Jackie Robinson': 'This Brooklyn Dodger broke MLB\'s color barrier in 1947, and his number 42 is retired league-wide.',
+      'Joe DiMaggio': 'This Yankees center fielder hit safely in 56 consecutive games in 1941, a record that still stands.',
+      'Jim Palmer': 'This Orioles pitcher won three Cy Young Awards and was known for his high leg kick.',
+      'Johnny Bench': 'This Reds catcher is widely considered the greatest catcher in baseball history.',
+    },
+    K: {
+      'Ken Griffey Jr': 'This smooth-swinging center fielder was known as "The Kid" and hit 630 career home runs.',
+      'Kirby Puckett': 'This beloved Twins outfielder led Minnesota to two World Series titles in 1987 and 1991.',
+    },
+    L: {
+      'Lou Gehrig': 'This Yankees first baseman played 2,130 consecutive games and was called the "Iron Horse."',
+      'Larry Doby': 'This outfielder broke the American League color barrier in 1947, months after Jackie Robinson.',
+      'Lefty Grove': 'This dominant left-handed pitcher led the league in ERA nine times during the 1920s-30s.',
+    },
+    M: {
+      'Mickey Mantle': 'This Yankees switch-hitter was famous for tape-measure home runs and won the Triple Crown in 1956.',
+      'Mike Trout': 'This Angels center fielder won three MVP awards before age 30 and is considered a generational talent.',
+      'Mariano Rivera': 'This Yankees closer is the all-time saves leader and was the first unanimously elected Hall of Famer.',
+      'Mookie Betts': 'This outfielder won MVP with the Red Sox and a World Series with the Dodgers.',
+    },
+    N: {
+      'Nolan Ryan': 'This fireballing pitcher threw a record seven no-hitters and struck out over 5,700 batters.',
+      'Nelson Cruz': 'This Dominican slugger was one of the most prolific designated hitters in the 2010s and 2020s.',
+    },
+    O: {
+      'Ozzie Smith': 'This Cardinals shortstop, known as "The Wizard," was famous for his acrobatic defensive plays.',
+      'Orlando Cepeda': 'This Puerto Rican first baseman, "The Baby Bull," won MVP with the Cardinals in 1967.',
+      'Orel Hershiser': 'This Dodgers pitcher threw 59 consecutive scoreless innings in 1988 and won the World Series MVP.',
+    },
+    P: {
+      'Pete Rose': 'This all-time hits leader with 4,256 was banned from baseball for gambling on games.',
+      'Pedro Martinez': 'This Dominican right-hander won three Cy Young Awards and dominated hitters in the steroid era.',
+      'Prince Fielder': 'This powerful first baseman, son of Cecil, hit 319 career home runs before injuries ended his career.',
+    },
+    Q: {
+      'Quinn Priester': 'This young right-handed pitcher was a top prospect drafted by the Pittsburgh Pirates.',
+    },
+    R: {
+      'Roberto Clemente': 'This Pirates right fielder collected exactly 3,000 hits and died in a humanitarian mission plane crash.',
+      'Randy Johnson': 'This 6\'10" left-hander, "The Big Unit," struck out over 4,800 batters and won five Cy Young Awards.',
+      'Roger Clemens': 'This power pitcher, "The Rocket," won seven Cy Young Awards across his career.',
+      'Rickey Henderson': 'The all-time stolen base king with 1,406, considered the greatest leadoff hitter ever.',
+    },
+    S: {
+      'Sandy Koufax': 'This Dodgers lefty threw four no-hitters and retired at 30 due to an arthritic elbow.',
+      'Stan Musial': 'This Cardinals legend, "Stan the Man," collected 3,630 hits across 22 seasons.',
+      'Satchel Paige': 'This Negro Leagues legend became the oldest rookie in MLB history at age 42.',
+      'Shohei Ohtani': 'This Japanese two-way star excels as both a pitcher and hitter, drawing Babe Ruth comparisons.',
+    },
+    T: {
+      'Ted Williams': 'This Red Sox legend was the last player to hit .400 in a season, batting .406 in 1941.',
+      'Tom Seaver': 'This Mets pitcher, "Tom Terrific," won three Cy Young Awards and 311 career games.',
+      'Tony Gwynn': 'This Padres outfielder won eight batting titles and hit .338 for his career.',
+      'Tris Speaker': 'This early 1900s center fielder is the all-time leader in doubles with 792.',
+    },
+    U: {
+      'Ugueth Urbina': 'This Venezuelan reliever was a two-time All-Star closer for the Expos and Marlins.',
+    },
+    V: {
+      'Vida Blue': 'This Athletics pitcher won both the Cy Young and MVP in 1971 at just 22 years old.',
+      'Vernon Wells': 'This Blue Jays center fielder was a three-time All-Star known for his defense and power.',
+    },
+    W: {
+      'Willie Mays': 'This "Say Hey Kid" is considered one of the greatest ever with 660 homers and legendary catches.',
+      'Walter Johnson': 'This "Big Train" pitcher won 417 games and held the career strikeout record for decades.',
+      'Warren Spahn': 'This left-hander won 363 games, the most by any lefty in MLB history.',
+    },
+    X: {
+      'Xander Bogaerts': 'This Aruban-born shortstop was a key part of the Red Sox 2018 World Series championship.',
+    },
+    Y: {
+      'Yogi Berra': 'This Yankees catcher won 10 World Series rings and was famous for quirky quotes like "It ain\'t over till it\'s over."',
+      'Yasiel Puig': 'This Cuban outfielder burst onto the scene with the Dodgers and was known for his powerful arm and bat flips.',
+      'Yu Darvish': 'This Japanese-Iranian pitcher is known for his wide arsenal of pitches and success in both NPB and MLB.',
+    },
+    Z: {
+      'Zack Greinke': 'This cerebral pitcher won the 2009 AL Cy Young Award and was known for his quirky personality.',
+      'Zack Wheeler': 'This Phillies right-hander emerged as one of the top pitchers in the National League.',
+    },
+  },
+
+  football: {
+    A: {
+      'Aaron Rodgers': 'This Packers quarterback won four NFL MVP awards and is known for his "Hail Mary" throws.',
+      'Adrian Peterson': 'This running back rushed for over 14,000 yards and ran for 296 yards in a single game.',
+      'Aaron Donald': 'This Rams defensive tackle won three Defensive Player of the Year awards.',
+    },
+    B: {
+      'Barry Sanders': 'This Lions running back retired early despite being close to the all-time rushing record, known for elusive moves.',
+      'Brett Favre': 'This gunslinger quarterback started a record 297 consecutive games and won three straight MVP awards.',
+      'Brian Urlacher': 'This Bears middle linebacker anchored one of the top defenses of the 2000s.',
+      'Bo Jackson': 'This dual-sport athlete starred in both the NFL and MLB, becoming a cultural icon with Nike\'s "Bo Knows" campaign.',
+    },
+    C: {
+      'Calvin Johnson': 'This Lions wide receiver, nicknamed "Megatron," had 1,964 receiving yards in a single season.',
+      'Cam Newton': 'This Panthers quarterback won MVP in 2015 and was known for his Superman celebration.',
+    },
+    D: {
+      'Dan Marino': 'This Dolphins quarterback threw for over 61,000 yards but never won a Super Bowl.',
+      'Deion Sanders': 'This "Prime Time" cornerback was the only player to appear in both a Super Bowl and World Series.',
+      'Drew Brees': 'This Saints quarterback set multiple passing records and led New Orleans to a Super Bowl win.',
+      'Dick Butkus': 'This ferocious Bears linebacker defined the position and is considered one of the hardest hitters ever.',
+    },
+    E: {
+      'Emmitt Smith': 'This Cowboys running back is the NFL\'s all-time leading rusher with 18,355 career yards.',
+      'Eli Manning': 'This Giants quarterback defeated Tom Brady\'s Patriots in two Super Bowls.',
+      'Earl Campbell': 'This Oilers running back, the "Tyler Rose," won three rushing titles and the 1979 MVP.',
+    },
+    F: {
+      'Fran Tarkenton': 'This Vikings quarterback was a pioneer of the scrambling style and held passing records at retirement.',
+      'Franco Harris': 'This Steelers running back made the "Immaculate Reception," one of the most famous plays in NFL history.',
+    },
+    G: {
+      'Gale Sayers': 'This Bears running back was nicknamed "The Kansas Comet" and scored six touchdowns in a single game.',
+    },
+    H: {
+      'Herschel Walker': 'This running back won the Heisman Trophy and was involved in one of the biggest NFL trades ever.',
+    },
+    I: {
+      'Isaac Bruce': 'This Rams wide receiver was part of "The Greatest Show on Turf" and caught the Super Bowl-winning touchdown.',
+    },
+    J: {
+      'Jerry Rice': 'This wide receiver is the NFL\'s all-time leader in touchdowns, receptions, and receiving yards.',
+      'Jim Brown': 'This Browns running back is often called the greatest football player ever, leading the league in rushing eight times.',
+      'Joe Montana': 'This 49ers quarterback won four Super Bowls and never threw an interception in the big game.',
+      'John Elway': 'This Broncos quarterback won two Super Bowls near the end of his career and was famous for "The Drive."',
+      'Joe Namath': 'This Jets quarterback guaranteed a Super Bowl III victory and delivered on his bold promise.',
+    },
+    K: {
+      'Kurt Warner': 'This undrafted quarterback went from stocking grocery shelves to winning Super Bowl MVP with the Rams.',
+      'Kam Chancellor': 'This Seahawks safety was part of the "Legion of Boom" defense and known for his devastating hits.',
+    },
+    L: {
+      'Lawrence Taylor': 'This Giants linebacker revolutionized the position and is considered the greatest defensive player ever.',
+      'LaDainian Tomlinson': 'This Chargers running back scored a record 31 touchdowns in a single season in 2006.',
+      'Lamar Jackson': 'This Ravens quarterback won the MVP award at age 22 and revolutionized the position with his running ability.',
+    },
+    M: {
+      'Michael Vick': 'This Falcons quarterback was the fastest player at the position and returned to the NFL after prison.',
+      'Marshawn Lynch': 'This Seahawks running back was famous for "Beast Mode" runs and avoiding media interviews.',
+      'Marcus Allen': 'This Raiders running back won Super Bowl XVIII MVP with a 74-yard touchdown run.',
+      'Michael Strahan': 'This Giants defensive end set the single-season sack record with 22.5 and later became a TV personality.',
+    },
+    N: {
+      'Ndamukong Suh': 'This dominant defensive tackle was known for his strength and physical style of play.',
+      'Nick Foles': 'This Eagles backup quarterback won Super Bowl LII MVP, defeating Tom Brady\'s Patriots.',
+    },
+    O: {
+      'OJ Simpson': 'This Bills running back was the first to rush for 2,000 yards in a single season.',
+      'Orlando Pace': 'This Rams offensive tackle was a seven-time Pro Bowler and anchored "The Greatest Show on Turf."',
+      'Odell Beckham Jr': 'This wide receiver made one of the most famous one-handed catches in NFL history against the Cowboys.',
+    },
+    P: {
+      'Peyton Manning': 'This quarterback won two Super Bowls with different teams and won a record five MVP awards.',
+      'Patrick Mahomes': 'This Chiefs quarterback won multiple Super Bowls and is known for no-look passes.',
+    },
+    Q: {
+      'Quenton Nelson': 'This Colts offensive guard was a first-round pick and named All-Pro multiple times early in his career.',
+    },
+    R: {
+      'Randy Moss': 'This Vikings receiver set the single-season touchdown reception record with 23 in 2007.',
+      'Ray Lewis': 'This Ravens linebacker won two Defensive Player of the Year awards and a Super Bowl MVP.',
+      'Russell Wilson': 'This Seahawks quarterback won Super Bowl XLVIII and was known for his fourth-quarter comebacks.',
+      'Reggie White': 'This "Minister of Defense" defensive end recorded 198 career sacks and dominated the trenches.',
+    },
+    S: {
+      'Steve Young': 'This 49ers quarterback succeeded Joe Montana and threw a record six touchdowns in Super Bowl XXIX.',
+      'Saquon Barkley': 'This running back won Offensive Rookie of the Year with the Giants and rushed for over 2,000 yards with the Eagles.',
+    },
+    T: {
+      'Tom Brady': 'This quarterback won seven Super Bowl rings, the most of any player in NFL history.',
+      'Terrell Owens': 'This flamboyant wide receiver had over 15,000 receiving yards and was known for creative celebrations.',
+      'Troy Aikman': 'This Cowboys quarterback won three Super Bowls in four years during the 1990s dynasty.',
+      'Troy Polamalu': 'This Steelers safety was known for his long hair and instinctive, hard-hitting play style.',
+    },
+    U: {
+      'Unitas': 'This legendary quarterback, Johnny by first name, led the Baltimore Colts in "The Greatest Game Ever Played."',
+    },
+    V: {
+      'Von Miller': 'This Broncos linebacker won Super Bowl 50 MVP and is known for his pass-rushing ability.',
+      'Vince Young': 'This Longhorns legend won the national championship with a dramatic Rose Bowl performance against USC.',
+    },
+    W: {
+      'Walter Payton': 'This Bears running back, "Sweetness," was the NFL\'s all-time rushing leader for nearly two decades.',
+      'Warren Moon': 'This quarterback excelled in both the CFL and NFL and was inducted into the Hall of Fame.',
+      'Wes Welker': 'This undersized Patriots wide receiver led the NFL in receptions three times with Tom Brady.',
+    },
+    X: {
+      'Xavier Rhodes': 'This Vikings cornerback was named All-Pro and was known for his shutdown coverage.',
+      'Xavier McKinney': 'This Giants safety was a versatile defender known for big plays in the secondary.',
+    },
+    Y: {
+      'Y.A. Tittle': 'This quarterback threw 36 touchdown passes in 1963 and is remembered for the iconic bloody, kneeling photo.',
+    },
+    Z: {
+      'Zach Thomas': 'This Dolphins middle linebacker was a seven-time Pro Bowler despite being a fifth-round draft pick.',
+    },
+  },
+
+  basketball: {
+    A: {
+      'Allen Iverson': 'This 76ers guard, "The Answer," won four scoring titles despite being just six feet tall.',
+      'Anthony Davis': 'This power forward, known as "The Brow," won a championship with the Lakers alongside LeBron.',
+    },
+    B: {
+      'Bill Russell': 'This Celtics center won 11 championships in 13 seasons, the most of any player in NBA history.',
+      'Bob Cousy': 'This Celtics point guard, "The Houdini of the Hardwood," pioneered flashy passing in the 1950s.',
+    },
+    C: {
+      'Carmelo Anthony': 'This scoring forward, "Melo," was one of the most prolific scorers of his generation.',
+      'Charles Barkley': 'This undersized power forward, "Sir Charles," won MVP in 1993 and became a beloved TV analyst.',
+      'Chris Paul': 'This point guard, "CP3," is considered one of the greatest floor generals in NBA history.',
+      'Clyde Drexler': 'This Trail Blazers guard, "The Glide," was a 10-time All-Star and won a title with the Rockets.',
+    },
+    D: {
+      'Dwyane Wade': 'This Heat guard won three NBA championships and was nicknamed "Flash" for his athleticism.',
+      'Dennis Rodman': 'This flamboyant forward won five championships and led the league in rebounding seven consecutive years.',
+      'Dikembe Mutombo': 'This shot-blocking center was famous for wagging his finger after rejecting shots.',
+      'Dirk Nowitzki': 'This German-born Maverick led Dallas to the 2011 championship and revolutionized the stretch-four position.',
+      'David Robinson': 'This Spurs center, "The Admiral," was a Naval Academy graduate and two-time champion.',
+    },
+    E: {
+      'Elgin Baylor': 'This Lakers forward was one of the most acrobatic players ever and averaged 38.3 points in the 1962 playoffs.',
+      'Earl Monroe': 'This guard, "Earl the Pearl," was known for his dazzling playground-style moves in the NBA.',
+    },
+    F: {
+      'Fred VanVleet': 'This undrafted guard won an NBA championship with the Raptors in 2019.',
+    },
+    G: {
+      'Giannis Antetokounmpo': 'This "Greek Freak" Bucks forward won back-to-back MVPs and the 2021 NBA championship.',
+      'George Mikan': 'This pioneering Lakers center dominated the early NBA and helped popularize professional basketball.',
+    },
+    H: {
+      'Hakeem Olajuwon': 'This "Dream" Rockets center won back-to-back championships and was famous for his footwork in the post.',
+    },
+    I: {
+      'Isiah Thomas': 'This Pistons point guard led the "Bad Boy" Pistons to back-to-back championships in 1989-90.',
+    },
+    J: {
+      'Julius Erving': 'This "Dr. J" forward popularized above-the-rim play and led the 76ers to a championship in 1983.',
+      'Jason Kidd': 'This point guard was one of the best passers in NBA history and led the Nets to back-to-back Finals.',
+      'Jerry West': 'This Lakers guard\'s silhouette is widely believed to be the NBA logo, and he was known as "Mr. Clutch."',
+      'James Harden': 'This guard, known as "The Beard," won the MVP in 2018 and was famous for his stepback three-pointer.',
+      'Jayson Tatum': 'This Celtics forward led Boston to the 2024 NBA championship and is a multi-time All-Star.',
+    },
+    K: {
+      'Kobe Bryant': 'This Lakers legend, "The Black Mamba," won five championships and scored 81 points in a single game.',
+      'Kevin Durant': 'This scoring forward won back-to-back Finals MVPs with the Warriors and is one of the greatest scorers ever.',
+      'Kevin Garnett': 'This intense power forward, "The Big Ticket," won a championship with the Celtics in 2008.',
+      'Karl Malone': 'This Jazz power forward, "The Mailman," is the second all-time leading scorer in NBA history.',
+      'Kawhi Leonard': 'This quiet forward won Finals MVP with two different teams and is known for his massive hands.',
+      'Kareem Abdul-Jabbar': 'This center held the all-time scoring record for decades and was famous for his unstoppable skyhook shot.',
+    },
+    L: {
+      'LeBron James': 'This forward is the NBA\'s all-time leading scorer and won four championships with three different teams.',
+      'Larry Bird': 'This Celtics forward was a three-time MVP and part of the legendary rivalry with Magic Johnson.',
+      'Luka Doncic': 'This Slovenian guard joined the NBA from European basketball and became an instant superstar with the Mavericks.',
+    },
+    M: {
+      'Michael Jordan': 'This Bulls legend won six championships and six Finals MVPs, widely considered the greatest of all time.',
+      'Magic Johnson': 'This Lakers point guard won five championships and was famous for his flashy "Showtime" style.',
+      'Moses Malone': 'This center predicted the 76ers\' 1983 championship run with the famous quote "Fo\', Fo\', Fo\'."',
+    },
+    N: {
+      'Nikola Jokic': 'This Serbian Nuggets center won multiple MVPs and led Denver to their first championship in 2023.',
+      'Nate Archibald': 'This guard was the only player to lead the league in scoring and assists in the same season.',
+    },
+    O: {
+      'Oscar Robertson': 'This "Big O" guard averaged a triple-double for an entire season, a feat thought impossible for decades.',
+    },
+    P: {
+      'Patrick Ewing': 'This Knicks center was a dominant force in the 1990s and is one of the greatest to never win a title.',
+      'Paul Pierce': 'This Celtics forward, "The Truth," won the 2008 Finals MVP and was a 10-time All-Star.',
+    },
+    Q: {
+      'Quentin Richardson': 'This forward and guard was known for his three-point shooting with the Clippers and Knicks.',
+    },
+    R: {
+      'Russell Westbrook': 'This explosive guard averaged a triple-double for three consecutive seasons and won the 2017 MVP.',
+      'Ray Allen': 'This sharpshooter hit the iconic game-tying shot in the 2013 Finals and set the career three-point record.',
+      'Reggie Miller': 'This Pacers guard was one of the greatest three-point shooters ever and a legendary trash talker.',
+    },
+    S: {
+      'Stephen Curry': 'This Warriors guard revolutionized basketball with his three-point shooting and won four championships.',
+      'Shaquille O\'Neal': 'This dominant center, "Shaq," won three consecutive Finals MVPs with the Lakers and was nearly unstoppable.',
+      'Scottie Pippen': 'This Bulls forward was Michael Jordan\'s sidekick and a key part of two three-peats.',
+    },
+    T: {
+      'Tim Duncan': 'This Spurs forward, "The Big Fundamental," won five championships and is considered the greatest power forward.',
+      'Tracy McGrady': 'This scoring guard once scored 13 points in 35 seconds and was a seven-time All-Star.',
+    },
+    U: {
+      'Udonis Haslem': 'This Heat forward played his entire 20-year career in Miami and won three championships.',
+    },
+    V: {
+      'Vince Carter': 'This high-flying guard, "Vinsanity," won the 2000 Slam Dunk Contest and played 22 NBA seasons.',
+    },
+    W: {
+      'Wilt Chamberlain': 'This legendary center scored 100 points in a single game and once averaged 50.4 points per season.',
+      'Walt Frazier': 'This Knicks guard, "Clyde," was the leader of the 1970 and 1973 championship teams.',
+    },
+    X: {
+      'Xavier McDaniel': 'This Sonics forward, nicknamed "X-Man," was known for his physical play and scoring in the 1980s.',
+    },
+    Y: {
+      'Yao Ming': 'This 7\'6" Chinese center was a Rockets All-Star who helped popularize the NBA in Asia.',
+    },
+    Z: {
+      'Zion Williamson': 'This explosive Pelicans forward was the number one overall pick in 2019, known for incredible athleticism.',
+    },
+  },
 };

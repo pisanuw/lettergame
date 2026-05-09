@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +11,22 @@
   <!-- Setup Screen -->
   <div id="setup-screen" class="screen active">
     <div class="setup-card">
-      <h1>Letter Game</h1>
-      <p class="subtitle">
+      <h1 id="game-title">Letter Game</h1>
+      <p class="subtitle" id="game-subtitle">
         Take turns with the computer naming things in a category,
         one letter at a time — A all the way to Z.
-        You get <strong>3 skips</strong> per game.
       </p>
-      <label class="field-label" for="category-select">Choose a category (or leave blank for a random one)</label>
+      <p class="subtitle" id="game-hints-note">You get <strong>3 hints</strong> per game.</p>
+
+      <label class="field-label" id="lang-label" for="lang-select">Language</label>
+      <select id="lang-select">
+        <option value="en">English</option>
+        <option value="tr">Turkce</option>
+      </select>
+
+      <label class="field-label" id="cat-label" for="category-select">Choose a category (or leave blank for a random one)</label>
       <select id="category-select">
-        <option value="">Pick one for me</option>
+        <option value="" id="pick-for-me-opt">Pick one for me</option>
       </select>
       <button id="start-btn" class="btn btn-primary">Start Game</button>
     </div>
@@ -30,7 +37,7 @@
     <div class="game-wrap">
 
       <div class="game-header">
-        <button id="home-btn" class="home-btn" title="Back to Home">&#8962; Home</button>
+        <button id="home-btn" class="home-btn" title="Back to Home">&#8962; <span id="home-label">Home</span></button>
         <div class="header-center">
           <div class="category-label">Category</div>
           <div class="category-name" id="category-display"></div>
@@ -54,7 +61,7 @@
             autocorrect="off"
             spellcheck="false"
           >
-          <button class="btn btn-primary" id="submit-btn" style="width:auto;padding:10px 20px;">Submit</button>
+          <button class="btn btn-primary" id="submit-btn" style="width:auto;padding:10px 20px;"><span id="submit-label">Submit</span></button>
         </div>
 
         <div class="error-msg hidden" id="error-msg"></div>
@@ -63,7 +70,7 @@
 
       <div class="action-row">
         <button class="btn btn-secondary" id="hint-btn"><span id="hint-label">Hint</span> <span id="hint-count">(3 left)</span></button>
-        <button class="btn btn-secondary" id="quit-btn">Quit</button>
+        <button class="btn btn-secondary" id="quit-btn"><span id="quit-label">Quit</span></button>
       </div>
 
     </div>
@@ -73,7 +80,7 @@
   <div id="end-screen" class="screen">
     <div class="end-card">
       <div class="trophy">&#127881;</div>
-      <h2>A to Z complete!</h2>
+      <h2 id="complete-heading">A to Z complete!</h2>
       <p class="end-category-label" id="end-category"></p>
       <div class="final-list" id="final-words"></div>
 
@@ -99,8 +106,8 @@
       </div>
 
       <div class="end-actions">
-        <button class="btn btn-primary" id="play-again-btn">Play Again</button>
-        <button class="btn btn-secondary" id="end-home-btn">&#8962; Home</button>
+        <button class="btn btn-primary" id="play-again-btn"><span id="play-again-label">Play Again</span></button>
+        <button class="btn btn-secondary" id="end-home-btn">&#8962; <span id="end-home-label">Home</span></button>
       </div>
     </div>
   </div>
@@ -108,8 +115,8 @@
   <!-- In-game word suggestion modal -->
   <div id="ingame-suggest-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
     <div class="modal-box">
-      <h3>Suggest a Word</h3>
-      <p class="modal-sub">We'll review <strong id="ingame-sug-word-display"></strong> and may add it to <strong id="ingame-sug-cat-display"></strong>.</p>
+      <h3 id="modal-title">Suggest a Word</h3>
+      <p class="modal-sub" id="modal-sub-text">We'll review <strong id="ingame-sug-word-display"></strong> and may add it to <strong id="ingame-sug-cat-display"></strong>.</p>
       <div id="ingame-sug-form">
         <label class="field-label" for="ingame-sug-email">Your email <span class="optional">(optional)</span></label>
         <input id="ingame-sug-email" type="email" placeholder="you@example.com">
@@ -135,6 +142,9 @@
 
   <script src="words.js"></script>
   <script src="hints.js"></script>
+  <script src="words-tr.js"></script>
+  <script src="hints-tr.js"></script>
+  <script src="i18n.js"></script>
   <script src="game.js"></script>
 </body>
 </html>

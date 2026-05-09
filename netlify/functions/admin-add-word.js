@@ -21,12 +21,18 @@
 const GITHUB_OWNER  = process.env.GITHUB_OWNER  || 'pisanuw';
 const GITHUB_REPO   = process.env.GITHUB_REPO   || 'lettergame';
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
-const FILE_PATH     = 'words.js';
+
+// Language-specific file paths and Wikipedia subdomains
+const LANG_CONFIG = {
+  en: { filePath: 'words.js',    wikiLang: 'en' },
+  tr: { filePath: 'words-tr.js', wikiLang: 'tr' },
+};
 
 const VALID_CATEGORIES = [
   'fruits','animals','cities','foods','vegetables','sports','instruments',
   'occupations','birds','flowers','trees','gemstones','dinosaurs','movies',
   'games','tvshows','superheroes','mythology','history','dances',
+  'countries','baseball','football','basketball',
 ];
 
 exports.handler = async (event) => {
@@ -38,7 +44,9 @@ exports.handler = async (event) => {
   try { body = JSON.parse(event.body); }
   catch { return { statusCode: 400, body: JSON.stringify({ error: 'Invalid JSON body' }) }; }
 
-  const { password, category, word, verify } = body;
+  const { password, category, word, verify, lang: reqLang } = body;
+  const lang = (reqLang && LANG_CONFIG[reqLang]) ? reqLang : 'en';
+  const langConfig = LANG_CONFIG[lang];
 
   // --- Auth ---
   const basicPw    = process.env.ADMIN_PASSWORD_BASIC;
@@ -74,9 +82,9 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Word must start with a letter A-Z' }) };
   }
 
-  // --- Optional Google verification (mode 2) ---
+  // --- Optional Wikipedia verification (mode 2) ---
   if (verify) {
-    const verifyResult = await verifyWordWithGoogle(trimmedWord, category);
+    const verifyResult = await verifyWordWithWikipedia(trimmedWord, category, langConfig.wikiLang);
     if (!verifyResult.valid) {
       return {
         statusCode: 422,
@@ -87,11 +95,11 @@ exports.handler = async (event) => {
 
   // --- Commit to GitHub ---
   try {
-    const result = await addWordToGitHub(category, letter, trimmedWord);
+    const result = await addWordToGitHub(category, letter, trimmedWord, langConfig.filePath);
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ success: true, word: trimmedWord, category, letter, sha: result.sha }),
+      body: JSON.stringify({ success: true, word: trimmedWord, category, letter, lang, sha: result.sha }),
     };
   } catch (err) {
     return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
@@ -125,9 +133,13 @@ const CATEGORY_KEYWORDS = {
   mythology:   ['deity', 'god', 'goddess', 'mythology', 'mythological', 'divine'],
   history:     ['politician', 'statesman', 'general', 'emperor', 'queen', 'king', 'leader', 'president', 'philosopher', 'scientist', 'explorer'],
   dances:      ['dance', 'dancing', 'choreography', 'music genre'],
+  countries:   ['country', 'nation', 'sovereign', 'republic', 'kingdom', 'state'],
+  baseball:    ['baseball', 'mlb', 'pitcher', 'batter', 'outfielder', 'shortstop', 'major league'],
+  football:    ['football', 'nfl', 'quarterback', 'wide receiver', 'linebacker', 'running back'],
+  basketball:  ['basketball', 'nba', 'point guard', 'center', 'forward', 'shooting guard'],
 };
 
-async function verifyWordWithGoogle(word, category) {
+async function verifyWordWithWikipedia(word, category, wikiLang = 'en') {
   const categoryLabel = categoryDisplayName(category);
   const keywords = CATEGORY_KEYWORDS[category] || [categoryLabel.toLowerCase()];
 
@@ -144,7 +156,7 @@ async function verifyWordWithGoogle(word, category) {
 
   try {
     // 1. Try direct page summary
-    const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(word)}`;
+    const summaryUrl = `https://${wikiLang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(word)}`;
     const res = await fetch(summaryUrl, { headers: { 'User-Agent': 'lettergame-admin/1.0' } });
 
     if (res.ok) {
@@ -160,7 +172,7 @@ async function verifyWordWithGoogle(word, category) {
     }
 
     // 2. Fall back to Wikipedia search
-    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(word + ' ' + categoryLabel)}&srlimit=3&format=json&origin=*`;
+    const searchUrl = `https://${wikiLang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(word + ' ' + categoryLabel)}&srlimit=3&format=json&origin=*`;
     const sRes  = await fetch(searchUrl, { headers: { 'User-Agent': 'lettergame-admin/1.0' } });
     const sData = await sRes.json();
     const results = sData.query?.search || [];
@@ -188,14 +200,16 @@ function categoryDisplayName(cat) {
     gemstones:'Gemstones', dinosaurs:'Dinosaurs', movies:'Movies', games:'Video Games',
     tvshows:'TV Shows', superheroes:'Superheroes', mythology:'Mythological Deities',
     history:'Historical Figures', dances:'Dances',
+    countries:'Countries', baseball:'Famous Baseball Players',
+    football:'Famous Football Players', basketball:'Famous Basketball Players',
   };
   return map[cat] || cat;
 }
 
 // ---- GitHub REST API ----
 
-async function getFile(token) {
-  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${FILE_PATH}?ref=${GITHUB_BRANCH}`;
+async function getFile(token, filePath) {
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}?ref=${GITHUB_BRANCH}`;
   const res = await fetch(url, {
     headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' },
   });
@@ -205,8 +219,8 @@ async function getFile(token) {
   return { content, sha: data.sha };
 }
 
-async function putFile(token, content, sha, commitMessage) {
-  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+async function putFile(token, content, sha, commitMessage, filePath) {
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`;
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
@@ -270,11 +284,11 @@ function insertWord(content, category, letter, word) {
   return result.join('\n');
 }
 
-async function addWordToGitHub(category, letter, word) {
+async function addWordToGitHub(category, letter, word, filePath) {
   const token = process.env.GITHUB_TOKEN;
   if (!token) throw new Error('GITHUB_TOKEN not configured');
 
-  const { content, sha } = await getFile(token);
+  const { content, sha } = await getFile(token, filePath);
 
   // Check word doesn't already exist
   const wordPattern = new RegExp(`'${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}'`);
@@ -297,5 +311,5 @@ async function addWordToGitHub(category, letter, word) {
 
   const newContent = insertWord(content, category, letter, word);
   const msg = `Add "${word}" to ${category}[${letter}] via admin`;
-  return putFile(token, newContent, sha, msg);
+  return putFile(token, newContent, sha, msg, filePath);
 }

@@ -109,6 +109,12 @@
   <div id="admin-screen" class="hidden">
     <div id="mode-badge" class="mode-badge"></div>
 
+    <label for="lang-select">Language</label>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="tr">Turkce</option>
+    </select>
+
     <label for="cat-select">Category</label>
     <select id="cat-select">
       <option value="fruits">Fruits</option>
@@ -160,7 +166,9 @@
   let mode = null; // 'basic' or 'verified'
   let password = null;
 
-  // queue: [{ word, category, letter, status: 'pending'|'verified'|'rejected'|'added', note }]
+  function getLang() { return $('lang-select').value; }
+
+  // queue: [{ word, category, letter, lang, status: 'pending'|'verified'|'rejected'|'added', note }]
   let queue = [];
 
   // ---- Login ----
@@ -256,7 +264,7 @@
       return;
     }
 
-    const item = { word, category, letter, status: 'pending', note: '' };
+    const item = { word, category, letter, lang: getLang(), status: 'pending', note: '' };
     queue.push(item);
     $('word-input').value = '';
     $('letter-preview').textContent = '';
@@ -378,6 +386,7 @@
           category: item.category,
           word: item.word,
           verify: mode === 'verified',
+          lang: item.lang,
         }),
       });
 

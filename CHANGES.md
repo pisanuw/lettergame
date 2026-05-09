@@ -27,3 +27,12 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-08 [code] hints.js generated (one clue per word). Hint button now shows clue text instead of the word itself; lastHintWord still used for computer's next play.
 2026-05-08 [doc] README rewritten: hints, admin page, env vars table, local dev instructions. .env.example updated with GITHUB_TOKEN, ADMIN_PASSWORD_BASIC/VERIFIED.
 2026-05-08 [decision] Admin passwords: ADMIN_PASSWORD_BASIC (direct add), ADMIN_PASSWORD_VERIFIED (Google-verified add). Both required in Netlify env vars before deploy.
+2026-05-09 [doc] Added repo startup instructions to read ~/.claude/CLAUDE.md, BRIEFING.md, CHANGES.md, and MyUnderstanding.md if present.
+2026-05-09 [code] Added Turkish starter data files words-tr.js and hints-tr.js with translated category labels and Turkish clue templates.
+2026-05-09 [code] Turkish vocabulary complete: words-tr.js contains 100% Turkish words all 20 categories A-Z. All special Turkish characters (ç, ğ, ı, ö, ş, ü) preserved.
+2026-05-09 [code] Multi-language support: language selector on setup screen, i18n.js for UI translations, game.js uses active language data. Wikipedia lookups use correct language subdomain (en/tr).
+2026-05-09 [code] Admin page and admin-add-word.js updated: lang selector, commits to correct word file per language, Wikipedia verification uses correct language.
+2026-05-09 [code] Unit tests (test.js): 45 tests covering word data integrity, hints, i18n structure, HTML/JS wiring, admin function, cross-language consistency.
+2026-05-09 [code] Turkish hints replaced: hints-tr.js now contains meaningful Turkish clues instead of generic "Bu bir [kategori]" placeholders. Each hint describes characteristics, origin, use, or appearance (e.g., Armut→autumn harvest fruit, Timsah→crocodile with strong jaw).
+2026-05-09 [code] Added 4 English-only categories: Countries (25 letters, no X), Famous Baseball Players, Famous Football Players, Famous Basketball Players. All with full A-Z word lists and hints.
+2026-05-09 [code] Game hint/skip button now handles letters with no words (auto-shows Skip instead of Hint). Supports sparse categories like Countries missing X.

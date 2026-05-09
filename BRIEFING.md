@@ -1,5 +1,9 @@
 # Briefing
 
+## Session Start
+
+At the start of every project session, read `~/.claude/CLAUDE.md`, then read this file fully and the last 30 lines of `CHANGES.md` before making changes.
+
 - **Purpose**: Browser word game where user and computer alternate naming things in a category, following the alphabet A to Z.
 - **Current scope**: Plain HTML/CSS/JS single-page app (index.html, style.css, words.js, game.js). 20 categories, 2105 words total, full A-Z coverage. User types a word validated against the word list. Computer picks randomly with image fetched from Wikipedia (Google Custom Search fallback). Game ends at Z.
 - **Key decisions**:
