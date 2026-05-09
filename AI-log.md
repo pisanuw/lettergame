@@ -38,8 +38,9 @@
 2026-05-08T22:15 User: Same error message. the google api key in .env has been updated, running it locally I get Rejected: Verification failed: Google API error: This project does not have the access to Custom Search JSON API.
 2026-05-08T22:20 User: "Custom Search API" is listed in the Google Cloud lettergame project. The credential matching .env does have "Custom Search API" as the selected apis under credentials
 2026-05-08T22:25 User: Billing was already enabled
-2026-05-08T22:30 User: The programmable search engine has a public url that is https://cse.google.com/cse?cx=617e6807ea18b4c8b#gsc.tab=0. Can you not use that when searching?
+2026-05-08T22:30 User: The programmable search engine has a public url that is https://cse.google.com/cse?cx=REDACTED#gsc.tab=0. Can you not use that when searching?
 2026-05-08T22:35 User: OK, switch to wikipedia
+2026-05-08T22:50 User: GOOGLE_CX was in the code so netlify rejected the build. Move it so env variables are used instead
 2026-05-08T18:24 User: Modify ~/.claude/CLAUDE.md file so there is a newline before each entry in AI-log.md file
 
 2026-05-08T21:38 User: how run python web server locally
