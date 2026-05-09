@@ -113,7 +113,7 @@ const WORDS = {
     A: ['Apple Pie', 'Avocado Toast', 'Alfredo Pasta', 'Asparagus Soup', 'Arancini', 'Adobo', 'Antipasto', 'Aglio e Olio'],
     B: ['Burger', 'Burrito', 'Baklava', 'Bruschetta', 'Bibimbap', 'Borscht', 'Biryani', 'Beef Stew'],
     C: ['Curry', 'Carbonara', 'Croissant', 'Chili', 'Cheesecake', 'Crepe', 'Ceviche', 'Couscous'],
-    D: ['Dumpling', 'Dal', 'Donut', 'Duck Confit', 'Danish Pastry', 'Dhokla'],
+    D: ['Dumpling', 'Dal', 'Donut', 'Duck Confit', 'Danish Pastry', 'Dhokla', 'Dolmas'],
     E: ['Enchilada', 'Empanada', 'Eggs Benedict', 'Escargot', 'Eel Sushi'],
     F: ['French Fries', 'Falafel', 'Fish and Chips', 'Fried Rice', 'Fondue', 'French Toast', 'Frittata'],
     G: ['Gyoza', 'Gumbo', 'Guacamole', 'Gazpacho', 'Gelato', 'Gnocchi', 'Galette'],
