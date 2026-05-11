@@ -139,3 +139,22 @@ Read the other commands in ~/.claude/commands/ to understand the format. Be prec
 $ts User: For "Filmler" category in Turkish. Use only movies that were made in Turkey or that have clear Turkish titles. The turkish title is the one that has to start with the correct letter. Update the category to say "Turk Filmleri" to indicate that this is turkish only movies. Update the hints as well
 
 2026-05-09T00:00 User: For "Filmler" category in Turkish. Use only movies that were made in Turkey or that have clear Turkish titles. The turkish title is the one that has to start with the correct letter. Update the category to say "Turk Filmleri" to indicate that this is turkish only movies. Update the hints as well
+
+2026-05-10T00:00 User: When words are added via the web and pushed to the Github repo, and when the repo is modified locally, it can cause a git conflict.
+
+Modify the code so words added via web interface are added to words-web.js file which is used to supplement the existing words.js and words-tr.js files
+
+Write an additional script that will look at words-web.js and add the words to the correct files and places. I will run this script locally after pulling in the updated repo
+
+Questions?
+
+2026-05-10T00:01 User: 1. correct
+2. Leave the hint blank for now
+3. Correct
+4. Yes, correct
+
+2026-05-10T00:02 User: Go through each of the categories and if the category can be "easily expanded" with new words, expand it and add hints for the new words
+
+2026-05-10T00:00 User: Go through each of the categories and if the category can be 'easily expanded' with new words, expand it and add hints for the new words
+
+2026-05-10T00:00 User: For any hints that are in the form of "Starts with X", come up with new hints

@@ -31,11 +31,32 @@ let el = {};
 
 function $(id) { return document.getElementById(id); }
 
+// Merge WEB_WORDS entries into a words object (mutates a deep copy)
+function mergeWebWords(words, lang) {
+  if (typeof WEB_WORDS === 'undefined' || !WEB_WORDS.length) return words;
+  // Deep copy so we don't mutate the original data
+  const merged = JSON.parse(JSON.stringify(words));
+  for (const entry of WEB_WORDS) {
+    if (entry.lang !== lang) continue;
+    const cat = entry.category;
+    const word = entry.word;
+    if (!word || !cat) continue;
+    const letter = word[0].toUpperCase();
+    if (!merged[cat]) merged[cat] = {};
+    if (!merged[cat][letter]) merged[cat][letter] = [];
+    // Avoid duplicates
+    if (!merged[cat][letter].some(w => w.toLowerCase() === word.toLowerCase())) {
+      merged[cat][letter].push(word);
+    }
+  }
+  return merged;
+}
+
 function setLanguage(lang) {
   state.lang = lang;
   const data = LANG[lang] || LANG.en;
   activeCategories = data.categories;
-  activeWords      = data.words;
+  activeWords      = mergeWebWords(data.words, lang);
   activeHints      = data.hints;
   activeWikiLang   = data.wikiLang;
   t = UI[lang] || UI.en;

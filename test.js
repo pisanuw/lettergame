@@ -209,6 +209,10 @@ console.log('\n--- index.html ---');
 
 const html = loadFile('index.html');
 
+test('index.html loads words-web.js', () => {
+  assert.ok(html.includes('src="words-web.js"'));
+});
+
 test('index.html loads words.js', () => {
   assert.ok(html.includes('src="words.js"'));
 });
@@ -286,6 +290,14 @@ test('game.js state includes lang', () => {
   assert.ok(gameSrc.includes("lang: 'en'") || gameSrc.includes('lang:'));
 });
 
+test('game.js has mergeWebWords function', () => {
+  assert.ok(gameSrc.includes('function mergeWebWords('));
+});
+
+test('game.js calls mergeWebWords in setLanguage', () => {
+  assert.ok(gameSrc.includes('mergeWebWords(data.words'));
+});
+
 test('game.js uses translated UI strings (t.xxx)', () => {
   assert.ok(gameSrc.includes('t.yourTurn('));
   assert.ok(gameSrc.includes('t.computerThinking'));
@@ -305,11 +317,6 @@ test('admin function has LANG_CONFIG', () => {
   assert.ok(adminSrc.includes('LANG_CONFIG'));
 });
 
-test('admin function supports en and tr file paths', () => {
-  assert.ok(adminSrc.includes("filePath: 'words.js'"));
-  assert.ok(adminSrc.includes("filePath: 'words-tr.js'"));
-});
-
 test('admin function supports en and tr Wikipedia', () => {
   assert.ok(adminSrc.includes("wikiLang: 'en'"));
   assert.ok(adminSrc.includes("wikiLang: 'tr'"));
@@ -319,13 +326,14 @@ test('admin function uses langConfig.wikiLang for Wikipedia URLs', () => {
   assert.ok(adminSrc.includes('${wikiLang}.wikipedia.org'));
 });
 
-test('admin function uses langConfig.filePath for GitHub commits', () => {
-  assert.ok(adminSrc.includes('langConfig.filePath'));
+test('admin function commits to words-web.js', () => {
+  assert.ok(adminSrc.includes("WEB_WORDS_FILE") || adminSrc.includes("words-web.js"),
+    'admin should commit to words-web.js');
 });
 
-test('admin function has insertWord function', () => {
-  assert.ok(adminSrc.includes('function insertWord('),
-    'insertWord function not found in admin-add-word.js');
+test('admin function has appendToWebWords function', () => {
+  assert.ok(adminSrc.includes('function appendToWebWords('),
+    'appendToWebWords function not found in admin-add-word.js');
 });
 
 // ========================================
@@ -349,7 +357,30 @@ test('admin.html queue items store lang', () => {
 });
 
 // ========================================
-// 9. Cross-file consistency tests
+// 9. words-web.js and merge script tests
+// ========================================
+
+console.log('\n--- words-web.js ---');
+
+const webWordsSrc = loadFile('words-web.js');
+
+test('words-web.js defines WEB_WORDS array', () => {
+  assert.ok(webWordsSrc.includes('const WEB_WORDS = ['));
+});
+
+test('words-web.js is valid JavaScript', () => {
+  // Should parse without error
+  const fn = new Function(webWordsSrc + '\nreturn WEB_WORDS;');
+  const result = fn();
+  assert.ok(Array.isArray(result), 'WEB_WORDS should be an array');
+});
+
+test('merge-web-words.js exists', () => {
+  assert.ok(fs.existsSync(path.join(__dirname, 'merge-web-words.js')));
+});
+
+// ========================================
+// 10. Cross-file consistency tests
 // ========================================
 
 console.log('\n--- Cross-file Consistency ---');

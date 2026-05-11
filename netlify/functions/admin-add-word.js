@@ -22,11 +22,14 @@ const GITHUB_OWNER  = process.env.GITHUB_OWNER  || 'pisanuw';
 const GITHUB_REPO   = process.env.GITHUB_REPO   || 'lettergame';
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
 
-// Language-specific file paths and Wikipedia subdomains
+// Language-specific Wikipedia subdomains
 const LANG_CONFIG = {
-  en: { filePath: 'words.js',    wikiLang: 'en' },
-  tr: { filePath: 'words-tr.js', wikiLang: 'tr' },
+  en: { wikiLang: 'en' },
+  tr: { wikiLang: 'tr' },
 };
+
+// All admin-added words go to this single file to avoid merge conflicts
+const WEB_WORDS_FILE = 'words-web.js';
 
 const VALID_CATEGORIES = [
   'fruits','animals','cities','foods','vegetables','sports','instruments',
@@ -93,9 +96,9 @@ exports.handler = async (event) => {
     }
   }
 
-  // --- Commit to GitHub ---
+  // --- Commit to GitHub (append to words-web.js) ---
   try {
-    const result = await addWordToGitHub(category, letter, trimmedWord, langConfig.filePath);
+    const result = await appendToWebWords(lang, category, trimmedWord);
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -240,76 +243,34 @@ async function putFile(token, content, sha, commitMessage, filePath) {
   return { sha: data.content.sha };
 }
 
-function insertWord(content, category, letter, word) {
-  // Find the line:   `    ${letter}: ['Word1', 'Word2', ...],`
-  // within the category block.
-  //
-  // Strategy: locate the category key line, then search forward for the
-  // letter line. Each word array fits on one line in words.js.
-
-  const lines = content.split('\n');
-  const catMarker = `  ${category}: {`;
-  const letterMarker = `    ${letter}: [`;
-
-  let inCategory = false;
-  let inserted = false;
-
-  const result = lines.map(line => {
-    if (!inCategory) {
-      if (line.trim().startsWith(`${category}:`) && line.includes('{')) inCategory = true;
-      return line;
-    }
-    // Detect end of category block
-    if (line === '  },' || line === '  }') { inCategory = false; return line; }
-
-    if (!inserted && line.trimStart().startsWith(`${letter}: [`)) {
-      // Append word to this array line
-      inserted = true;
-      // Remove trailing `],` or `]`, append word, re-add closing
-      const closingMatch = line.match(/(\],?)(\s*)$/);
-      if (!closingMatch) return line; // unexpected format, leave alone
-      const closing = closingMatch[1];
-      const before = line.slice(0, line.lastIndexOf(closing));
-      // Escape single quotes in the word
-      const escaped = word.replace(/'/g, "\\'");
-      return `${before}, '${escaped}'${closing}`;
-    }
-    return line;
-  });
-
-  if (!inserted) {
-    throw new Error(`Could not find ${category}[${letter}] in words.js. Does this letter exist for this category?`);
-  }
-
-  return result.join('\n');
-}
-
-async function addWordToGitHub(category, letter, word, filePath) {
+async function appendToWebWords(lang, category, word) {
   const token = process.env.GITHUB_TOKEN;
   if (!token) throw new Error('GITHUB_TOKEN not configured');
 
-  const { content, sha } = await getFile(token, filePath);
+  const { content, sha } = await getFile(token, WEB_WORDS_FILE);
 
-  // Check word doesn't already exist
-  const wordPattern = new RegExp(`'${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}'`);
-  // We look specifically in the category+letter line
-  const lines = content.split('\n');
-  let inCat = false;
-  for (const line of lines) {
-    if (!inCat) {
-      if (line.trimStart().startsWith(`${category}:`) && line.includes('{')) inCat = true;
-      continue;
-    }
-    if (line === '  },' || line === '  }') break;
-    if (line.trimStart().startsWith(`${letter}: [`)) {
-      if (wordPattern.test(line)) {
-        throw new Error(`"${word}" already exists in ${category}[${letter}]`);
-      }
-      break;
+  // Check word doesn't already exist in web words
+  const escaped = word.replace(/'/g, "\\'");
+  if (content.includes(`'${escaped}'`) && content.includes(`'${category}'`) && content.includes(`'${lang}'`)) {
+    // More precise: check if exact entry exists
+    const entryPattern = new RegExp(
+      `\\{\\s*lang:\\s*'${lang}'\\s*,\\s*category:\\s*'${category}'\\s*,\\s*word:\\s*'${escaped.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}'`
+    );
+    if (entryPattern.test(content)) {
+      throw new Error(`"${word}" already exists in web words for ${category} (${lang})`);
     }
   }
 
-  const newContent = insertWord(content, category, letter, word);
-  const msg = `Add "${word}" to ${category}[${letter}] via admin`;
-  return putFile(token, newContent, sha, msg, filePath);
+  // Append new entry before the closing ];
+  const entry = `  { lang: '${lang}', category: '${category}', word: '${escaped}' },`;
+  const newContent = content.replace(
+    /^(const WEB_WORDS = \[)\s*/m,
+    `$1\n`
+  ).replace(
+    /\];\s*$/,
+    `${entry}\n];\n`
+  );
+
+  const msg = `Add "${word}" to ${category}[${lang}] via admin`;
+  return putFile(token, newContent, sha, msg, WEB_WORDS_FILE);
 }

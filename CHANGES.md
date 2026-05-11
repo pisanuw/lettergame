@@ -36,5 +36,9 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-09 [code] Turkish hints replaced: hints-tr.js now contains meaningful Turkish clues instead of generic "Bu bir [kategori]" placeholders. Each hint describes characteristics, origin, use, or appearance (e.g., Armut→autumn harvest fruit, Timsah→crocodile with strong jaw).
 2026-05-09 [code] Added 4 English-only categories: Countries (25 letters, no X), Famous Baseball Players, Famous Football Players, Famous Basketball Players. All with full A-Z word lists and hints.
 2026-05-09 [code] Game hint/skip button now handles letters with no words (auto-shows Skip instead of Hint). Supports sparse categories like Countries missing X.
+2026-05-10 [code] Admin now commits to words-web.js (append-only array) instead of words.js/words-tr.js to avoid git merge conflicts.
+2026-05-10 [code] game.js mergeWebWords() merges WEB_WORDS into active word lists at runtime so admin-added words are playable immediately.
+2026-05-10 [code] merge-web-words.js: local script reads words-web.js, inserts words into correct files, then clears words-web.js. Run after git pull.
 2026-05-09 [doc] Added ~/.claude/commands/git-help-merge.md slash command with step-by-step conflict diff and merge workflow.
+2026-05-10 [code] Expanded 9 categories with 98 new words+hints: football(13), basketball(12), baseball(8), history(9), dances(14), tvshows(17), movies(9), superheroes(8), mythology(8).
 2026-05-09 [code] Updated Turkish movies to Turk Filmleri with Turkish-title-only entries and synchronized hints in words-tr.js and hints-tr.js.

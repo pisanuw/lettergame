@@ -2183,6 +2183,7 @@ const HINTS = {
       'Arrival': 'A linguist must communicate with alien visitors to prevent war in this sci-fi drama.',
       'Amadeus': 'A brilliant composer\'s life unfolds in this Oscar-winning film directed by Miloš Forman.',
       'American Beauty': 'A 1999 film about suburban secrets, featuring a teenager and a red rose obsession.',
+      'Amelie': 'This whimsical French film follows a shy Parisian waitress who secretly orchestrates acts of kindness.',
     },
     B: {
       'Batman': 'A caped crusader who fights crime in Gotham City alongside his butler Alfred.',
@@ -2191,6 +2192,7 @@ const HINTS = {
       'Black Panther': 'A fierce feline superhero from Wakanda with a vibranium suit and advanced technology.',
       'Back to the Future': 'A teenager borrows a time machine from a scientist to save his parents\' romance.',
       'Beauty and the Beast': 'A tale as old as time: cursed prince finds love with a girl who loves to read.',
+      'Bohemian Rhapsody': 'This biographical film chronicles the rise of Queen and lead singer Freddie Mercury.',
     },
     C: {
       'Casablanca': '"Here\'s looking at you, kid" is a famous line from this romantic drama set in a North African port city.',
@@ -2198,6 +2200,7 @@ const HINTS = {
       'Captain America': 'A superhero with a shield who fights for freedom and justice during wartime.',
       'Cinderella': 'A servant girl\'s glass slipper and a magical midnight deadline make this fairy tale timeless.',
       'Cast Away': 'A man stranded on an island befriends a volleyball during his long isolation.',
+      'Coco': 'This Pixar film follows a boy who enters the Land of the Dead to find his great-great-grandfather.',
     },
     D: {
       'Die Hard': '"Yippee-ki-yay! A cop battles terrorists in a tall building on Christmas Eve."',
@@ -2229,6 +2232,7 @@ const HINTS = {
       'Get Out': 'A thriller where a photographer uncovers a sinister conspiracy at his girlfriend\'s family reunion.',
       'Ghostbusters': '"Who you gonna call?" This 1984 comedy features paranormal investigators in New York City.',
       'Gran Torino': 'Clint Eastwood\'s final acting role as a grumpy Korean War veteran protecting his prized muscle car.',
+      'Gravity': 'This survival thriller features two astronauts stranded in space after their shuttle is destroyed by debris.',
     },
     H: {
       'Harry Potter': 'A young wizard attends a magical school and battles a dark lord across eight films.',
@@ -2262,6 +2266,7 @@ const HINTS = {
       'Lego Movie': '"Everything is awesome" in this 2014 film about colorful interlocking plastic bricks.',
       'Lawrence of Arabia': 'Epic biographical film about a charismatic British officer in the Middle Eastern desert during WWI.',
       'Luca': 'Pixar film where a sea monster boy discovers friendship on the Italian Riviera.',
+      'Life of Pi': 'This adventure film follows a boy stranded on a lifeboat in the Pacific Ocean with a Bengal tiger.',
     },
     M: {
       'Matrix': 'A 1999 sci-fi film where the main character discovers reality is a computer simulation.',
@@ -2270,11 +2275,13 @@ const HINTS = {
       'Mulan': 'A warrior disguises herself as a man to take her father\'s place in the Chinese army.',
       'Moonlight': 'A coming-of-age drama that won Best Picture, following a young man\'s journey in Miami.',
       'Midsommar': 'A Swedish festival of flowers, music, and horror that takes a very dark turn.',
+      'Memento': 'This Christopher Nolan thriller is told in reverse chronological order following a man with short-term memory loss.',
     },
     N: {
       'No Country for Old Men': 'A Cormac McCarthy novel adapted into a dark thriller about a drug deal gone wrong in 1980s Texas.',
       'Nope': 'Jordan Peele\'s 2022 sci-fi thriller about a mysterious presence threatening a California ranch.',
       'Nomadland': 'A film about people living in vans, traveling across America in search of work and belonging.',
+      'Nightcrawler': 'This thriller stars Jake Gyllenhaal as an ambitious freelance crime journalist in Los Angeles.',
     },
     O: {
       'Oppenheimer': '"I am become Death, the destroyer of worlds" — a famous quote from this physicist\'s life story.',
@@ -2304,6 +2311,7 @@ const HINTS = {
       'Spider-Man': '"Your friendly neighborhood hero with web-slinging powers and a great sense of responsibility."',
       'Saving Private Ryan': 'A 1998 war film where soldiers fight to bring one man home from Normandy.',
       'Schindler\'s List': 'A Holocaust hero\'s documented act of salvation, directed by Spielberg.',
+      'Spirited Away': 'This Studio Ghibli masterpiece follows a girl trapped in a spirit world bathhouse.',
     },
     T: {
       'Titanic': 'A ship hits an iceberg in this epic romance and disaster film from 1997.',
@@ -2311,6 +2319,7 @@ const HINTS = {
       'Toy Story': 'A cowboy and his plastic friend compete for a child\'s affection in this Pixar classic.',
       'The Godfather': 'An iconic crime saga where a powerful family patriarch rules his empire from behind the scenes.',
       'The Shining': 'A psychological horror film set in an isolated hotel during winter, featuring an axe and the word "redrum."',
+      'Tenet': 'This Christopher Nolan sci-fi thriller involves time inversion and a plot to prevent World War III.',
     },
     U: {
       'Up': 'A Pixar film where an elderly man ties balloons to his house and travels to Paradise Falls.',
@@ -2508,6 +2517,8 @@ const HINTS = {
       'Arrested Development': 'A wealthy family\'s legal troubles and poor decisions halt their once-promising future.',
       'Alias': 'Jennifer Garner plays a secret agent with a double life in this spy thriller series.',
       'Andor': 'A Star Wars spy thriller series following a rebel before the events of Rogue One.',
+      'Abbott Elementary': 'This mockumentary sitcom follows teachers at an underfunded Philadelphia public school.',
+      'Atlanta': 'This FX series created by Donald Glover explores the Atlanta rap scene with surreal humor.',
     },
     B: {
       'Breaking Bad': 'A high school chemistry teacher turns to cooking meth to provide for his family.',
@@ -2515,6 +2526,8 @@ const HINTS = {
       'Black Mirror': '"Sounds like a dark color plus a reflective surface."',
       'Band of Brothers': 'Steven Spielberg and Tom Hanks produced this WWII miniseries following soldiers from D-Day through Europe.',
       'Bloodline': 'A dark family drama set in the Florida Keys where secrets and betrayal run deep within one household.',
+      'Buffy the Vampire Slayer': 'This 1990s series follows a teenage girl chosen to battle vampires and the forces of darkness.',
+      'Brooklyn Nine-Nine': 'This police sitcom stars Andy Samberg as a talented but immature NYPD detective.',
     },
     C: {
       'Castle': 'A detective and a mystery novelist solve crimes together in New York City.',
@@ -2522,6 +2535,7 @@ const HINTS = {
       'Community': '"A group of misfits at a community college bond over study sessions and paintball wars."',
       'Criminal Minds': 'FBI profilers analyze the psychology of suspects to solve cases in this long-running drama series.',
       'Chernobyl': 'This HBO miniseries dramatizes the catastrophic 1986 nuclear disaster in Soviet Ukraine.',
+      'Curb Your Enthusiasm': 'This HBO comedy follows Seinfeld co-creator Larry David in awkward social situations.',
     },
     D: {
       'Dexter': 'A blood spatter analyst by day, vigilante by night, in this dark thriller series.',
@@ -2529,6 +2543,7 @@ const HINTS = {
       'Dark': 'A German sci-fi thriller where time travel and a small town\'s mysteries intertwine across multiple generations.',
       'Doctor Who': 'A British sci-fi series about a time traveler with a blue box and multiple regenerations.',
       'Daredevil': 'Blind superhero from Hell\'s Kitchen who fights crime in a red suit.',
+      'Desperate Housewives': 'This ABC drama follows the secrets and scandals of women living on Wisteria Lane.',
     },
     E: {
       'Elementary': 'This modern take on a classic detective stars Jonny Lee Miller solving crimes in New York City.',
@@ -2542,12 +2557,14 @@ const HINTS = {
       'Firefly': 'A space western about a ragtag crew aboard a cargo ship, created by Joss Whedon.',
       'Family Guy': '"An animated sitcom featuring a talking dog and his dysfunctional household in Rhode Island."',
       'Fleabag': 'A British comedy series about a sharp-witted woman breaking the fourth wall in her messy life.',
+      'Full House': 'This family sitcom features a widowed father raising three daughters with help from his brother-in-law and best friend.',
     },
     G: {
       'Game of Thrones': 'A fantasy epic about power, dragons, and the battle for an iron throne in a medieval realm.',
       'Grey\'s Anatomy': 'A medical drama set in Seattle where surgeons navigate love, loss, and life-or-death decisions.',
       'Glee': 'Sounds like an emotion of joy and delight combined with a homophone for a past tense verb.',
       'Gravity Falls': 'A mysterious town where supernatural mysteries plague two siblings during summer vacation.',
+      'Gilmore Girls': 'This dramedy follows a mother and daughter duo known for their fast-talking banter in Stars Hollow, Connecticut.',
     },
     H: {
       'House': 'A brilliant doctor with a diagnostic gift solves medical mysteries while battling his own demons.',
@@ -2555,18 +2572,22 @@ const HINTS = {
       'Heroes': '"Ordinary people discover extraordinary powers in this show about a cheerleader, a cop, and a painter."',
       'Halt and Catch Fire': 'A 1980s drama about computer pioneers and the birth of the personal computer industry.',
       'House of Cards': 'A political thriller where an ambitious congressman and his wife manipulate their way to ultimate power.',
+      'How I Met Your Mother': 'This sitcom features a father telling his children the story of how he met their mother.',
     },
     I: {
       'It\'s Always Sunny': 'A comedy about five terrible people running a dive bar in Philadelphia, always getting into schemes.',
       'Invincible': '"A teen superhero discovers his powers in this adult animated series on Amazon Prime."',
+      'Insecure': 'This HBO comedy created by Issa Rae explores the lives of Black women in Los Angeles.',
     },
     J: {
       'Justified': 'A lawman in Kentucky pursues a criminal from his past in this FX crime drama series.',
       'Jane the Virgin': 'A young woman\'s life changes when she\'s accidentally artificially inseminated in this romantic comedy series.',
+      'Jeopardy': 'This iconic quiz show presents answers and contestants must respond in the form of a question.',
     },
     K: {
       'Killing Eve': 'A psychological thriller about a MI6 agent obsessed with capturing a glamorous psychopath.',
       'Kingdom': 'This Netflix zombie thriller series is set in Korea and features a deadly plague outbreak.',
+      'King of Queens': 'This sitcom follows a delivery driver and his wife living with her father in Queens, New York.',
     },
     L: {
       'Lost': 'A plane crashes on a mysterious island where passengers struggle to survive and uncover secrets.',
@@ -2579,6 +2600,7 @@ const HINTS = {
       'Mindhunter': 'A Netflix series about FBI profilers hunting serial killers by understanding their psychology.',
       'Modern Family': 'A mockumentary following three interconnected families navigating relationships and parenthood in Los Angeles.',
       'Mandalorian': 'This Star Wars series follows a lone bounty hunter protecting a mysterious child with Force abilities.',
+      'Mr. Robot': 'This thriller follows a cybersecurity engineer who is recruited by a mysterious anarchist group.',
     },
     N: {
       'Narcos': 'This Netflix series follows the rise and fall of a Colombian drug lord during the 1980s and 90s.',
@@ -2612,12 +2634,15 @@ const HINTS = {
       'Seinfeld': 'A show about nothing, featuring a comedian and his quirky New York friends.',
       'Squid Game': 'A deadly Korean competition where players battle through childhood games for a massive cash prize.',
       'Sherlock': 'A brilliant detective with a deerstalker hat solves crimes with his best friend Watson.',
+      'Scrubs': 'This medical comedy follows young doctors at a teaching hospital with an imaginative narrating intern.',
+      'Survivor': 'This reality competition show strands contestants in remote locations to compete for a million dollars.',
     },
     T: {
       'The Wire': 'Gritty HBO drama set in Baltimore following cops, dealers, and politicians intertwined in urban crime.',
       'The Sopranos': 'A mob family in New Jersey struggles with therapy and internal conflict in this acclaimed HBO drama.',
       'Ted Lasso': 'An American football coach brings optimism to a struggling English soccer team.',
       'Twin Peaks': 'A quirky Pacific Northwest town where a murder mystery unfolds over coffee and cherry pie.',
+      'The Office': 'This mockumentary sitcom depicts the everyday lives of office employees at a paper company in Scranton.',
     },
     U: {
       'Umbrella Academy': 'A dysfunctional family with superpowers must stop the apocalypse using a rain protection device as their name.',
@@ -2635,6 +2660,7 @@ const HINTS = {
       'West Wing': 'Aaron Sorkin drama about the President\'s staff navigating politics and crises from their offices.',
       'White Lotus': 'Mike White\'s anthology series featuring interconnected guests and staff at a luxury resort in paradise.',
       'Wentworth': 'Australian prison drama where inmates face harsh conditions and complex relationships behind bars.',
+      'Will and Grace': 'This NBC sitcom follows a gay lawyer and his best friend, an interior designer, in New York City.',
     },
     X: {
       'X-Files': '"The truth is out there" — a sci-fi series about FBI agents investigating unexplained phenomena.',
@@ -2664,18 +2690,21 @@ const HINTS = {
       'Black Widow': 'Russian spy turned Avengers assassin with a venomous arachnid alias.',
       'Batgirl': 'She fights crime in Gotham City alongside the Dark Knight, armed with gadgets and martial arts skills.',
       'Booster Gold': 'A time-traveling DC hero with a jetpack, known for his cocky personality and self-promotion.',
+      'Blue Beetle': 'This DC hero uses an alien scarab that bonds to his spine and creates powerful armor.',
     },
     C: {
       'Captain America': 'A shield-wielding patriotic hero who was frozen for decades and fights for justice.',
       'Cyclops': 'This X-Men leader has a visor that shoots powerful beams from his single eye.',
       'Captain Marvel': 'A military rank paired with a magical word, she\'s a cosmic powerhouse with a fist bump signature move.',
       'Catwoman': 'A skilled Gotham City thief with a feline alter ego, known for her whip and moral ambiguity.',
+      'Colossus': 'This X-Men member can transform his body into organic steel, gaining superhuman strength.',
     },
     D: {
       'Deadpool': 'A wisecracking mercenary with healing powers who breaks the fourth wall and loves chimichurgas.',
       'Daredevil': 'A blind lawyer fights crime in Hell\'s Kitchen, guided by heightened senses instead of sight.',
       'Doctor Strange': 'A mystic surgeon who bends time and reality with a magical cloak and glowing hands.',
       'Domino': 'She\'s a lucky mutant mercenary with the ability to affect probability through touch.',
+      'Drax': 'This Guardians of the Galaxy member is a powerful warrior with a very literal sense of humor.',
     },
     E: {
       'Elastigirl': 'She can stretch her body to incredible lengths and fights crime with her superhero family.',
@@ -2685,6 +2714,7 @@ const HINTS = {
       'Flash': 'He runs so fast that lightning bolts seem to chase him instead.',
       'Falcon': 'This Avenger took flight alongside Captain America and uses advanced weaponry including a mechanical suit with retractable wings.',
       'Firestar': 'A mutant with flame powers who can fly, often associated with the X-Men team.',
+      'Firestorm': 'This DC hero can rearrange the atomic structure of matter and project nuclear blasts.',
     },
     G: {
       'Green Lantern': 'His power comes from a ring that creates anything he imagines, fueled by willpower.',
@@ -2727,6 +2757,7 @@ const HINTS = {
       'Namor': 'This aquatic Marvel hero rules Atlantis and shares his name with a backwards word.',
       'Nick Fury': 'One-eyed director of S.H.I.E.L.D. who wears an iconic black eyepatch and coordinates Earth\'s mightiest heroes.',
       'Nova': 'A bright burst of light in the sky; also a star that suddenly increases in brightness.',
+      'Nightcrawler': 'This X-Men mutant can teleport and has blue skin, a prehensile tail, and incredible agility.',
     },
     O: {
       'Oracle': 'She\'s Batman\'s eyes and ears in Gotham, a brilliant hacker and information expert.',
@@ -2753,6 +2784,8 @@ const HINTS = {
       'Storm': 'She controls the weather and is a member of the X-Men with white hair.',
       'She-Hulk': 'Green-skinned lawyer and cousin of a famous rage-filled Avenger, she transforms when angry.',
       'Shazam': 'A word of power spoken by a young hero transforms him into an adult champion.',
+      'Scarlet Witch': 'This Avenger has reality-warping powers and is one of the most powerful beings in the Marvel universe.',
+      'Star-Lord': 'This half-human leader of the Guardians of the Galaxy is known for his love of 1970s music.',
     },
     T: {
       'Thor': 'God of thunder from Norse mythology who wields a magical hammer called Mjolnir.',
@@ -2773,6 +2806,7 @@ const HINTS = {
       'Wolverine': 'A mutant with adamantium claws, an incredible healing factor, and a serious attitude problem.',
       'Wasp': '"Sounds like an insect plus a female pronoun."',
       'War Machine': 'Iron-suited Avenger who transforms into a weapons-laden flying tank in the MCU.',
+      'White Tiger': 'This Marvel hero uses mystical amulets that grant enhanced strength and martial arts ability.',
     },
     X: {
       'X-23': 'This female mutant clone was created in a lab and shares DNA with a famous clawed superhero.',
@@ -2796,6 +2830,7 @@ const HINTS = {
       'Anubis': 'This Egyptian god with a jackal\'s head guided souls to the afterlife.',
       'Atlas': 'This Titan was condemned to hold up the sky on his shoulders for eternity.',
       'Aurora': 'She is the Roman goddess of the dawn, riding her chariot across the sky each morning.',
+      'Artemis': 'This Greek goddess of the hunt and moon was twin sister of Apollo and protector of young women.',
     },
     B: {
       'Bacchus': '"The god of ___ and celebration, often depicted with grapes and a crown of vines."',
@@ -2814,6 +2849,7 @@ const HINTS = {
       'Dionysus': 'The god of wine, theater, and ecstasy, often depicted with grapes and a crown of ivy.',
       'Demeter': 'This Greek goddess makes crops grow and is the mother of Persephone, who spends part of each year in the underworld.',
       'Danu': 'Mother goddess of the Tuatha Dé Danann in Irish mythology, ancestor of the divine race.',
+      'Durga': 'This Hindu warrior goddess rides a lion or tiger and is celebrated during the festival of Navratri.',
     },
     E: {
       'Eros': 'The Greek god of love and desire, often depicted as a winged cherub with a bow and arrow.',
@@ -2835,11 +2871,13 @@ const HINTS = {
       'Hera': 'Queen of the gods in Greek mythology, known for her jealous nature and marriage to Zeus.',
       'Horus': 'This Egyptian deity has the head of a falcon and is the son of Osiris and Isis.',
       'Hecate': 'Greek goddess of magic, crossroads, and the underworld, often depicted carrying torches.',
+      'Hanuman': 'This Hindu monkey god is celebrated for his devotion and played a key role in the epic Ramayana.',
     },
     I: {
       'Iris': 'The ___ of the eye is the colored part surrounding the pupil.',
       'Isis': 'Egyptian goddess of magic and fertility, wife of Osiris, mother of Horus.',
       'Indra': 'In Hindu mythology, the king of the gods and lord of thunder and rain.',
+      'Inanna': 'This Sumerian queen of heaven was the goddess of love, war, and fertility in ancient Mesopotamia.',
     },
     J: {
       'Jupiter': 'King of the Roman gods, associated with thunderbolts and the planet named after him.',
@@ -2868,6 +2906,7 @@ const HINTS = {
       'Nike': 'Greek goddess of victory, often depicted with wings and associated with athletic triumph.',
       'Nephthys': 'In Egyptian mythology, she is the sister and wife of Set, goddess of mourning and the night sky.',
       'Nut': 'Egyptian goddess of the sky, often depicted arching over the earth god Geb.',
+      'Nyx': 'This primordial Greek goddess personified the night and was feared even by Zeus.',
     },
     O: {
       'Odin': 'All-father of Norse mythology who sacrificed an eye for wisdom and knowledge.',
@@ -2878,6 +2917,7 @@ const HINTS = {
       'Persephone': 'She spends half the year in the underworld as the wife of Hades, half above ground.',
       'Pan': 'This Greek god of the wild has goat legs and plays a magical reed flute.',
       'Prometheus': 'He stole fire from the gods and gave it to humanity, suffering eternal punishment for his gift.',
+      'Parvati': 'This Hindu goddess of fertility and love is the consort of Shiva and mother of Ganesha.',
     },
     Q: {
       'Quetzalcoatl': 'A feathered serpent deity worshipped by the Aztecs, associated with wind and civilization.',
@@ -2893,12 +2933,14 @@ const HINTS = {
       'Selene': 'She drives a silver chariot across the night sky, pulling the moon behind her.',
       'Sobek': 'Ancient Egyptian god with the head of a crocodile, associated with the Nile River.',
       'Set': 'This Egyptian god of chaos and the desert had a distinctive animal head with curved ears.',
+      'Skadi': 'This Norse giantess and goddess of winter and skiing married the sea god Njord.',
     },
     T: {
       'Thor': 'Wielder of a magical hammer in Norse mythology, god of thunder and storms.',
       'Triton': 'The messenger of the sea, son of Poseidon, often depicted blowing a conch shell.',
       'Tyr': 'This Norse god of war sacrificed his hand to bind a fearsome wolf.',
       'Thoth': 'This Egyptian god of wisdom and writing is often depicted with the head of an ibis.',
+      'Tethys': 'This Greek Titaness was the goddess of fresh water and mother of the river gods.',
     },
     U: {
       'Uranus': 'In Greek mythology, this primordial deity personified the sky and fathered the Titans.',
@@ -2934,11 +2976,13 @@ const HINTS = {
       'Aristotle': 'This ancient Greek philosopher tutored Alexander the Great and founded his own school called the Lyceum.',
       'Amelia Earhart': 'She disappeared over the Pacific Ocean in 1937 while attempting to fly around the world.',
       'Archimedes': '"Eureka!" was his famous exclamation while bathing, leading to discoveries in physics and mathematics.',
+      'Augustus': 'The first emperor of Rome who transformed the republic into an empire and ushered in the Pax Romana.',
     },
     B: {
       'Boudicca': 'British Celtic queen who led a famous revolt against Roman occupation in the 1st century AD.',
       'Beethoven': 'Deaf composer who wrote the famous "Ninth Symphony" with the "Ode to Joy."',
       'Bolivar': '"The ___ is a monetary unit named after this South American independence leader."',
+      'Bismarck': 'This Prussian statesman unified the German states and served as the first Chancellor of Germany.',
     },
     C: {
       'Cleopatra': 'The last pharaoh of Egypt, known for her romance with Mark Antony and Caesar.',
@@ -2946,6 +2990,7 @@ const HINTS = {
       'Confucius': 'Ancient Chinese philosopher whose teachings about ethics and proper conduct became a major world religion and philosophy.',
       'Columbus': 'He sailed the ocean blue in 1492, seeking a westward route to Asia.',
       'Copernicus': 'This Polish astronomer moved the Sun to the center of our solar system, not Earth.',
+      'Catherine the Great': 'This Russian empress expanded the empire and modernized its culture during the 18th century.',
     },
     D: {
       'Darwin': 'He proposed that species evolve through natural selection after studying finches in the Galápagos Islands.',
@@ -2993,6 +3038,7 @@ const HINTS = {
       'Leonardo da Vinci': 'Renaissance master who painted the Mona Lisa and filled notebooks with inventive sketches and scientific observations.',
       'Louis XIV': 'French king known as "The Sun King" who built the Palace of Versailles.',
       'Lenin': 'Russian revolutionary leader who founded the Soviet Union and led the Bolshevik Revolution.',
+      'Lao Tzu': 'This ancient Chinese philosopher is credited with founding Taoism and writing the Tao Te Ching.',
     },
     M: {
       'Marie Curie': 'Polish-born scientist who won Nobel Prizes in two different scientific fields for her work with radioactivity.',
@@ -3000,6 +3046,7 @@ const HINTS = {
       'Marco Polo': 'Venetian explorer who traveled the Silk Road to China and documented his journey in the 13th century.',
       'Michelangelo': 'Renaissance artist famous for painting the Sistine Chapel ceiling and sculpting David.',
       'Mozart': 'An 18th-century Austrian composer who wrote his first symphony before age 10.',
+      'Martin Luther King': 'This civil rights leader advocated nonviolent resistance and delivered the "I Have a Dream" speech.',
     },
     N: {
       'Newton': 'This physicist famously discovered gravity after an apple fell from a tree.',
@@ -3017,6 +3064,7 @@ const HINTS = {
       'Pocahontas': 'A Native American woman who served as a bridge between two cultures in early colonial Virginia.',
       'Pythagoras': '"A right triangle\'s sides follow the equation a² + b² = c², named after this ancient Greek mathematician."',
       'Pericles': 'This Athenian leader transformed the city into a cultural powerhouse during the Classical age\'s golden era.',
+      'Pasteur': 'This French scientist developed pasteurization and created vaccines for rabies and anthrax.',
     },
     Q: {
       'Qin Shi Huang': 'First emperor of unified China who built the famous terracotta army to guard him in the afterlife.',
@@ -3026,12 +3074,14 @@ const HINTS = {
       'Rembrandt': 'This Dutch Golden Age master was famous for his dramatic use of light and shadow in portraits and biblical scenes.',
       'Richard the Lionheart': 'A medieval English king famous for his military prowess during the Crusades, known by a fierce animal name.',
       'Rasputin': 'This Siberian mystic allegedly survived poisoning, shooting, and drowning in early 1900s Russia.',
+      'Rosa Parks': 'This civil rights activist refused to give up her bus seat in Montgomery, sparking a boycott.',
     },
     S: {
       'Shakespeare': '"This English playwright wrote \'Hamlet\' and \'Romeo and Juliet\' in the 1600s."',
       'Socrates': 'Ancient Greek philosopher who was executed by drinking poison, known for questioning everything.',
       'Sun Tzu': 'Ancient Chinese military strategist who wrote "The Art of ___," a foundational text on warfare and strategy.',
       'Suleiman': 'This Ottoman sultan ruled during the empire\'s golden age and was known as "the Magnificent."',
+      'Spartacus': 'This gladiator led a famous slave revolt against the Roman Republic in 73 BC.',
     },
     T: {
       'Tesla': 'This Serbian-American inventor pioneered wireless technology and the alternating current system.',
@@ -3044,6 +3094,7 @@ const HINTS = {
     V: {
       'Voltaire': 'French Enlightenment philosopher and writer famous for championing free speech and religious tolerance.',
       'Victoria': 'A 19th-century British monarch whose reign lasted 63 years and gave her name to an entire era.',
+      'Vasco da Gama': 'This Portuguese explorer was the first European to reach India by sea in 1498.',
     },
     W: {
       'Washington': 'First president of the United States, famous for his wooden teeth and crossing the Delaware River.',
@@ -3075,16 +3126,21 @@ const HINTS = {
       'Ballroom': 'Formal dances like the waltz and tango are performed in this type of grand room.',
       'Breakdance': 'Acrobatic street dance from the 1970s featuring spins, freezes, and athletic moves performed to hip-hop music.',
       'B-boying': 'Urban street dance featuring acrobatic moves, spins, and freezes, popularized in the 1970s Bronx.',
+      'Belly Dance': 'This Middle Eastern dance focuses on fluid movements of the torso, hips, and arms.',
+      'Bossa Nova': 'This Brazilian dance style emerged in the late 1950s, blending samba rhythms with jazz influences.',
     },
     C: {
       'Cha-Cha': 'A rhythmic Latin dance with three quick steps followed by a pause, often performed in pairs.',
       'Charleston': 'This 1920s dance craze originated in a South Carolina city of the same name.',
       'Country Line Dance': 'Dancers stand in straight rows performing synchronized steps, often seen at honky-tonks and rodeos.',
       'Capoeira': 'This Brazilian martial art blends dance, acrobatics, and combat, often performed to rhythmic drumming.',
+      'Conga': 'This Cuban carnival dance is performed in a line with each person holding the waist of the person ahead.',
+      'Cumbia': 'This Colombian dance with African roots became popular throughout Latin America and features circular movements.',
     },
     D: {
       'Disco': 'A dance craze of the 1970s featuring a spinning ball of mirrors, platform shoes, and funky music.',
       'Danzon': 'This Cuban partner dance features a distinctive slow-fast-slow rhythm and originated in the 19th century.',
+      'Dougie': 'This hip-hop dance became famous through the 2010 song "Teach Me How to Dougie."',
     },
     E: {
       'Electric Slide': 'A 1980s line dance where you slide side to side to a funky beat.',
@@ -3093,16 +3149,19 @@ const HINTS = {
     F: {
       'Foxtrot': 'Sounds like a clever animal plus a speedy military maneuver.',
       'Flamenco': 'A passionate Spanish dance featuring rapid footwork, hand clapping, and often performed in colorful dresses.',
+      'Fandango': 'This lively Spanish couples dance involves hand clapping, stomping, and castanets.',
     },
     G: {
       'Garba': 'A traditional Indian circle dance performed during Navratri festival celebrations, often with hand claps and colorful costumes.',
       'Gumboot Dance': 'A South African dance where performers slap their rubber footwear rhythmically to create percussion.',
+      'Go-Go': 'This free-form dance from the 1960s was performed in nightclubs and popularized on TV shows.',
     },
     H: {
       'Hip Hop': 'Urban dance style born in 1970s New York, often performed to rap music with rhythmic body movements.',
       'Highland Fling': 'A Scottish dance performed in a kilt, featuring rapid leg movements and arm positions.',
       'Haka': 'A traditional Māori war dance from New Zealand, often performed before rugby matches.',
       'Hora': 'A traditional circle dance popular in Israeli and Jewish celebrations, often performed at weddings.',
+      'Hustle': 'This disco-era partner dance became hugely popular in the 1970s nightclub scene.',
     },
     I: {
       'Irish Step Dancing': 'Rigid upper body, rhythmic footwork, and hard-soled shoes create rapid tapping sounds on stage.',
@@ -3121,12 +3180,14 @@ const HINTS = {
       'Lindy Hop': 'This 1930s swing dance craze was named after Charles Lindbergh\'s famous transatlantic flight.',
       'Latin Dance': 'Passionate movement style originating from Central and South America, featuring hip motion and rhythmic footwork.',
       'Lambada': 'This forbidden dance from Brazil became a \'80s hit with a catchy song warning against doing it.',
+      'Locking': 'This funk-based street dance style features distinct pauses or "locks" between movements.',
     },
     M: {
       'Mambo': 'This Cuban dance rhythm had people "doing the ___ " in a famous 1954 song.',
       'Merengue': 'This Caribbean dance is often paired with a dessert topping made of whipped egg whites and sugar.',
       'Moonwalk': 'A gliding dance move that makes it look like you\'re walking forward while moving backward.',
       'Macarena': 'A 1990s hit song by Los Del Rio made this hand-clapping dance a worldwide party phenomenon.',
+      'Mazurka': 'This Polish folk dance in triple time was popularized in European ballrooms by Chopin.',
     },
     N: {
       'Northern Soul': 'A 1960s British dance movement fueled by Motown records and energetic footwork.',
@@ -3148,18 +3209,21 @@ const HINTS = {
       'Rumba': 'This sensual Latin dance originated in Cuba and is known for its romantic hip movements and slower tempo.',
       'Robot Dance': 'A jerky, mechanical dance move where your body mimics stiff movements of an automaton.',
       'Reggaeton': 'This Puerto Rican dance style features a distinctive "dembow" rhythm and exploded in popularity during the 1990s.',
+      'Running Man': 'This dance move mimics running in place and became iconic in 1990s hip-hop culture.',
     },
     S: {
       'Salsa': 'This spicy sauce or rhythmic dance originated in Latin America and pairs perfectly with chips.',
       'Samba': 'This Brazilian rhythm dance is a main attraction at Rio\'s famous Carnival celebrations.',
       'Swing': 'A 1940s dance performed to big band music, often featuring energetic partner movements and aerial tricks.',
       'Shuffle': 'Drag your feet across the floor in this easy, laid-back dance move.',
+      'Soca': 'This Caribbean dance style originated in Trinidad, combining soul and calypso music traditions.',
     },
     T: {
       'Tango': 'A passionate Argentine dance performed by two people in close embrace, known for dramatic flair.',
       'Twist': 'Chubby Checker made this hip-swiveling dance a 1960s sensation.',
       'Tap Dance': 'A dance style where metal plates on shoes create rhythmic sounds against the floor.',
       'Tinikling': 'A Philippine dance where performers jump between two rhythmically clapping bamboo poles.',
+      'Tutting': 'This dance style uses geometric arm and hand positions inspired by ancient Egyptian art.',
     },
     U: {
       'Urban Dance': 'Street-style movement born in hip-hop culture, featuring popping, locking, and freestyle moves.',
@@ -3171,6 +3235,7 @@ const HINTS = {
     W: {
       'Waltz': 'A graceful three-beat dance in 3/4 time, often performed in ballrooms with elegant, flowing movements.',
       'Waacking': 'A high-energy street dance style from 1970s LA featuring sharp arm movements and syncopated footwork.',
+      'West Coast Swing': 'This smooth partner dance evolved from Lindy Hop and is danced to a wide range of music tempos.',
     },
     X: {
       'Xaxado': 'A Brazilian partner dance with rapid hip movements, often performed at Carnival celebrations.',
@@ -3377,23 +3442,27 @@ const HINTS = {
       'Aaron Judge': 'This Yankees slugger set the American League single-season home run record with 62 in 2022.',
       'Albert Pujols': 'This Dominican-born first baseman hit over 700 career home runs for the Cardinals and Angels.',
       'Alex Rodriguez': 'This Yankees shortstop and third baseman hit 696 career homers but was suspended for PED use.',
+      'Andre Dawson': 'This outfielder, "The Hawk," won MVP with the Cubs in 1987 and was known for his all-around game.',
     },
     B: {
       'Babe Ruth': 'This legendary Yankee was called the "Sultan of Swat" and revolutionized baseball with power hitting.',
       'Barry Bonds': 'This outfielder holds the all-time home run record with 762 career homers.',
       'Bob Gibson': 'This Cardinals pitcher posted a stunning 1.12 ERA in 1968 and was a fierce competitor.',
       'Brooks Robinson': 'This Orioles third baseman was nicknamed "The Human Vacuum Cleaner" for his fielding.',
+      'Bryce Harper': 'This outfielder was the youngest unanimous MVP winner and later signed a massive deal with the Phillies.',
     },
     C: {
       'Cal Ripken Jr': 'This Orioles shortstop played 2,632 consecutive games, earning the nickname "Iron Man."',
       'Cy Young': 'This pitcher won 511 career games, and the annual pitching award is named after him.',
       'Clayton Kershaw': 'This Dodgers left-hander is considered one of the greatest pitchers of his generation.',
       'Craig Biggio': 'This Astros second baseman and catcher collected over 3,000 hits in his career.',
+      'Chipper Jones': 'This switch-hitting Braves third baseman won the 1999 NL MVP and batted .303 for his career.',
     },
     D: {
       'Derek Jeter': 'This Yankees shortstop and captain won five World Series and collected over 3,000 hits.',
       'David Ortiz': 'This Red Sox designated hitter, known as "Big Papi," was clutch in the 2004 ALCS comeback.',
       'Don Drysdale': 'This Dodgers pitcher threw 58 consecutive scoreless innings in 1968.',
+      'Duke Snider': 'This "Duke of Flatbush" was the Dodgers\' center fielder who hit 407 career home runs.',
     },
     E: {
       'Ernie Banks': 'This Cubs shortstop was known for saying "Let\'s play two!" and hit 512 home runs.',
@@ -3408,6 +3477,7 @@ const HINTS = {
     G: {
       'Greg Maddux': 'This Braves and Cubs pitcher won four consecutive Cy Young Awards with pinpoint control.',
       'George Brett': 'This Royals third baseman famously hit .390 in 1980 and won three batting titles.',
+      'Gerrit Cole': 'This Yankees ace has one of the highest strikeout rates in history and is a perennial Cy Young contender.',
     },
     H: {
       'Hank Aaron': 'This Hall of Famer broke Babe Ruth\'s all-time home run record with 755 career homers.',
@@ -3467,6 +3537,7 @@ const HINTS = {
       'Stan Musial': 'This Cardinals legend, "Stan the Man," collected 3,630 hits across 22 seasons.',
       'Satchel Paige': 'This Negro Leagues legend became the oldest rookie in MLB history at age 42.',
       'Shohei Ohtani': 'This Japanese two-way star excels as both a pitcher and hitter, drawing Babe Ruth comparisons.',
+      'Sammy Sosa': 'This Cubs slugger hit 66 home runs in 1998 during the famous home run race with Mark McGwire.',
     },
     T: {
       'Ted Williams': 'This Red Sox legend was the last player to hit .400 in a season, batting .406 in 1941.',
@@ -3480,11 +3551,13 @@ const HINTS = {
     V: {
       'Vida Blue': 'This Athletics pitcher won both the Cy Young and MVP in 1971 at just 22 years old.',
       'Vernon Wells': 'This Blue Jays center fielder was a three-time All-Star known for his defense and power.',
+      'Vladimir Guerrero': 'This Hall of Famer was known for hitting pitches at any height and won the 2004 AL MVP.',
     },
     W: {
       'Willie Mays': 'This "Say Hey Kid" is considered one of the greatest ever with 660 homers and legendary catches.',
       'Walter Johnson': 'This "Big Train" pitcher won 417 games and held the career strikeout record for decades.',
       'Warren Spahn': 'This left-hander won 363 games, the most by any lefty in MLB history.',
+      'Willie McCovey': 'This Giants first baseman, "Stretch," hit 521 career home runs and won the 1969 NL MVP.',
     },
     X: {
       'Xander Bogaerts': 'This Aruban-born shortstop was a key part of the Red Sox 2018 World Series championship.',
@@ -3515,6 +3588,7 @@ const HINTS = {
     C: {
       'Calvin Johnson': 'This Lions wide receiver, nicknamed "Megatron," had 1,964 receiving yards in a single season.',
       'Cam Newton': 'This Panthers quarterback won MVP in 2015 and was known for his Superman celebration.',
+      'Cris Carter': 'This Vikings wide receiver was an eight-time Pro Bowler known for the phrase "all he does is catch touchdowns."',
     },
     D: {
       'Dan Marino': 'This Dolphins quarterback threw for over 61,000 yards but never won a Super Bowl.',
@@ -3526,16 +3600,20 @@ const HINTS = {
       'Emmitt Smith': 'This Cowboys running back is the NFL\'s all-time leading rusher with 18,355 career yards.',
       'Eli Manning': 'This Giants quarterback defeated Tom Brady\'s Patriots in two Super Bowls.',
       'Earl Campbell': 'This Oilers running back, the "Tyler Rose," won three rushing titles and the 1979 MVP.',
+      'Eric Dickerson': 'This Rams running back set the single-season rushing record with 2,105 yards in 1984.',
     },
     F: {
       'Fran Tarkenton': 'This Vikings quarterback was a pioneer of the scrambling style and held passing records at retirement.',
       'Franco Harris': 'This Steelers running back made the "Immaculate Reception," one of the most famous plays in NFL history.',
+      'Frank Gore': 'This running back played 16 NFL seasons and is the third all-time leading rusher.',
     },
     G: {
       'Gale Sayers': 'This Bears running back was nicknamed "The Kansas Comet" and scored six touchdowns in a single game.',
+      'George Kittle': 'This 49ers tight end is known for his explosive blocking and receiving, setting the TE single-season receiving record.',
     },
     H: {
       'Herschel Walker': 'This running back won the Heisman Trophy and was involved in one of the biggest NFL trades ever.',
+      'Hines Ward': 'This Steelers wide receiver won Super Bowl XL MVP and was known for his devastating blocking.',
     },
     I: {
       'Isaac Bruce': 'This Rams wide receiver was part of "The Greatest Show on Turf" and caught the Super Bowl-winning touchdown.',
@@ -3550,21 +3628,25 @@ const HINTS = {
     K: {
       'Kurt Warner': 'This undrafted quarterback went from stocking grocery shelves to winning Super Bowl MVP with the Rams.',
       'Kam Chancellor': 'This Seahawks safety was part of the "Legion of Boom" defense and known for his devastating hits.',
+      'Khalil Mack': 'This pass rusher won Defensive Player of the Year and was traded from the Raiders to the Bears.',
     },
     L: {
       'Lawrence Taylor': 'This Giants linebacker revolutionized the position and is considered the greatest defensive player ever.',
       'LaDainian Tomlinson': 'This Chargers running back scored a record 31 touchdowns in a single season in 2006.',
       'Lamar Jackson': 'This Ravens quarterback won the MVP award at age 22 and revolutionized the position with his running ability.',
+      'Luke Kuechly': 'This Panthers linebacker won Defensive Player of the Year and retired early at age 28.',
     },
     M: {
       'Michael Vick': 'This Falcons quarterback was the fastest player at the position and returned to the NFL after prison.',
       'Marshawn Lynch': 'This Seahawks running back was famous for "Beast Mode" runs and avoiding media interviews.',
       'Marcus Allen': 'This Raiders running back won Super Bowl XVIII MVP with a 74-yard touchdown run.',
       'Michael Strahan': 'This Giants defensive end set the single-season sack record with 22.5 and later became a TV personality.',
+      'Mike Ditka': 'This Bears legend was a Hall of Fame tight end who later coached Chicago to a Super Bowl win.',
     },
     N: {
       'Ndamukong Suh': 'This dominant defensive tackle was known for his strength and physical style of play.',
       'Nick Foles': 'This Eagles backup quarterback won Super Bowl LII MVP, defeating Tom Brady\'s Patriots.',
+      'Nick Chubb': 'This Browns running back is known for his powerful running style and remarkable comeback from injury.',
     },
     O: {
       'OJ Simpson': 'This Bills running back was the first to rush for 2,000 yards in a single season.',
@@ -3574,6 +3656,7 @@ const HINTS = {
     P: {
       'Peyton Manning': 'This quarterback won two Super Bowls with different teams and won a record five MVP awards.',
       'Patrick Mahomes': 'This Chiefs quarterback won multiple Super Bowls and is known for no-look passes.',
+      'Patrick Willis': 'This 49ers linebacker was a seven-time Pro Bowler known for his speed and tackling ability.',
     },
     Q: {
       'Quenton Nelson': 'This Colts offensive guard was a first-round pick and named All-Pro multiple times early in his career.',
@@ -3587,6 +3670,8 @@ const HINTS = {
     S: {
       'Steve Young': 'This 49ers quarterback succeeded Joe Montana and threw a record six touchdowns in Super Bowl XXIX.',
       'Saquon Barkley': 'This running back won Offensive Rookie of the Year with the Giants and rushed for over 2,000 yards with the Eagles.',
+      'Shannon Sharpe': 'This Broncos tight end was a three-time Super Bowl champion and became a prominent TV analyst.',
+      'Sean Taylor': 'This Redskins safety was one of the most feared hitters in the NFL before his tragic death in 2007.',
     },
     T: {
       'Tom Brady': 'This quarterback won seven Super Bowl rings, the most of any player in NFL history.',
@@ -3600,6 +3685,7 @@ const HINTS = {
     V: {
       'Von Miller': 'This Broncos linebacker won Super Bowl 50 MVP and is known for his pass-rushing ability.',
       'Vince Young': 'This Longhorns legend won the national championship with a dramatic Rose Bowl performance against USC.',
+      'Vince Wilfork': 'This Patriots nose tackle was a key part of two Super Bowl-winning defenses and known for his massive size.',
     },
     W: {
       'Walter Payton': 'This Bears running back, "Sweetness," was the NFL\'s all-time rushing leader for nearly two decades.',
@@ -3622,10 +3708,13 @@ const HINTS = {
     A: {
       'Allen Iverson': 'This 76ers guard, "The Answer," won four scoring titles despite being just six feet tall.',
       'Anthony Davis': 'This power forward, known as "The Brow," won a championship with the Lakers alongside LeBron.',
+      'Alonzo Mourning': 'This Heat center was a two-time Defensive Player of the Year and won a championship in 2006.',
     },
     B: {
       'Bill Russell': 'This Celtics center won 11 championships in 13 seasons, the most of any player in NBA history.',
       'Bob Cousy': 'This Celtics point guard, "The Houdini of the Hardwood," pioneered flashy passing in the 1950s.',
+      'Ben Wallace': 'This undrafted center won four Defensive Player of the Year awards and a championship with the Pistons.',
+      'Bob Pettit': 'This Hawks forward was the first NBA MVP and a two-time scoring champion in the 1950s.',
     },
     C: {
       'Carmelo Anthony': 'This scoring forward, "Melo," was one of the most prolific scorers of his generation.',
@@ -3643,6 +3732,7 @@ const HINTS = {
     E: {
       'Elgin Baylor': 'This Lakers forward was one of the most acrobatic players ever and averaged 38.3 points in the 1962 playoffs.',
       'Earl Monroe': 'This guard, "Earl the Pearl," was known for his dazzling playground-style moves in the NBA.',
+      'Elvin Hayes': 'This "Big E" forward and center was a 12-time All-Star and won a championship with the Bullets.',
     },
     F: {
       'Fred VanVleet': 'This undrafted guard won an NBA championship with the Raptors in 2019.',
@@ -3650,6 +3740,7 @@ const HINTS = {
     G: {
       'Giannis Antetokounmpo': 'This "Greek Freak" Bucks forward won back-to-back MVPs and the 2021 NBA championship.',
       'George Mikan': 'This pioneering Lakers center dominated the early NBA and helped popularize professional basketball.',
+      'Grant Hill': 'This versatile forward was co-Rookie of the Year and a seven-time All-Star before injuries slowed his career.',
     },
     H: {
       'Hakeem Olajuwon': 'This "Dream" Rockets center won back-to-back championships and was famous for his footwork in the post.',
@@ -3676,6 +3767,7 @@ const HINTS = {
       'LeBron James': 'This forward is the NBA\'s all-time leading scorer and won four championships with three different teams.',
       'Larry Bird': 'This Celtics forward was a three-time MVP and part of the legendary rivalry with Magic Johnson.',
       'Luka Doncic': 'This Slovenian guard joined the NBA from European basketball and became an instant superstar with the Mavericks.',
+      'Lenny Wilkens': 'This Hall of Famer was both a great player and the NBA\'s all-time winningest coach for years.',
     },
     M: {
       'Michael Jordan': 'This Bulls legend won six championships and six Finals MVPs, widely considered the greatest of all time.',
@@ -3685,6 +3777,7 @@ const HINTS = {
     N: {
       'Nikola Jokic': 'This Serbian Nuggets center won multiple MVPs and led Denver to their first championship in 2023.',
       'Nate Archibald': 'This guard was the only player to lead the league in scoring and assists in the same season.',
+      'Nate Robinson': 'This 5\'9" guard won three NBA Slam Dunk Contests despite being one of the shortest players in league history.',
     },
     O: {
       'Oscar Robertson': 'This "Big O" guard averaged a triple-double for an entire season, a feat thought impossible for decades.',
@@ -3692,6 +3785,7 @@ const HINTS = {
     P: {
       'Patrick Ewing': 'This Knicks center was a dominant force in the 1990s and is one of the greatest to never win a title.',
       'Paul Pierce': 'This Celtics forward, "The Truth," won the 2008 Finals MVP and was a 10-time All-Star.',
+      'Penny Hardaway': 'This Magic guard formed a dynamic duo with Shaquille O\'Neal and had his own Nike shoe line.',
     },
     Q: {
       'Quentin Richardson': 'This forward and guard was known for his three-point shooting with the Clippers and Knicks.',
@@ -3705,10 +3799,12 @@ const HINTS = {
       'Stephen Curry': 'This Warriors guard revolutionized basketball with his three-point shooting and won four championships.',
       'Shaquille O\'Neal': 'This dominant center, "Shaq," won three consecutive Finals MVPs with the Lakers and was nearly unstoppable.',
       'Scottie Pippen': 'This Bulls forward was Michael Jordan\'s sidekick and a key part of two three-peats.',
+      'Steve Nash': 'This Canadian point guard won back-to-back MVPs with the Suns and was known for his brilliant passing.',
     },
     T: {
       'Tim Duncan': 'This Spurs forward, "The Big Fundamental," won five championships and is considered the greatest power forward.',
       'Tracy McGrady': 'This scoring guard once scored 13 points in 35 seconds and was a seven-time All-Star.',
+      'Trae Young': 'This Hawks guard is known for his deep three-point shooting range and flashy passing.',
     },
     U: {
       'Udonis Haslem': 'This Heat forward played his entire 20-year career in Miami and won three championships.',
@@ -3719,6 +3815,7 @@ const HINTS = {
     W: {
       'Wilt Chamberlain': 'This legendary center scored 100 points in a single game and once averaged 50.4 points per season.',
       'Walt Frazier': 'This Knicks guard, "Clyde," was the leader of the 1970 and 1973 championship teams.',
+      'Willis Reed': 'This Knicks center famously limped onto the court in Game 7 of the 1970 Finals to inspire a championship win.',
     },
     X: {
       'Xavier McDaniel': 'This Sonics forward, nicknamed "X-Man," was known for his physical play and scoring in the 1980s.',
@@ -3728,6 +3825,7 @@ const HINTS = {
     },
     Z: {
       'Zion Williamson': 'This explosive Pelicans forward was the number one overall pick in 2019, known for incredible athleticism.',
+      'Zach Randolph': 'This "Z-Bo" power forward was known for his physical post play with the Grizzlies.',
     },
   },
 };
