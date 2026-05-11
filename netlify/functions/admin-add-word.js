@@ -31,12 +31,19 @@ const LANG_CONFIG = {
 // All admin-added words go to this single file to avoid merge conflicts
 const WEB_WORDS_FILE = 'words-web.js';
 
-const VALID_CATEGORIES = [
-  'fruits','animals','cities','foods','vegetables','sports','instruments',
-  'occupations','birds','flowers','trees','gemstones','dinosaurs','movies',
-  'games','tvshows','superheroes','mythology','history','dances',
-  'countries','baseball','football','basketball',
-];
+// Category display names (single source for this serverless function)
+const CATEGORY_DISPLAY = {
+  fruits:'Fruits', animals:'Animals', cities:'World Cities', foods:'Foods and Dishes',
+  vegetables:'Vegetables', sports:'Sports', instruments:'Musical Instruments',
+  occupations:'Occupations', birds:'Birds', flowers:'Flowers', trees:'Trees',
+  gemstones:'Gemstones', dinosaurs:'Dinosaurs', movies:'Movies', games:'Video Games',
+  tvshows:'TV Shows', superheroes:'Superheroes', mythology:'Mythological Deities',
+  history:'Historical Figures', dances:'Dances',
+  countries:'Countries', baseball:'Famous Baseball Players',
+  football:'Famous Football Players', basketball:'Famous Basketball Players',
+};
+
+const VALID_CATEGORIES = Object.keys(CATEGORY_DISPLAY);
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -196,17 +203,7 @@ async function verifyWordWithWikipedia(word, category, wikiLang = 'en') {
 }
 
 function categoryDisplayName(cat) {
-  const map = {
-    fruits:'Fruits', animals:'Animals', cities:'World Cities', foods:'Foods and Dishes',
-    vegetables:'Vegetables', sports:'Sports', instruments:'Musical Instruments',
-    occupations:'Occupations', birds:'Birds', flowers:'Flowers', trees:'Trees',
-    gemstones:'Gemstones', dinosaurs:'Dinosaurs', movies:'Movies', games:'Video Games',
-    tvshows:'TV Shows', superheroes:'Superheroes', mythology:'Mythological Deities',
-    history:'Historical Figures', dances:'Dances',
-    countries:'Countries', baseball:'Famous Baseball Players',
-    football:'Famous Football Players', basketball:'Famous Basketball Players',
-  };
-  return map[cat] || cat;
+  return CATEGORY_DISPLAY[cat] || cat;
 }
 
 // ---- GitHub REST API ----

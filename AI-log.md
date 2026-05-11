@@ -158,3 +158,25 @@ Questions?
 2026-05-10T00:00 User: Go through each of the categories and if the category can be 'easily expanded' with new words, expand it and add hints for the new words
 
 2026-05-10T00:00 User: For any hints that are in the form of "Starts with X", come up with new hints
+
+2026-05-10T00:00 User: Let's change what happens when a word is not on the list.
+
+When the user clicks on "Suggest this word", instead of a Modal dialog popping up and an email being generated, it should be checked by Wikipedia, and if verified, added to the list AND pushed to Github.
+
+If the word cannot be verified, an email should be sent to admin, without any modal dialogue. I have added AUTH_SMTP_HOST and other details to .env file. Update the .env.example file with comments and empty vales
+
+Some of the categories in https://letter-category.netlify.app/admin were missing. Make sure that there is only ONE categories variable that is being maintained.
+
+Questions?
+
+2026-05-10T00:00 User: 1. Wikipedia article existence check
+2. Correct
+3. Put it in .env
+4. If verified is correct. If not verified, skip the word
+
+Also, add a newline before every entry in CHANGES.md that starts with YYYY-MM-DD
+
+2026-05-10T00:00 User: - Create a feedback form similar to ../meet/meetme/feedback.html 
+Add "Send feedback" at the bottom of the page
+
+- When an email is sent from the web, include as much details for the origin of the email as possible in the body of the email, such as IP number, browser used, etc

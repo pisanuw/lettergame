@@ -116,28 +116,7 @@
     </select>
 
     <label for="cat-select">Category</label>
-    <select id="cat-select">
-      <option value="fruits">Fruits</option>
-      <option value="animals">Animals</option>
-      <option value="cities">World Cities</option>
-      <option value="foods">Foods &amp; Dishes</option>
-      <option value="vegetables">Vegetables</option>
-      <option value="sports">Sports</option>
-      <option value="instruments">Musical Instruments</option>
-      <option value="occupations">Occupations</option>
-      <option value="birds">Birds</option>
-      <option value="flowers">Flowers</option>
-      <option value="trees">Trees</option>
-      <option value="gemstones">Gemstones</option>
-      <option value="dinosaurs">Dinosaurs</option>
-      <option value="movies">Movies</option>
-      <option value="games">Video Games</option>
-      <option value="tvshows">TV Shows</option>
-      <option value="superheroes">Superheroes</option>
-      <option value="mythology">Mythological Deities</option>
-      <option value="history">Historical Figures</option>
-      <option value="dances">Dances</option>
-    </select>
+    <select id="cat-select"></select>
 
     <label for="word-input">
       Word <span id="letter-preview" style="color:var(--primary);font-size:0.95rem;font-weight:800;"></span>
@@ -161,10 +140,24 @@
   </div>
 </div>
 
+<script src="words.js"></script>
 <script>
   const $ = id => document.getElementById(id);
   let mode = null; // 'basic' or 'verified'
   let password = null;
+
+  // Populate category dropdown from the single CATEGORIES source in words.js
+  (function populateCategories() {
+    const sel = $('cat-select');
+    if (typeof CATEGORIES !== 'undefined') {
+      for (const [key, label] of Object.entries(CATEGORIES)) {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = label;
+        sel.appendChild(opt);
+      }
+    }
+  })();
 
   function getLang() { return $('lang-select').value; }
 

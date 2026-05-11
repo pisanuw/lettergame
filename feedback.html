@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letter Game - Feedback</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #e8ecff 0%, #f5f0ff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+    .feedback-card {
+      background: white;
+      border-radius: var(--radius, 14px);
+      box-shadow: 0 4px 24px rgba(79,110,247,0.10);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 520px;
+    }
+    .feedback-card h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary, #4f6ef7);
+      margin-bottom: 6px;
+    }
+    .feedback-copy {
+      color: var(--muted, #6b7280);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .fb-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted, #6b7280);
+      margin-bottom: 6px;
+    }
+    .fb-label .required { color: #e53e3e; }
+    .fb-input, .fb-select, .fb-textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: var(--text, #1a1a2e);
+      background: white;
+      margin-bottom: 16px;
+      font-family: inherit;
+    }
+    .fb-input:focus, .fb-select:focus, .fb-textarea:focus {
+      outline: none;
+      border-color: var(--primary, #4f6ef7);
+    }
+    .fb-textarea { resize: vertical; min-height: 120px; }
+    .fb-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .fb-submit {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--primary, #4f6ef7);
+      color: white;
+      transition: background 0.15s;
+    }
+    .fb-submit:hover { background: var(--primary-dark, #3a56d4); }
+    .fb-submit:disabled { background: #a5b4fc; cursor: not-allowed; }
+    .fb-msg {
+      font-size: 0.88rem;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+    .fb-msg.error { color: #e53e3e; }
+    .fb-msg.success { color: #065f46; font-weight: 600; }
+    .fb-sent {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .fb-sent-icon { font-size: 2.5rem; margin-bottom: 8px; }
+    .fb-sent-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+    .fb-sent-copy { color: var(--muted, #6b7280); font-size: 0.9rem; margin-bottom: 16px; }
+    .fb-back {
+      display: inline-block;
+      padding: 9px 22px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted, #6b7280);
+      text-decoration: none;
+      border: 2px solid #e2e8f0;
+      transition: border-color 0.15s;
+    }
+    .fb-back:hover { border-color: var(--primary, #4f6ef7); color: var(--primary, #4f6ef7); }
+    .hidden { display: none !important; }
+    @media (max-width: 480px) {
+      .feedback-card { padding: 28px 20px; }
+      .fb-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="feedback-card">
+  <h1>Send Feedback</h1>
+  <p class="feedback-copy">
+    Bug report, feature request, or just a thought? We'd love to hear from you.
+    Your message goes straight to the team.
+  </p>
+
+  <form id="feedback-form">
+    <div class="fb-row">
+      <div>
+        <label class="fb-label" for="fb-name">Your name</label>
+        <input type="text" id="fb-name" class="fb-input" placeholder="Jane Smith">
+      </div>
+      <div>
+        <label class="fb-label" for="fb-email">Email <span class="required">*</span></label>
+        <input type="email" id="fb-email" class="fb-input" placeholder="you@example.com" required>
+      </div>
+    </div>
+
+    <label class="fb-label" for="fb-type">Type of feedback</label>
+    <select id="fb-type" class="fb-select">
+      <option value="bug">Bug report</option>
+      <option value="feature">Feature request</option>
+      <option value="question">Question</option>
+      <option value="other" selected>General feedback</option>
+    </select>
+
+    <label class="fb-label" for="fb-message">Message <span class="required">*</span></label>
+    <textarea id="fb-message" class="fb-textarea" rows="6" placeholder="Describe your feedback..." required></textarea>
+
+    <button type="submit" class="fb-submit" id="fb-submit">Send Feedback</button>
+    <div class="fb-msg" id="fb-msg"></div>
+  </form>
+
+  <div id="feedback-sent" class="fb-sent hidden">
+    <div class="fb-sent-icon">&#10004;</div>
+    <h2 class="fb-sent-title">Feedback sent!</h2>
+    <p class="fb-sent-copy">Thank you. The team will review your message shortly.</p>
+    <a href="index.html" class="fb-back">Back to game</a>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('feedback-form');
+  const msg = document.getElementById('fb-msg');
+  const btn = document.getElementById('fb-submit');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.className = 'fb-msg';
+    msg.textContent = '';
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    const payload = {
+      name: document.getElementById('fb-name').value.trim(),
+      email: document.getElementById('fb-email').value.trim(),
+      type: document.getElementById('fb-type').value,
+      message: document.getElementById('fb-message').value.trim(),
+      // Client metadata for the email body
+      url: location.href,
+      referrer: document.referrer || '',
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      screen: `${screen.width}x${screen.height}`,
+      timestamp: new Date().toISOString(),
+    };
+
+    try {
+      const res = await fetch('/.netlify/functions/send-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        form.classList.add('hidden');
+        document.getElementById('feedback-sent').classList.remove('hidden');
+      } else {
+        const data = await res.json().catch(() => ({}));
+        msg.textContent = data.error || 'Failed to send. Please try again.';
+        msg.classList.add('error');
+      }
+    } catch {
+      msg.textContent = 'Network error. Please try again.';
+      msg.classList.add('error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Feedback';
+    }
+  });
+</script>
+</body>
+</html>

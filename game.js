@@ -124,23 +124,11 @@ function init() {
     sugSection:      $('suggest-section'),
     sugCategoryName: $('sug-category-name'),
     sugWord:         $('sug-word'),
-    sugEmail:        $('sug-email'),
     sugError:        $('sug-error'),
     sugSubmitBtn:    $('sug-submit-btn'),
     sugSkipBtn:      $('sug-skip-btn'),
     sugFormWrap:     $('suggest-form-wrap'),
     sugSuccess:      $('suggest-success'),
-    // in-game suggestion modal
-    ingameModal:     $('ingame-suggest-modal'),
-    ingameSugWord:   $('ingame-sug-word-display'),
-    ingameSugCat:    $('ingame-sug-cat-display'),
-    ingameSugEmail:  $('ingame-sug-email'),
-    ingameSugForm:   $('ingame-sug-form'),
-    ingameSugError:  $('ingame-sug-error'),
-    ingameSugSubmit: $('ingame-sug-submit'),
-    ingameSugCancel: $('ingame-sug-cancel'),
-    ingameSugSuccess:$('ingame-sug-success'),
-    ingameSugClose:  $('ingame-sug-close'),
   };
 
   // Set initial language
@@ -170,13 +158,6 @@ function init() {
   });
   el.sugWord.addEventListener('keydown', e => { if (e.key === 'Enter') handleSuggestion(); });
 
-  // In-game suggestion modal events
-  el.ingameSugCancel.addEventListener('click', closeIngameModal);
-  el.ingameSugClose.addEventListener('click', closeIngameModal);
-  el.ingameSugSubmit.addEventListener('click', handleIngameSuggestion);
-  el.ingameSugEmail.addEventListener('keydown', e => { if (e.key === 'Enter') handleIngameSuggestion(); });
-  el.ingameModal.addEventListener('click', e => { if (e.target === el.ingameModal) closeIngameModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeIngameModal(); });
 }
 
 function showScreen(name) {
@@ -608,7 +589,7 @@ function showError(msg, suggestWord = null) {
     link.textContent = t.suggestLink;
     link.addEventListener('click', e => {
       e.preventDefault();
-      openInGameSuggestModal(suggestWord);
+      suggestWordToServer(suggestWord);
     });
     el.errorMsg.textContent = msg + ' ';
     el.errorMsg.appendChild(link);
@@ -619,8 +600,6 @@ function showError(msg, suggestWord = null) {
 }
 
 function acceptSuggestion(word) {
-  closeIngameModal();
-
   const letter = currentLetter();
   const displayWord = `${word} (${t.suggested})`;
   state.history.push({ word: displayWord, player: 'user', letter });
@@ -652,61 +631,46 @@ function acceptSuggestion(word) {
   scheduleComputerTurn();
 }
 
-// --- In-game suggestion modal ---
+// --- In-game word suggestion (serverless Wikipedia check) ---
 
-let ingameSuggestWord = '';
-
-function openInGameSuggestModal(word) {
-  ingameSuggestWord = word;
-  el.ingameSugWord.textContent = `"${word}"`;
-  el.ingameSugCat.textContent = activeCategories[state.category];
-  el.ingameSugEmail.value = '';
-  el.ingameSugError.classList.add('hidden');
-  el.ingameSugForm.classList.remove('hidden');
-  el.ingameSugSuccess.classList.add('hidden');
-  el.ingameModal.classList.remove('hidden');
-  el.ingameSugEmail.focus();
-}
-
-function closeIngameModal() {
-  el.ingameModal.classList.add('hidden');
-  // Return focus to word input if game is still in progress
-  if (state.phase === 'playing' && state.currentTurn === 'user') {
-    el.wordInput.focus();
-  }
-}
-
-async function handleIngameSuggestion() {
-  const email = el.ingameSugEmail.value.trim();
-  el.ingameSugSubmit.disabled = true;
-  el.ingameSugSubmit.textContent = t.sending;
+async function suggestWordToServer(word) {
+  // Show checking status inline (no modal)
+  el.errorMsg.textContent = t.checking;
+  el.errorMsg.classList.remove('hidden');
 
   try {
-    const res = await fetch('/', {
+    const res = await fetch('/.netlify/functions/suggest-word', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        'form-name': 'word-suggestion',
-        word: ingameSuggestWord,
-        category: activeCategories[state.category] || state.category,
-        email,
-      }).toString(),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        word,
+        category: state.category,
+        lang: state.lang,
+      }),
     });
-    if (res.ok || res.status === 303) {
-      el.ingameSugForm.classList.add('hidden');
-      el.ingameSugSuccess.classList.remove('hidden');
-      // Advance the game after a brief moment so user sees the success message
-      setTimeout(() => acceptSuggestion(ingameSuggestWord), 1200);
+    const data = await res.json();
+
+    if (data.accepted) {
+      // Word verified and added to GitHub
+      el.errorMsg.textContent = t.wordAdded;
+      el.errorMsg.classList.remove('hidden');
+      // Also add to local activeWords so the word works for the rest of this session
+      const letter = word[0].toUpperCase();
+      if (!activeWords[state.category]) activeWords[state.category] = {};
+      if (!activeWords[state.category][letter]) activeWords[state.category][letter] = [];
+      if (!activeWords[state.category][letter].some(w => w.toLowerCase() === word.toLowerCase())) {
+        activeWords[state.category][letter].push(word);
+      }
+      setTimeout(() => acceptSuggestion(word), 1200);
     } else {
-      el.ingameSugError.textContent = t.submissionFailed;
-      el.ingameSugError.classList.remove('hidden');
+      // Not verified; email sent to admin. Skip this word.
+      el.errorMsg.textContent = t.wordSentAdmin;
+      el.errorMsg.classList.remove('hidden');
+      setTimeout(() => handleSkip(), 1500);
     }
   } catch {
-    el.ingameSugError.textContent = t.networkError;
-    el.ingameSugError.classList.remove('hidden');
-  } finally {
-    el.ingameSugSubmit.disabled = false;
-    el.ingameSugSubmit.textContent = t.sendSuggestion;
+    el.errorMsg.textContent = t.networkError;
+    el.errorMsg.classList.remove('hidden');
   }
 }
 
@@ -744,7 +708,6 @@ function endGame() {
 async function handleSuggestion() {
   const word     = el.sugWord.value.trim();
   const category = state.category;
-  const email    = el.sugEmail.value.trim();
 
   if (!word) {
     showSugError(t.enterWord);
@@ -752,25 +715,24 @@ async function handleSuggestion() {
   }
 
   el.sugSubmitBtn.disabled = true;
-  el.sugSubmitBtn.textContent = t.sending;
+  el.sugSubmitBtn.textContent = t.checking;
 
   try {
-    const res = await fetch('/', {
+    const res = await fetch('/.netlify/functions/suggest-word', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        'form-name': 'word-suggestion',
-        word,
-        category: activeCategories[category] || category,
-        email,
-      }).toString(),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ word, category, lang: state.lang }),
     });
+    const data = await res.json();
 
-    if (res.ok || res.status === 303) {
+    if (data.accepted) {
       el.sugFormWrap.classList.add('hidden');
+      el.sugSuccess.querySelector('.success-msg').textContent = t.wordAdded;
       el.sugSuccess.classList.remove('hidden');
     } else {
-      showSugError(t.submissionFailed);
+      el.sugFormWrap.classList.add('hidden');
+      el.sugSuccess.querySelector('.success-msg').textContent = t.wordSentAdmin;
+      el.sugSuccess.classList.remove('hidden');
     }
   } catch {
     showSugError(t.networkError);

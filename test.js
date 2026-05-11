@@ -294,6 +294,10 @@ test('game.js has mergeWebWords function', () => {
   assert.ok(gameSrc.includes('function mergeWebWords('));
 });
 
+test('game.js has suggestWordToServer function', () => {
+  assert.ok(gameSrc.includes('function suggestWordToServer('));
+});
+
 test('game.js calls mergeWebWords in setLanguage', () => {
   assert.ok(gameSrc.includes('mergeWebWords(data.words'));
 });
@@ -354,6 +358,43 @@ test('admin.html passes lang in API calls', () => {
 
 test('admin.html queue items store lang', () => {
   assert.ok(adminHtml.includes('lang: getLang()'));
+});
+
+// ========================================
+// 8b. suggest-word.js tests
+// ========================================
+
+console.log('\n--- suggest-word.js ---');
+
+const suggestSrc = loadFile('netlify/functions/suggest-word.js');
+
+test('suggest-word.js has Wikipedia verification', () => {
+  assert.ok(suggestSrc.includes('verifyWithWikipedia'));
+});
+
+test('suggest-word.js has appendToWebWords function', () => {
+  assert.ok(suggestSrc.includes('function appendToWebWords('));
+});
+
+test('suggest-word.js has emailAdmin function', () => {
+  assert.ok(suggestSrc.includes('function emailAdmin('));
+});
+
+test('suggest-word.js returns accepted flag', () => {
+  assert.ok(suggestSrc.includes('accepted: true'));
+  assert.ok(suggestSrc.includes('accepted: false'));
+});
+
+test('suggest-word.js has all 24 categories', () => {
+  assert.ok(suggestSrc.includes("countries:'Countries'"));
+  assert.ok(suggestSrc.includes("baseball:'Famous Baseball Players'"));
+  assert.ok(suggestSrc.includes("football:'Famous Football Players'"));
+  assert.ok(suggestSrc.includes("basketball:'Famous Basketball Players'"));
+});
+
+test('admin.html loads words.js for categories', () => {
+  assert.ok(adminHtml.includes('src="words.js"'), 'admin.html should load words.js');
+  assert.ok(adminHtml.includes('CATEGORIES'), 'admin.html should reference CATEGORIES');
 });
 
 // ========================================
