@@ -184,3 +184,7 @@ Add "Send feedback" at the bottom of the page
 2026-05-10T00:00 User: send-feedback.js should use env variable for admin, not hardcode it
 
 2026-05-10T00:00 User: Same for suggest-word.js
+
+2026-05-10T00:00 User: The game does not start when I click "start game"
+
+2026-05-10T00:00 User: How do I run it locally? Write a script run-locally so I can just use that

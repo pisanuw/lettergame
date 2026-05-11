@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Start the Letter Game locally with Netlify Dev (serves static files + serverless functions)
+# Requires: npm install -g netlify-cli (or brew install netlify-cli)
+# Env vars loaded from .env automatically
+
+set -e
+
+if ! command -v netlify &>/dev/null; then
+  echo "Error: netlify CLI not found. Install with: npm install -g netlify-cli"
+  exit 1
+fi
+
+echo "Starting Letter Game at http://localhost:8888"
+echo "Press Ctrl+C to stop"
+echo ""
+
+netlify dev

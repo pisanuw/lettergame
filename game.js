@@ -89,7 +89,6 @@ function setLanguage(lang) {
   $('complete-heading').textContent = t.complete;
   $('play-again-label').textContent = t.playAgain;
   $('end-home-label').textContent = t.home;
-  $('modal-title').textContent = t.suggestTitle;
   el.wordInput.placeholder = t.typeWord;
 }
 
