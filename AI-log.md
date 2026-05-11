@@ -1,7 +1,7 @@
 # AI Log - Log every user message before responding
 
 2026-05-07T14:25 User: Creating an app called lettergame. Possibly deploy on netlify. - User chooses a category. Come up with 20 popular categories such as fruit, cities, countries, etc - User and computer alternate coming up with a word that starts with the correct letter following the alphabet from A to Z - Computer or user starts randomly - User chooses category or computer chooses category randomly - Have multiple options for each letter for each category to minimize repetitions - Simple UI. Any questions? [Clarifications: user types the word, plain JS, Z ends game, no skipping, purely collaborative no score]
- User: Update README with deployment site and repo. Double computer choices per category. Suggest way to add new words (admin yusuf.pisan@gmail.com gets email, can use Google API). Home button at top.
+ User: Update README with deployment site and repo. Double computer choices per category. Suggest way to add new words (admin REDACTED gets email, can use Google API). Home button at top.
 
 2026-05-08T06:57 User: ~/.claude/CLAUDE.md has the instruction AI-log.md: Append-only project journal of all the user instructions verbatim., but my instructions are not being appended to the project file. Rewrite CLAUDE.md, so ALL instructions I type are appended to the project AI-log.md file, even trivial ones like yes, or go ahead
 
@@ -176,7 +176,7 @@ Questions?
 
 Also, add a newline before every entry in CHANGES.md that starts with YYYY-MM-DD
 
-2026-05-10T00:00 User: - Create a feedback form similar to ../meet/meetme/feedback.html 
+2026-05-10T00:00 User: - Create a feedback form similar to ../meet/meetme/feedback.html
 Add "Send feedback" at the bottom of the page
 
 - When an email is sent from the web, include as much details for the origin of the email as possible in the body of the email, such as IP number, browser used, etc
