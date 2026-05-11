@@ -90,7 +90,10 @@ exports.handler = async (event) => {
       },
     });
 
-    const adminEmail = process.env.ADMIN_EMAIL || 'yusuf.pisan@gmail.com';
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (!adminEmail) {
+      return { statusCode: 500, body: JSON.stringify({ error: 'ADMIN_EMAIL not configured' }) };
+    }
 
     await transporter.sendMail({
       from: process.env.AUTH_SMTP_FROM || 'noreply@lettergame.app',

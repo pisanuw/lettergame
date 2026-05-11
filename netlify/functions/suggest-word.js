@@ -264,7 +264,8 @@ async function emailAdmin(word, category, lang, reason, clientInfo = {}) {
     },
   });
 
-  const adminEmail = process.env.ADMIN_EMAIL || 'yusuf.pisan@gmail.com';
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (!adminEmail) return; // ADMIN_EMAIL not configured, skip
   const catLabel = CATEGORY_DISPLAY[category] || category;
 
   await transporter.sendMail({

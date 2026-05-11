@@ -180,3 +180,7 @@ Also, add a newline before every entry in CHANGES.md that starts with YYYY-MM-DD
 Add "Send feedback" at the bottom of the page
 
 - When an email is sent from the web, include as much details for the origin of the email as possible in the body of the email, such as IP number, browser used, etc
+
+2026-05-10T00:00 User: send-feedback.js should use env variable for admin, not hardcode it
+
+2026-05-10T00:00 User: Same for suggest-word.js
