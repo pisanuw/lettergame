@@ -188,3 +188,11 @@ Add "Send feedback" at the bottom of the page
 2026-05-10T00:00 User: The game does not start when I click "start game"
 
 2026-05-10T00:00 User: How do I run it locally? Write a script run-locally so I can just use that
+
+2026-05-16T00:00 User: Send admin an email when
+- a word is suggested and accepted
+- a word is suggested but rejected (which already happens I think)
+
+When a word is suggested, make a note of it in the permanent panel so the users see it
+
+2026-05-16T00:00 User: Add the words from words-web.js as well as the hints for them

@@ -598,6 +598,20 @@ function showError(msg, suggestWord = null) {
   el.errorMsg.classList.remove('hidden');
 }
 
+function recordSuggestionInHistory(word, accepted) {
+  const letter = currentLetter();
+  const label = accepted ? t.suggested : t.suggestedPending;
+  const row = document.createElement('div');
+  row.className = 'history-row suggestion-note';
+  row.innerHTML = `
+    <span class="h-letter">${letter}</span>
+    <span class="h-word">${word} (${label})</span>
+    <span class="h-who">${t.you}</span>
+  `;
+  el.wordHistory.appendChild(row);
+  el.wordHistory.scrollTop = el.wordHistory.scrollHeight;
+}
+
 function acceptSuggestion(word) {
   const letter = currentLetter();
   const displayWord = `${word} (${t.suggested})`;
@@ -662,9 +676,10 @@ async function suggestWordToServer(word) {
       }
       setTimeout(() => acceptSuggestion(word), 1200);
     } else {
-      // Not verified; email sent to admin. Skip this word.
+      // Not verified; email sent to admin. Record in history and skip.
       el.errorMsg.textContent = t.wordSentAdmin;
       el.errorMsg.classList.remove('hidden');
+      recordSuggestionInHistory(word, false);
       setTimeout(() => handleSkip(), 1500);
     }
   } catch {

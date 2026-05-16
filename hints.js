@@ -42,6 +42,7 @@ const HINTS = {
       'Date': 'A sweet brown fruit from a palm tree, often eaten during Ramadan.',
       'Damson': 'This small purple plum variety is named after a town in England where it was traditionally grown.',
       'Dewberry': '"Sounds like morning moisture plus a dark berry that grows on thorny brambles."',
+      'doom doom': 'An African palm fruit with a hard, edible rind and sweet, dry flesh, also called doum palm fruit.',
       'Desert Lime': 'This small, round citrus fruit thrives in Australia\'s arid regions and has a tangy, aromatic flavor.',
       'Duku': 'This Southeast Asian fruit grows in clusters and has a thin, golden-yellow bumpy skin with sweet, translucent flesh inside.',
     },
@@ -231,6 +232,7 @@ const HINTS = {
       'Boar': 'A wild male pig with tusks, known for being aggressive and roaming forests.',
       'Bongo': 'This striped African antelope has spiral horns and is known for its distinctive markings.',
       'Blue Whale': 'The largest animal ever to exist on Earth, living in the ocean and named after a color.',
+      'baracuda': 'A fast predatory fish with a long body and sharp teeth, found in tropical oceans.',
     },
     C: {
       'Cheetah': 'I am the fastest land animal, with distinctive black tear marks running from my eyes to my mouth.',
@@ -2385,6 +2387,7 @@ const HINTS = {
       'Elder Scrolls': '"You can become a vampire or a werewolf in this fantasy RPG series set in Tamriel."',
       'Earthworm Jim': 'A comic invertebrate superhero with a plasma gun, known for grotesque animation and absurd humor from the 90s.',
       'Elden Ring': 'A collaboration between a legendary director and a renowned artist creates a brutal fantasy masterpiece.',
+      'Earthbound': 'A quirky SNES RPG where a boy with psychic powers saves the world from an alien threat using baseball bats and pizza.',
       'Everquest': 'A classic 1999 MMO that pioneered online fantasy adventures with its endless quest for loot and leveling.',
     },
     F: {
@@ -3364,6 +3367,7 @@ const HINTS = {
       'Netherlands': 'This Western European country is known for tulips, windmills, and canals.',
       'Norway': 'This Scandinavian country is known for fjords, the Northern Lights, and Viking heritage.',
       'New Zealand': 'This South Pacific island nation was the filming location for The Lord of the Rings.',
+      'North Korea': 'This East Asian country is one of the most isolated nations, officially called the DPRK.',
       'Nicaragua': 'The largest country in Central America, with volcanoes and two large lakes.',
       'Namibia': 'This Southern African country is home to the ancient Namib Desert and Skeleton Coast.',
       'Niger': 'This landlocked West African country is named after the Niger River.',

@@ -96,6 +96,17 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Word must start with A-Z' }) };
   }
 
+  // Client metadata for email notifications
+  const clientInfo = {
+    ip: event.headers['x-forwarded-for']
+      || event.headers['x-nf-client-connection-ip']
+      || event.headers['client-ip']
+      || 'unknown',
+    userAgent: event.headers['user-agent'] || 'unknown',
+    country: event.headers['x-country'] || event.headers['x-nf-country-code'] || '',
+    acceptLang: event.headers['accept-language'] || '',
+  };
+
   // Wikipedia verification
   const result = await verifyWithWikipedia(trimmed, category, wikiLang);
 
@@ -103,33 +114,29 @@ exports.handler = async (event) => {
     // Verified: add to words-web.js via GitHub
     try {
       await appendToWebWords(lang, category, trimmed);
-      return {
-        statusCode: 200,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accepted: true, word: trimmed, category, letter }),
-      };
     } catch (err) {
       return {
         statusCode: 500,
         body: JSON.stringify({ accepted: false, error: err.message }),
       };
     }
-  } else {
-    // Not verified: email admin with client details
-    const clientInfo = {
-      ip: event.headers['x-forwarded-for']
-        || event.headers['x-nf-client-connection-ip']
-        || event.headers['client-ip']
-        || 'unknown',
-      userAgent: event.headers['user-agent'] || 'unknown',
-      country: event.headers['x-country'] || event.headers['x-nf-country-code'] || '',
-      acceptLang: event.headers['accept-language'] || '',
-    };
+    // Email admin about accepted word
     try {
-      await emailAdmin(trimmed, category, lang, result.reason, clientInfo);
+      await emailAdminAccepted(trimmed, category, lang, clientInfo);
     } catch (err) {
-      console.error('SMTP error:', err.message);
-      // Don't fail the request if email fails; the user still gets feedback
+      console.error('SMTP error (accepted):', err.message);
+    }
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accepted: true, word: trimmed, category, letter }),
+    };
+  } else {
+    // Not verified: email admin with rejection details
+    try {
+      await emailAdminRejected(trimmed, category, lang, result.reason, clientInfo);
+    } catch (err) {
+      console.error('SMTP error (rejected):', err.message);
     }
     return {
       statusCode: 200,
@@ -250,11 +257,10 @@ async function appendToWebWords(lang, category, word) {
 
 // ---- SMTP email ----
 
-async function emailAdmin(word, category, lang, reason, clientInfo = {}) {
+function createTransporter() {
   const host = process.env.AUTH_SMTP_HOST;
-  if (!host) return; // SMTP not configured, skip silently
-
-  const transporter = nodemailer.createTransport({
+  if (!host) return null;
+  return nodemailer.createTransport({
     host,
     port: Number(process.env.AUTH_SMTP_PORT) || 587,
     secure: false,
@@ -263,30 +269,63 @@ async function emailAdmin(word, category, lang, reason, clientInfo = {}) {
       pass: process.env.AUTH_SMTP_PASS,
     },
   });
+}
 
+function clientBlock(clientInfo) {
+  return [
+    'Client Details:',
+    `  IP Address:      ${clientInfo.ip || 'unknown'}`,
+    `  Country:         ${clientInfo.country || '(not available)'}`,
+    `  User-Agent:      ${clientInfo.userAgent || 'unknown'}`,
+    `  Accept-Language: ${clientInfo.acceptLang || '(not available)'}`,
+    `  Timestamp:       ${new Date().toISOString()}`,
+  ].join('\n');
+}
+
+async function emailAdminAccepted(word, category, lang, clientInfo) {
+  const transporter = createTransporter();
+  if (!transporter) return;
   const adminEmail = process.env.ADMIN_EMAIL;
-  if (!adminEmail) return; // ADMIN_EMAIL not configured, skip
+  if (!adminEmail) return;
   const catLabel = CATEGORY_DISPLAY[category] || category;
 
   await transporter.sendMail({
     from: process.env.AUTH_SMTP_FROM || 'noreply@lettergame.app',
     to: adminEmail,
-    subject: `[Letter Game] Word suggestion: "${word}" in ${catLabel}`,
+    subject: `[Letter Game] Word ACCEPTED: "${word}" in ${catLabel}`,
     text: [
       `A player suggested "${word}" for the ${catLabel} category (${lang}).`,
       '',
-      `Wikipedia verification failed:`,
-      reason,
+      'Status: ACCEPTED (Wikipedia verified, added to words-web.js)',
       '',
-      `To add manually, go to the admin page or run:`,
-      `  node merge-web-words.js`,
+      clientBlock(clientInfo),
       '',
-      'Client Details:',
-      `  IP Address:      ${clientInfo.ip || 'unknown'}`,
-      `  Country:         ${clientInfo.country || '(not available)'}`,
-      `  User-Agent:      ${clientInfo.userAgent || 'unknown'}`,
-      `  Accept-Language: ${clientInfo.acceptLang || '(not available)'}`,
-      `  Timestamp:       ${new Date().toISOString()}`,
+      '-- Letter Game',
+    ].join('\n'),
+  });
+}
+
+async function emailAdminRejected(word, category, lang, reason, clientInfo) {
+  const transporter = createTransporter();
+  if (!transporter) return;
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (!adminEmail) return;
+  const catLabel = CATEGORY_DISPLAY[category] || category;
+
+  await transporter.sendMail({
+    from: process.env.AUTH_SMTP_FROM || 'noreply@lettergame.app',
+    to: adminEmail,
+    subject: `[Letter Game] Word REJECTED: "${word}" in ${catLabel}`,
+    text: [
+      `A player suggested "${word}" for the ${catLabel} category (${lang}).`,
+      '',
+      'Status: REJECTED (Wikipedia verification failed)',
+      `Reason: ${reason}`,
+      '',
+      'To add manually, go to the admin page or run:',
+      '  node merge-web-words.js',
+      '',
+      clientBlock(clientInfo),
       '',
       '-- Letter Game',
     ].join('\n'),

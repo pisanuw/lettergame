@@ -376,8 +376,9 @@ test('suggest-word.js has appendToWebWords function', () => {
   assert.ok(suggestSrc.includes('function appendToWebWords('));
 });
 
-test('suggest-word.js has emailAdmin function', () => {
-  assert.ok(suggestSrc.includes('function emailAdmin('));
+test('suggest-word.js has email functions for accepted and rejected', () => {
+  assert.ok(suggestSrc.includes('function emailAdminAccepted('));
+  assert.ok(suggestSrc.includes('function emailAdminRejected('));
 });
 
 test('suggest-word.js returns accepted flag', () => {

@@ -283,6 +283,12 @@ select:focus { outline: none; border-color: var(--primary); }
   flex-direction: row-reverse;
 }
 
+.history-row.suggestion-note {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px dashed #86efac;
+}
+
 .history-row.skipped-row {
   background: #fef9ec;
   color: #92400e;
