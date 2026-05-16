@@ -6,4 +6,5 @@ const WEB_WORDS = [
 { lang: 'en', category: 'games', word: 'Earthbound' },
   { lang: 'en', category: 'countries', word: 'North Korea' },
   { lang: 'en', category: 'animals', word: 'baracuda' },
+  { lang: 'en', category: 'fruits', word: 'doom doom' },
 ];
