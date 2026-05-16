@@ -6,4 +6,5 @@ const WEB_WORDS = [
 { lang: 'en', category: 'birds', word: 'Nuthatch' },
   { lang: 'en', category: 'birds', word: 'Titmouse' },
   { lang: 'en', category: 'birds', word: 'Vireo' },
+  { lang: 'en', category: 'countries', word: 'Bahrain' },
 ];
