@@ -89,3 +89,11 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-10 [code] feedback.html and send-feedback.js: feedback form sends email via SMTP with client metadata (IP, browser, screen, country, etc).
 
 2026-05-10 [code] All outgoing emails (suggest-word, send-feedback) now include client details: IP, user-agent, country, accept-language, timestamp.
+
+2026-05-16 [code] suggest-word.js now emails admin on both ACCEPTED and REJECTED suggestions (previously only rejected). Separate emailAdminAccepted/emailAdminRejected functions.
+
+2026-05-16 [code] Rejected suggestions now show in word history panel with "(sent for review)" label and green dashed border. Added suggestedPending i18n string.
+
+2026-05-16 [code] Merged 4 words from words-web.js into words.js (Earthbound, North Korea, baracuda, doom doom) with hints. Cleared words-web.js.
+
+2026-05-16 [code] Fixed game not starting: removed stale $('modal-title') reference in setLanguage() that caused null error after modal HTML was removed.
