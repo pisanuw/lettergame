@@ -8,4 +8,5 @@ const WEB_WORDS = [
   { lang: 'en', category: 'birds', word: 'Vireo' },
   { lang: 'en', category: 'countries', word: 'Bahrain' },
   { lang: 'en', category: 'occupations', word: 'Artist' },
+  { lang: 'en', category: 'occupations', word: 'Wine Steward' },
 ];
