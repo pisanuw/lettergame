@@ -486,7 +486,7 @@ const HINTS_TR = {
     "C": {"Havuç": "Turuncu, tatlı, kök.", "Karnabahar": "Beyaz çiçek, besleyici.", "Lahana": "Yeşil-kırmızı, yapraklar.", "Kereviz": "Yeşil dal, tatlı-asidik."},
     "D": {"Daikon": "Beyaz turp, Asya sebze.", "Karahindiba Yaprağı": "Koyu yeşil,苦.", "Delicata Balkabağı": "Yeşil dış, turuncu iç."},
     "E": {"Patlıcan": "Mor-siyah, esnek, İtalyan.", "Edamame": "Yeşil soya fasulye, tatlı.", "Endive": "Açık yeşil, acılı.", "Escarole": "Yeşil yaprak, estetik."},
-    "F": {"Rezene": "Beyaz-yeşil, nadir, tat.", "Fiddlehead Eğreltisi": "Yeşil kıvrıntı, nadir.", "Yeşil Fasulye": "Uzun, yeşil, besleyici."},
+    "F": {"Rezene": "Beyaz-yeşil, nadir, tat.", "Fiddlehead Eğreltisi": "Yeşil kıvrıntı, nadir.", "Yeşil Fasulye": "Uzun, yeşil, besleyici.", "Fasulye": "Yeşil veya kuru olarak tüketilen, protein açısından zengin bir baklagil."},
     "G": {"Sarımsak": "Beyaz çiçek, güçlü tat.", "Zencefil": "Kök sebze, tat-ilac.", "Yeşil Soğan": "Beyaz-yeşil, hafif tat.", "Galangal": "Kök, Asya, limon."},
     "H": {"Beyin Otu": "Yeşil yaprak, çiğ, beslenme.", "Palmiye Kalbi": "Beyaz dali, nadir.", "Haricot Fasulyesi": "Beyaz fasulye, tatlı."},
     "I": {"Hint Ispanağı": "Yeşil yaprak, spinach benzeri.", "Buz Marulu": "Açık yeşil, çıt çıtlı."},
@@ -495,7 +495,7 @@ const HINTS_TR = {
     "L": {"Pırasa": "Beyaz-yeşil, soğan benzeri.", "Marul": "Açık yeşil, yaprak.", "Mercimek": "Kırmızı-yeşil, kuru.", "Lima Fasulyesi": "Yeşil-krem, tatlı."},
     "M": {"Mantar": "Beyaz-kahverengi, fungi.", "Sarı Hardal Yaprağı": "Yeşil, keskin, Asya.", "Mangetout": "Yeşil bölüm, yenilebilir.", "Mung Fasulyesi": "Yeşil, kuru, Asya."},
     "N": {"Napa Lahanası": "Açık yeşil, Çin, yaprak.", "Nori": "Siyah deniz yosunu, Asya."},
-    "O": {"Soğan": "Beyaz-kırmızı-sarı, kat.", "Okra": "Yeşil, uzun, tatlı.", "Ismen Mantarı": "Beyaz, belirgin."},
+    "O": {"Soğan": "Beyaz-kırmızı-sarı, kat.", "Okra": "Yeşil, uzun, tatlı.", "Ismen Mantarı": "Beyaz, belirgin.", "Otlu Peynir Biber": "Taze yeşil biber çeşidi, otlu peynir ile birlikte tüketilir."},
     "P": {"Patates": "Beyaz-kırmızı, krahu, yüksek.", "Bezelye": "Yeşil küçük, tatlı.", "Biber": "Kırmızı-yeşil-sarı, tatlı.", "Balkabağı": "Turuncu, tatlı, sonbahat."},
     "Q": {"Kinoa": "Beyaz tane, besleyici, Andean."},
     "R": {"Turp": "Kırmızı-beyaz, çiğ, tatlı-acı.", "Şalgam": "Beyaz kök, hafif, Avrupa.", "Radicchio": "Kırmızı-beyaz, acılı.", "Kırmızı Lahana": "Kırmızı, tatlı, beslenme."},
@@ -503,8 +503,8 @@ const HINTS_TR = {
     "T": {"Domates": "Kırmızı, tatlı-asidik, beslenme.", "Şalgam": "Beyaz kök, hafif tat.", "Taro": "Kahverengi, kök, nişastacı.", "Tomatillo": "Yeşil, portakal benzeri."},
     "U": {"Ulluco": "Andean patates, renkli.", "Upo": "Uzun kabak, Asya."},
     "V": {"Asma Domates": "Kırmızı, güzel lezzet.", "Kadife Fasulyesi": "Yeşil-mor, tatlı."},
-    "W": {"Su Teresi": "Yeşil yaprak, çiğ, beslenme.", "Su Kestanesi": "Beyaz gövde, tatlı.", "Wakame": "Deniz yosunu, Asya.", "Beyaz Turp": "Beyaz, uzun, Asya."},
-    "X": {"Xigua": "Kavun türü, Çin, büyük."},
+    "W": {"Su Teresi": "Yeşil yaprak, çiğ, beslenme.", "Su Kestanesi": "Beyaz gövde, tatlı.", "Wakame": "Deniz yosunu, Asya.", "Beyaz Turp": "Beyaz, uzun, Asya.", "Wasabi Kökü": "Japon mutfağında kullanılan, acı ve yakıcı yeşil bir kök sebze."},
+    "X": {"Xigua": "Kavun türü, Çin, büyük.", "Xigua Kabuğu": "Karpuz kabuğu turşusu olarak hazırlanan bir sebze garnitürü."},
     "Y": {"Yam": "Dünya patates, beslenme, tuberöz.", "Yuka": "Kök sebze, nişastacı, Asya.", "Sarı Balkabağı": "Turuncu, tatlı, sonbahat."},
     "Z": {"Kabak": "Sarı-yeşil, beslenme, yaz.", "Kabak Çiçeği": "Sarı çiçek, yenilebilir."}
   },
@@ -559,9 +559,9 @@ const HINTS_TR = {
     "R": {"Recorder": "Tahta üflemeli, şarkı, öğrenme.", "Rhodes Piyano": "Elektrik piyano, retro, caz."},
     "S": {"Saksafon": "Pirinç, reed, caz-pop.", "Sitar": "Hint telili, rezonans, exotik.", "Sousaphone": "Pirinç, spiral, marş-bant.", "Çelik Davul": "Davul türü, melodi, Karayip."},
     "T": {"Trompet": "Pirinç, valves, parlak ses.", "Trombon": "Pirinç, slide, orkestra.", "Tuba": "Pirinç, derin, orkestra.", "Def": "Vurma, frame, geleneksel.", "Theremin": "Elektronik, hava-kontrol, nadir."},
-    "U": {"Ukulele": "Dört tel, küçük, Hawaiki."},
+    "U": {"Ukulele": "Dört tel, küçük, Hawaiki.", "Ud": "Armut şekilli gövdesi olan, Ortadoğu kökenli telli bir çalgı."},
     "V": {"Keman": "Tel, yay, orkestra başarılı.", "Viola": "Dört tel, derin keman.", "Vibrafon": "Vurma, rezonans, metal."},
-    "W": {"Washboard": "Çamaşır panosu, ritimleme, folk.", "Rüzgar Çanları": "Metal tüpler, rüzgar, meditasyon.", "Düdük": "Antik, tatlı, Ermenistan."},
+    "W": {"Washboard": "Çamaşır panosu, ritimleme, folk.", "Rüzgar Çanları": "Metal tüpler, rüzgar, meditasyon.", "Düdük": "Antik, tatlı, Ermenistan.", "Wagner Tuba": "Wagner operalarında kullanılan, korno ve tuba arası bir bakır üflemeli çalgı."},
     "X": {"Ksilofon": "Tahta çubuklar, vurma, orkestra."},
     "Y": {"Yangqin": "Çekiç-çubuk, Çin, hammered.", "Yueqin": "Yuvarlak lutlu, Çin, el."},
     "Z": {"Zither": "Çoklu tel, vurma-plek, eski.", "Zurna": "Ütüsüz pirinç, Orta Doğu, gür."}
@@ -591,9 +591,9 @@ const HINTS_TR = {
     "U": {"Undertaker": "Cenaze hazırlığı, gömme, dini.", "Şehir Plancısı": "Şehir tasarım, planlama, mimari.", "UX Tasarımcı": "Kullanıcı deneyim, arayüz, tasarım."},
     "V": {"Veteriner": "Hayvan sağlığı, tıp, tedavi.", "Keman Virtuozu": "Müzik ustası, keman, sahnesi.", "Video Oyunu Tasarımcısı": "Oyun tasarım, programlama, sanat."},
     "W": {"Yazar": "Kitap yazma, yaratıcı, edebiyat.", "Kaporta Ustası": "Kapı açma, emek, zanaatkar.", "Garson": "Yiyecek servisi, restoran, hizmet.", "Web Geliştirici": "Web sitesi tasarım, kod, teknoloji."},
-    "X": {"Xylografi Sanatçısı": "Ahşap oyma, bas relief, sanat."},
+    "X": {"Xylografi Sanatçısı": "Ahşap oyma, bas relief, sanat.", "X-Ray Teknisyeni": "Hastanelerde röntgen çekimi yapan ve görüntüleri hazırlayan sağlık personeli."},
     "Y": {"Yoga Eğitmeni": "Yoga öğretme, meditasyon, sağlık.", "Gençlik Danışmanı": "Genç danışmanlık, rehberlik, sosyal."},
-    "Z": {"Zooloji Bilimci": "Hayvan çalışma, araştırma, bilim.", "Hayvanat Bahçesi Sorumlusu": "Hayvan bakımı, yönetim, koruma."}
+    "Z": {"Zooloji Bilimci": "Hayvan çalışma, araştırma, bilim.", "Hayvanat Bahçesi Sorumlusu": "Hayvan bakımı, yönetim, koruma.", "Zoolog": "Hayvanları, davranışlarını ve yaşam alanlarını inceleyen bilim insanı."}
   },
 
   "birds": {
@@ -618,9 +618,9 @@ const HINTS_TR = {
     "S": {"Kırlangıç": "Siyah-beyaz, hızlı uçan, yaz.", "Serçe": "Küçük kahverengi, bahçe kuşu.", "Kuğu": "Beyaz, uzun boyun, zarif."},
     "T": {"Bülbül": "Güzel şarkı, bahçe kuşu, siyah.", "Turaç": "Ormanda yaşayan, hızlı kuş.", "Temmuz Kuşu": "İyi şarkı, turuncu-kırmızı."},
     "U": {"Yapıştırma": "Orman kuşu, vurma sesi."},
-    "V": {"Kargagil": "Zeki kuş, siyah, sosyal.", "Uzunhacı": "Kuş, konik gagası."},
+    "V": {"Kargagil": "Zeki kuş, siyah, sosyal.", "Uzunhacı": "Kuş, konik gagası.", "Vakvak Kuşu": "Ötüşüyle bilinen, ormanlık alanlarda yaşayan renkli bir kuş."},
     "W": {"Su Şahini": "Su üstündeki balık avlayan.", "Güvercin": "Beyaz renkli barış sembolü."},
-    "X": {"X-ray Papağanı": "Parlak renk, nadir papağan."},
+    "X": {"X-ray Papağanı": "Parlak renk, nadir papağan.", "Xantus Sinekkuşu": "Meksika kıyılarında yaşayan küçük ve hızlı bir sinek kuşu türü."},
     "Y": {"Sarıştıran": "Sarı renk, küçük kuş."},
     "Z": {"Zü Kuşu": "Turuncu renk, Afrika kuşu."}
   },
@@ -927,7 +927,7 @@ const HINTS_TR = {
     "L": {"Lindy Hop": "Swing, sosyal, hızlı.", "Latin": "Sosyal, ritim, çift.", "Lezginka": "Kafkasya, geleneksel, hızlı."},
     "M": {"Mambo": "Küba, Latin, ritim.", "Merengue": "Dominikana, Latin, çift.", "Mackrume": "Hindistan, klasik, hareket.", "Moonwalk": "Modern, Michael Jackson, stil."},
     "N": {"Nobility": "Klasik, formal, lider.", "Neck": "Sokak, modern, stil.", "Nigerian": "Afrika, halk, ritim."},
-    "O": {"Oryantal": "Ortadoğu, gövde, kadın.", "Odori": "Japon, klasik, takım.", "Orchestral": "Canlı, formal, müzik."},
+    "O": {"Oryantal": "Ortadoğu, gövde, kadın.", "Odori": "Japon, klasik, takım.", "Orchestral": "Canlı, formal, müzik.", "Oyun Havası": "Türk düğünlerinde çalınan neşeli müzikle oynanan geleneksel dans."},
     "P": {"Paso Doble": "İspanyol, sosyal, savaş.", "Polka": "Orta Avrupa, hızlı, sosyal.", "Punta": "Garifuna, sosyal, hızlı.", "Pelvic": "Modern, sağlık, hareket."},
     "Q": {"Quickstep": "Sosyal, standart, hızlı.", "Qwali": "Sufi, müzik, ritim."},
     "R": {"Rhumba": "Küba, Latin, romantik.", "Rumba": "Sosyal, slow, çift.", "Riverdance": "İrlanda, hızlı, takım."},
@@ -935,8 +935,8 @@ const HINTS_TR = {
     "T": {"Tango": "Arjantin, dramatik, çift.", "Tap": "Amerikan, ritim, ayak.", "Tarantella": "İtalyalı, hızlı, sosyal."},
     "U": {"Uptown": "Modern, sokak, stil."},
     "V": {"Valsez": "Sosyal, standart, hızlı.", "Vogue": "Sokak, modern, pose."},
-    "W": {"Waltz": "Viyana, sosyal, hızlı.", "Wili": "Bale, romantik, fantezi.", "West": "Amerikan, sosyal, sosyal."},
-    "X": {"Xinjiang": "Çin, halk, müzik."},
+    "W": {"Waltz": "Viyana, sosyal, hızlı.", "Wili": "Bale, romantik, fantezi.", "West": "Amerikan, sosyal, sosyal.", "Waltz Türk": "Batı etkisiyle Türk toplumuna giren üç zamanlı zarif bir dans."},
+    "X": {"Xinjiang": "Çin, halk, müzik.", "Xango Dansı": "Afrika kökenli ritüel bir dans, ateş ve ritimle yapılır."},
     "Y": {"Yorkshire": "İngiltere, halk, sosyal."},
     "Z": {"Zumba": "Latin, fitness, hızlı.", "Zambra": "İspanyol, romantik, dans."}
   }

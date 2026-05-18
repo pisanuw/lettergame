@@ -196,3 +196,36 @@ Add "Send feedback" at the bottom of the page
 When a word is suggested, make a note of it in the permanent panel so the users see it
 
 2026-05-16T00:00 User: Add the words from words-web.js as well as the hints for them
+
+2026-05-17T00:00 User: I noticed that there are some English words in the words-tr.js file AND some of the words don't start with the correct letter. This needs to be fixed. Hints need to be adjusted
+
+2026-05-17T00:00 User: Look through the English and Turkish wordlists and extend them with hints where it is easy to do so
+
+2026-05-17T00:00 User: I need you to write a Node.js script at /Users/pisan/bitbucket/pisanuw/lettergame/expand-wordlists.js that adds new words and hints to both English and Turkish word lists.
+
+The script should follow this pattern (same as merge-web-words.js in the project):
+1. Read words.js, hints.js, words-tr.js, hints-tr.js
+2. Insert new words into the correct letter arrays
+3. Insert new hints into the correct category/letter/word slots
+4. Write the files back
+
+[Detailed additions for English: football, basketball, history, dances, countries, superheroes and Turkish: vegetables, instruments, occupations, birds, dances categories]
+
+2026-05-17T00:00 User: How do I run merge-web-words?
+
+2026-05-17T00:00 User: I get an error
+
+MAC-30271119:lettergame$ node run merge-web-words.js --dry-run
+node:internal/modules/cjs/loader:1386
+  throw err;
+  ^
+
+Error: Cannot find module '/Users/pisan/bitbucket/pisanuw/lettergame/run'
+
+2026-05-17T00:00 User: I want merge-web-words.js to integrate the words AND generate hints. Can you modify the script?
+
+2026-05-17T00:00 User: [session continued from previous conversation]
+
+2026-05-17T00:00 User: If I use the Anthropic API, it costs me money. Can merge-web-words.js use the fact that I already have a Claude Max subscription to generate the hints?
+
+2026-05-17T00:00 User: Check to make sure that for turkish words the turkish version of wikipedia is being used

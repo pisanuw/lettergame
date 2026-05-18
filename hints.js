@@ -1276,6 +1276,7 @@ const HINTS = {
       'Archaeologist': 'This professional digs up ancient artifacts and studies civilizations buried underground for thousands of years.',
       'Animator': 'They bring drawings to life, one frame at a time, creating movement from still images.',
       'Anesthesiologist': 'This medical specialist puts patients to sleep before surgery so they don\'t feel pain.',
+      'Artist': 'This person creates paintings, sculptures, or other works using imagination and skill with various media.',
     },
     B: {
       'Baker': 'This person works with dough and heat to create fresh bread and pastries daily.',
@@ -1417,6 +1418,7 @@ const HINTS = {
       'Welder': 'This skilled metalworker joins pieces together using intense heat and creates strong bonds.',
       'Waiter': '"I\'ll be with you in just a moment" — this person takes your order and brings your food.',
       'Web Developer': 'This person builds and maintains the digital spaces you visit every day using code and design.',
+      'Wine Steward': 'This professional in fine dining helps guests choose the perfect bottle to pair with their meal.',
     },
     X: {
       'Xylographer': 'This artisan engraves intricate designs onto wood blocks for printing purposes.',
@@ -1438,6 +1440,7 @@ const HINTS = {
       'Auklet': 'A small diving seabird with a stocky build, found in northern Pacific waters.',
       'Anhinga': 'This water bird has a long, kinked neck and is often called the "snake bird" for its appearance.',
       'Amazon Parrot': 'A colorful tropical bird known for mimicking human speech and living in rainforests.',
+      'Angel bird': 'A seabird named for its heavenly white plumage, found gliding gracefully over tropical oceans.',
     },
     B: {
       'Bluebird': 'Sounds like a color plus a small feathered animal.',
@@ -1455,6 +1458,7 @@ const HINTS = {
       'Canary': 'This small songbird is famous for its bright yellow plumage and was historically kept in coal mines.',
       'Condor': 'This massive vulture with a massive wingspan is one of the largest flying birds in the world.',
       'Common Loon': 'This haunting water bird\'s eerie call echoes across northern lakes at night.',
+      'Cuckoo': 'Famous for laying its eggs in other birds\' nests, this bird also inspired a well-known type of clock.',
     },
     D: {
       'Duck': 'This waterfowl has a flat bill and quacks loudly to communicate with its flock.',
@@ -1520,6 +1524,7 @@ const HINTS = {
       'Nightingale': 'A songbird famous for its hauntingly beautiful nocturnal melodies and nighttime performances.',
       'Nighthawk': 'This aerial insect hunter is most active during twilight and darkness, diving through the night sky.',
       'Nutcracker': 'This alpine bird breaks open seeds and nuts with its strong, pointed bill.',
+      'Nuthatch': 'This small bird walks headfirst down tree trunks searching for insects hidden in the bark.',
     },
     O: {
       'Owl': 'A nocturnal bird with large forward-facing eyes and the ability to rotate its head nearly all the way around.',
@@ -1561,6 +1566,7 @@ const HINTS = {
       'Tern': 'This sleek seabird dives headfirst into water to catch fish, with pointed wings and a forked tail.',
       'Teal': 'A small dabbling duck with a blue-green head and a color that\'s also a shade of blue-green.',
       'Thrush': 'A small songbird known for its speckled breast and beautiful, flute-like song.',
+      'Titmouse': 'A small, crested gray songbird common at backyard feeders, despite its misleading rodent-like name.',
     },
     U: {
       'Umbrellabird': 'This tropical bird has an extendable crest that resembles a parasol when displayed.',
@@ -1569,6 +1575,7 @@ const HINTS = {
     V: {
       'Vulture': 'This scavenger has a bald head and feeds on carrion, soaring high on thermal currents.',
       'Verdin': 'A tiny desert songbird with a yellow head and greenish back, known for building intricate hanging nests.',
+      'Vireo': 'A small, olive-green songbird known for singing persistently from the treetops, even in the heat of midday.',
     },
     W: {
       'Warbler': 'A small songbird known for its melodious voice and distinctive trilling song.',
@@ -3168,6 +3175,7 @@ const HINTS = {
     },
     I: {
       'Irish Step Dancing': 'Rigid upper body, rhythmic footwork, and hard-soled shoes create rapid tapping sounds on stage.',
+      'Irish Step': 'A traditional Celtic dance characterized by rapid leg movements while keeping the upper body still.',
     },
     J: {
       'Jive': 'This upbeat swing dance was popularized in the 1940s and requires quick, energetic footwork.',
@@ -3198,6 +3206,7 @@ const HINTS = {
     },
     O: {
       'One-Step': 'A simple ballroom dance where partners move forward together in the same direction.',
+      'One Step': 'A simple ballroom dance from the early 1900s where partners take one step per beat of music.',
     },
     P: {
       'Polka': 'This lively Central European dance is often performed to accordion music with a distinctive bouncy rhythm.',
@@ -3242,6 +3251,7 @@ const HINTS = {
     },
     X: {
       'Xaxado': 'A Brazilian partner dance with rapid hip movements, often performed at Carnival celebrations.',
+      'Xote': 'A Brazilian partner dance derived from the European schottische, popular in the northeast of Brazil.',
     },
     Y: {
       'Yangko': 'A traditional Korean folk dance often performed during celebrations with rhythmic movements and colorful costumes.',
@@ -3273,6 +3283,7 @@ const HINTS = {
       'Belize': 'This Central American country on the Caribbean coast is the only one with English as official language.',
       'Botswana': 'This Southern African country is home to the Okavango Delta and Kalahari Desert.',
       'Bulgaria': 'This Balkan country on the Black Sea is known for rose oil production and yogurt.',
+      'Bahrain': 'This small island kingdom in the Persian Gulf is connected to Saudi Arabia by a long causeway.',
     },
     C: {
       'Canada': 'The second-largest country in the world, known for maple syrup and hockey.',
@@ -3664,6 +3675,7 @@ const HINTS = {
     },
     Q: {
       'Quenton Nelson': 'This Colts offensive guard was a first-round pick and named All-Pro multiple times early in his career.',
+      'Quinton Williams': 'A defensive tackle known for his power and agility on the interior defensive line.',
     },
     R: {
       'Randy Moss': 'This Vikings receiver set the single-season touchdown reception record with 23 in 2007.',
@@ -3685,6 +3697,7 @@ const HINTS = {
     },
     U: {
       'Unitas': 'This legendary quarterback, Johnny by first name, led the Baltimore Colts in "The Greatest Game Ever Played."',
+      'Udo Latimer': 'A speedy kick returner and wide receiver known for his explosive plays in special teams.',
     },
     V: {
       'Von Miller': 'This Broncos linebacker won Super Bowl 50 MVP and is known for his pass-rushing ability.',
@@ -3702,6 +3715,7 @@ const HINTS = {
     },
     Y: {
       'Y.A. Tittle': 'This quarterback threw 36 touchdown passes in 1963 and is remembered for the iconic bloody, kneeling photo.',
+      'Yancey Thigpen': 'A Pro Bowl wide receiver who played for the Steelers in the 1990s, known for clutch catches.',
     },
     Z: {
       'Zach Thomas': 'This Dolphins middle linebacker was a seven-time Pro Bowler despite being a fifth-round draft pick.',
@@ -3740,6 +3754,7 @@ const HINTS = {
     },
     F: {
       'Fred VanVleet': 'This undrafted guard won an NBA championship with the Raptors in 2019.',
+      'Fat Lever': 'A triple-double machine who played for the Nuggets, one of the most versatile guards of the 1980s.',
     },
     G: {
       'Giannis Antetokounmpo': 'This "Greek Freak" Bucks forward won back-to-back MVPs and the 2021 NBA championship.',
@@ -3748,6 +3763,7 @@ const HINTS = {
     },
     H: {
       'Hakeem Olajuwon': 'This "Dream" Rockets center won back-to-back championships and was famous for his footwork in the post.',
+      'Horace Grant': 'A power forward who won four NBA championships, known for his signature goggles and defensive toughness.',
     },
     I: {
       'Isiah Thomas': 'This Pistons point guard led the "Bad Boy" Pistons to back-to-back championships in 1989-90.',
